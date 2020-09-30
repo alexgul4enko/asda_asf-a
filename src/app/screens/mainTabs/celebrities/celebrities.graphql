@@ -1,0 +1,20 @@
+query Celebrities($first: Int, $cursor: String) {
+  celebrities (first: $first, after: $cursor) {
+    totalCount,
+    pageInfo {
+      endCursor,
+      hasNextPage
+    },
+    edges {
+      node {
+        id,
+        firstName,
+        lastName,
+        avatar {
+          url
+        }
+      }
+    }
+  }
+}
+

@@ -1,0 +1,21 @@
+query Products($first: Int, $cursor: String, $search: String, $slug: [String]) {
+  products (first: $first, after: $cursor, filter : { categorySlugs: $slug, search: $search  } ) {
+    totalCount,
+    pageInfo {
+      endCursor,
+      hasNextPage
+    },
+    edges {
+      node {
+        id
+        name
+        description
+        slug
+        thumbnail {
+          url
+        }
+      }
+    }
+  }
+}
+

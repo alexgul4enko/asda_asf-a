@@ -1,0 +1,31 @@
+query Categories($first: Int, $cursor: String, $level: Int) {
+  categories (first: $first, after: $cursor, level: $level) {
+    totalCount,
+    pageInfo {
+      endCursor,
+      hasNextPage
+    },
+    edges {
+      node {
+        parent {
+          id
+        }
+        id,
+        name,
+        description,
+        slug,
+        promoImage {
+          url
+        }
+        level
+        backgroundImage{
+          url
+        }
+        children {
+          totalCount
+        }
+      }
+    }
+  }
+}
+

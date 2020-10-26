@@ -1,7 +1,8 @@
 import { Component } from 'react'
 import PropTypes from 'prop-types'
 import { createIconSetFromIcoMoon } from 'react-native-vector-icons'
-import { Animated, Text } from 'react-native'
+import { Text } from 'react-native'
+import Animated from 'react-native-reanimated'
 import icoMoonConfig from 'assets/selection.json'
 
 const propTypes = {

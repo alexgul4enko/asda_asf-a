@@ -1,8 +1,15 @@
 import Config from 'react-native-config'
 import * as Sentry from '@sentry/react-native'
-import { ApolloClient, InMemoryCache, createHttpLink } from '@apollo/client'
-import { setContext } from '@apollo/client/link/context'
-import { memoryCache } from 'common/cache'
+import API from './api'
+import AsyncStorage from '@react-native-community/async-storage'
+import { resourcesReducer } from '@cranium/resource'
+import { cacheMiddleware, persistReducer } from '@cranium/cache'
+import { promisableActionMiddleware, composeReducers, combineReducers } from '@cranium/redux-helpers'
+import { createStore, applyMiddleware } from 'redux'
+import { reducers } from 'store'
+import authMiddleware from 'common/session/authMiddleware'
+import { composeWithDevTools } from 'redux-devtools-extension'
+
 const isSentryEnabled = Config.SENTRY_DSN && !__DEV__
 
 if(isSentryEnabled) {
@@ -12,24 +19,27 @@ if(isSentryEnabled) {
   })
 }
 
-
-const httpLink = createHttpLink({
-  uri: Config.API_URL + '/graphql/',
+const compose = composeWithDevTools({
+  name: Config.APP_NAME,
 })
 
-
-const authLink = setContext((_, { headers }) => {
-  const data = memoryCache.getData()
-  return {
-    headers: {
-      ...headers,
-      'X-Gender': data.gender,
-      Authorization: `JWT ${data.token || ''}`,
-    },
-  }
-})
-
-export const client = new ApolloClient({
-  link: authLink.concat(httpLink),
-  cache: new InMemoryCache(),
-})
+export default createStore(
+  composeReducers(
+    {},
+    combineReducers(reducers),
+    persistReducer(JSON.parse(Config.CACHE_STATE_PERSIST_KEYS)),
+    resourcesReducer,
+  ),
+  {},
+  compose(
+    applyMiddleware(
+      authMiddleware,
+      promisableActionMiddleware({ API }),
+      cacheMiddleware({
+        storeKey: Config.CACHE_STORAGE_KEY,
+        cacheKeys: JSON.parse(Config.CACHE_STATE_KEYS),
+        storage: AsyncStorage,
+      })
+    )
+  )
+)

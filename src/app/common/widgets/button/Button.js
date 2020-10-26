@@ -6,7 +6,7 @@ import styles from './button.styles'
 import theme from 'theme'
 
 Button.propTypes = {
-  title: PropTypes.string,
+  title: PropTypes.node,
   onPress: PropTypes.func.isRequired,
   disabled: PropTypes.bool,
   primary: PropTypes.bool,
@@ -17,7 +17,7 @@ Button.propTypes = {
 
 Button.defaultProps = {
   primary: false,
-  title: '',
+  title: undefined,
   disabled: false,
   children: undefined,
   style: {},

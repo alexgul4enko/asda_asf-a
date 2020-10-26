@@ -5,20 +5,19 @@ import styles from './push-notifications.styles'
 export default function PushNotificationsView({ setupNotification, skip }) {
   return (
     <SafeAreaView style={styles.page}>
-      <Text style={styles.text}>some text to ask user for push notifications</Text>
-      <View style={styles.footer}>
-        <Button
-          title="Enable"
-          onPress={setupNotification}
-          primary
-          style={styles.btn}
-        />
-        <Button
-          title="later"
-          onPress={skip}
-          style={styles.btn}
-        />
-      </View>
+      <Text style={styles.title}>{gettext('Be the first to know')}</Text>
+      <Text style={styles.text}>{gettext('Allow notifications for tailored new arrivals, trends and promotions')}</Text>
+      <Button
+        title={gettext('Yes, notify me')}
+        onPress={setupNotification}
+        primary
+        style={styles.btn}
+      />
+      <Button
+        title={gettext('Not now, maybe later')}
+        onPress={skip}
+        style={styles.btn}
+      />
     </SafeAreaView>
   )
 }

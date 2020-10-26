@@ -38,6 +38,10 @@ export default function CacheImage({
   ...rest
 }) {
   const [hasError, setError] = useState(false)
+
+  const cacheSource = useMemo(() => ({ ...source, headers: {} }), [source])
+  const handleError = useCallback(() => setError(true), [setError])
+  const resizeModeCached = useMemo(() => getResizeMode(resizeMode), [resizeMode])
   if(hasError) {
     return (
       defaultImage && (
@@ -45,9 +49,6 @@ export default function CacheImage({
       )
     )
   }
-  const cacheSource = useMemo(() => ({ ...source, headers: {} }), [source])
-  const handleError = useCallback(() => setError(true), [setError])
-  const resizeModeCached = useMemo(() => getResizeMode(resizeMode), [resizeMode])
   return (
     <FastImage
       {...rest}

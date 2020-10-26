@@ -1,12 +1,15 @@
 import { useCallback } from 'react'
 import { ActionSheetIOS, Platform } from 'react-native'
-import { useCache } from 'common/cache'
+import { useSetData } from '@cranium/resource'
+import { useSelector } from 'react-redux'
 import DialogAndroid from 'react-native-dialogs'
 import Gender from './Gender'
+import get from 'lodash/get'
 import theme from 'theme'
 
 export default function GenderContainer() {
-  const { gender, setGender } = useCache()
+  const setGender = useSetData('gender')
+  const gender = useSelector(state => get(state, 'gender.data'))
 
   const changeGender = useCallback(() => {
     if(Platform.OS === 'ios') {

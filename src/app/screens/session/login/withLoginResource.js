@@ -1,5 +1,5 @@
 import validate from './utils/validate'
-import { withFinalForm } from '@ds-frontend/resource'
+import { withFinalForm } from '@cranium/resource'
 
 
 export default withFinalForm(

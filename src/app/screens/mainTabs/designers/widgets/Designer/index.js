@@ -1,3 +1,5 @@
 import Designer from './Designer'
 
-export default Designer
+export default function renderItem({ item }) {
+  return <Designer {...item.node}/>
+}

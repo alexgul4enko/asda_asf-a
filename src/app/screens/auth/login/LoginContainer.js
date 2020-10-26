@@ -2,27 +2,27 @@ import { Form } from 'react-final-form'
 import { useCallback } from 'react'
 import LoginView from './LoginView'
 import LOGIN from './login.graphql'
-import { useMutation } from '@apollo/client'
 import validate from './utils/validate'
-import { useCache } from 'common/cache'
+import { withGraphQL } from '@cranium/resource'
+import get from 'lodash/get'
 
-export default function LoginContainer(props) {
-  const { setToken } = useCache()
-  const [login, { data, ...rest }] = useMutation(LOGIN)
+function LoginContainer({ navigation, session }) {
   const handleSubmit = useCallback((variables) => {
-    login({ variables })
-      .then(({ data }) => {
-        const token = data.tokenCreate.token
-        setToken(token)
-        props.navigation.goBack()
-      })
-      .catch(err => {})
-  }, [login, props.navigation.goBack, setToken])
+    return session.request(variables)
+  }, [session.request, navigation.goBack])
   return (
     <Form
       onSubmit={handleSubmit}
       render={LoginView}
-      validate={validate}
     />
   )
 }
+
+function parseValue(resp) {
+  if(!get(resp, 'data.tokenCreate.token')) {
+    return Promise.reject({ _error: '401' })
+  }
+  return get(resp, 'data.tokenCreate')
+}
+
+export default withGraphQL(LOGIN, { namespace: 'session', parseValue })(LoginContainer)

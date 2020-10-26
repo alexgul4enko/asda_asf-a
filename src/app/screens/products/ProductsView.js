@@ -4,6 +4,7 @@ import Icon from 'common/widgets/Icon'
 import Product from './widgets/Product'
 import styles from './products.styles'
 import isEmpty from 'lodash/isEmpty'
+import get from 'lodash/get'
 
 
 function keyExtractor(item) {
@@ -31,7 +32,7 @@ export default function ProductsView({ data, loadNext, refetch, refreshing, rout
           )
         }
         <FlatList
-          data={data}
+          data={get(data, 'edges')}
           renderItem={renderItem}
           keyExtractor={keyExtractor}
           onEndReached={loadNext}

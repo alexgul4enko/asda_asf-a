@@ -4,10 +4,11 @@ import Icon from 'common/widgets/Icon'
 import Category from './widgets/Category'
 import styles from './categories.styles'
 import isEmpty from 'lodash/isEmpty'
+import get from 'lodash/get'
 
 
 function keyExtractor(item) {
-  return item.node.id
+  return item.node.id + item.node.slug
 }
 
 function renderItem({ item }) {
@@ -26,7 +27,7 @@ export default function CategoriesView({ data, loadNext, refetch, refreshing, ro
         )
       }
       <FlatList
-        data={data}
+        data={get(data, 'edges', [])}
         renderItem={renderItem}
         keyExtractor={keyExtractor}
         onEndReached={loadNext}

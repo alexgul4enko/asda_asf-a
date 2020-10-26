@@ -17,8 +17,9 @@ export default function Designer({ avatar, firstName, lastName, id }) {
         url={get(avatar, 'url')}
         size={80}
         resizeMode="cover"
+        style={styles.avatar}
       />
-      <Text>{name}</Text>
+      <Text style={styles.title}>{name}</Text>
     </Link>
   )
 }

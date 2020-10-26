@@ -1,5 +1,6 @@
 import { FlatList, View } from 'react-native'
 import Celebrity from './widgets/Celebrity'
+import get from 'lodash/get'
 import styles from './celebrities.styles'
 
 
@@ -16,7 +17,7 @@ export default function CelebritiesView({ data, loadNext, refetch, refreshing })
     <View style={styles.root}>
       <FlatList
         style={styles.list}
-        data={data}
+        data={get(data, 'edges')}
         renderItem={renderItem}
         keyExtractor={keyExtractor}
         onEndReached={loadNext}

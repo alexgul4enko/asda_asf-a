@@ -1,5 +1,5 @@
-query Designers($first: Int, $cursor: String) {
-  designers (first: $first, after: $cursor) {
+query Designers($first: Int, $cursor: String, $search: String) {
+  designers (first: $first, after: $cursor, filter: { search: $search }) {
     totalCount,
     pageInfo {
       endCursor,
@@ -17,4 +17,3 @@ query Designers($first: Int, $cursor: String) {
     }
   }
 }
-

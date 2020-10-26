@@ -17,6 +17,6 @@ export default StyleSheet.create({
     backgroundColor: theme.primary,
   },
   primaryTitle: {
-    color: theme.color,
+    color: '#ffffff',
   },
 })

@@ -1,5 +1,5 @@
 import { useCallback } from 'react'
-import { useCache } from 'common/cache'
+import { useSetData } from '@cranium/resource'
 import PushNotificationsView from './PushNotificationsView'
 import messaging from '@react-native-firebase/messaging'
 import { Platform, Alert, Linking, AppState } from 'react-native'
@@ -47,7 +47,6 @@ function openSettingsApp() {
 
 
 function requestUserPermission() {
-  console.log('requestUserPermission')
   return messaging().requestPermission()
     .then(authStatus => {
       console.log({ authStatus })
@@ -75,23 +74,22 @@ function requestUserPermission() {
 
 
 export default function PushNotificationsContainer() {
-  const { goToApp } = useCache()
+  const setAppSettings = useSetData('app')
   const setupNotification = useCallback(() => {
     requestUserPermission()
       .then((data) => iid().getToken())
       .then(token => {
-        goToApp()
-        fetch('https://wecre8.inprogress.rocks/api/v1/devices', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({ token, device_type: Platform.OS, device_id: getUniqueId() }),
-        })
+        // fetch('https://wecre8.inprogress.rocks/api/v1/devices', {
+        //   method: 'POST',
+        //   headers: {
+        //     'Content-Type': 'application/json',
+        //   },
+        //   body: JSON.stringify({ token, device_type: Platform.OS, device_id: getUniqueId() }),
+        // })
       })
-      .catch(err => goToApp())
-  }, [goToApp])
+      .finally(() => setAppSettings('done'))
+  }, [])
   return (
-    <PushNotificationsView skip={goToApp} setupNotification={setupNotification}/>
+    <PushNotificationsView skip={() => setAppSettings('done')} setupNotification={setupNotification}/>
   )
 }

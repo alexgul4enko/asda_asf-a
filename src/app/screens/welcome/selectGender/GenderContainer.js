@@ -1,10 +1,10 @@
 import { useCallback } from 'react'
-import { useCache } from 'common/cache'
+import { useSetData } from '@cranium/resource'
 import GenderView from './GenderView'
 
 
 export default function GenderContainer({ navigation }) {
-  const { setGender } = useCache()
+  const setGender = useSetData('gender')
   const men = useCallback(() => {
     setGender('M')
     navigation.navigate('notifications')

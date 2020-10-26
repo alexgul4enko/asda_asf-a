@@ -3,7 +3,6 @@ import { useEffect, useRef } from 'react'
 import messaging from '@react-native-firebase/messaging'
 import { createStackNavigator } from '@react-navigation/stack'
 import { NavigationContainer, getStateFromPath, getPathFromState } from '@react-navigation/native'
-import { useCache } from 'common/cache'
 import BackIcon from 'common/navigation/BackIcon'
 import Welcome from 'screens/welcome'
 import Home, { homeOptions } from 'screens/mainTabs'
@@ -18,7 +17,8 @@ import Cart from './screens/cart'
 import { Login } from './screens/auth'
 import theme from 'theme'
 import { handleNotification } from './common/notifications'
-
+import { CheckAccess } from '@cranium/access'
+import { access } from 'common/session'
 
 const MainStack = createStackNavigator()
 
@@ -45,33 +45,35 @@ const linking = {
     },
   },
 }
+const firstInstall = true
 
 export default function AppNavigator() {
   const navigationRef = useRef()
   useEffect(() => {
     return messaging().onMessage(remoteMessage => handleNotification(remoteMessage, navigationRef))
   }, [])
-  const { firstInstall } = useCache()
+
   return (
     <NavigationContainer linking={linking} ref={navigationRef}>
-      {
-        firstInstall ? (<Welcome/>) : (
-          <MainStack.Navigator screenOptions={{
-            headerBackTitleVisible: false,
-            headerBackImage: BackIcon,
-          }}>
-            <MainStack.Screen name="main" component={Home} options={homeOptions} />
-            <MainStack.Screen name="Designer" component={Designer} options={designerOptions} />
-            <MainStack.Screen name="Celebrity" component={Celebrity} options={celebrityOptions} />
-            <MainStack.Screen name="Categories" component={Categories} options={categoriesOptions} />
-            <MainStack.Screen name="Products" component={Products} options={productsOptions} />
-            <MainStack.Screen name="Product" component={Product} options={productOptions} />
-            <MainStack.Screen name="Favourites" component={Favourites} />
-            <MainStack.Screen name="Cart" component={Cart} />
-            <MainStack.Screen name="Login" component={Login} />
-          </MainStack.Navigator>
-        )
-      }
+      <CheckAccess level={access.F_FIRST_INSTALL}>
+        <Welcome/>
+      </CheckAccess>
+      <CheckAccess level={access.F_FIRST_INSTALL_PASSED}>
+        <MainStack.Navigator screenOptions={{
+          headerBackTitleVisible: false,
+          headerBackImage: BackIcon,
+        }}>
+          <MainStack.Screen name="main" component={Home} options={homeOptions} />
+          <MainStack.Screen name="Designer" component={Designer} options={designerOptions} />
+          <MainStack.Screen name="Celebrity" component={Celebrity} options={celebrityOptions} />
+          <MainStack.Screen name="Categories" component={Categories} options={categoriesOptions} />
+          <MainStack.Screen name="Products" component={Products} options={productsOptions} />
+          <MainStack.Screen name="Product" component={Product} options={productOptions} />
+          <MainStack.Screen name="Favourites" component={Favourites} />
+          <MainStack.Screen name="Cart" component={Cart} />
+          <MainStack.Screen name="Login" component={Login} />
+        </MainStack.Navigator>
+      </CheckAccess>
     </NavigationContainer>
   )
 }

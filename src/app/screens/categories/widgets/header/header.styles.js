@@ -2,10 +2,6 @@ import { StyleSheet } from 'react-native'
 import theme from 'theme'
 
 export default StyleSheet.create({
-  root: {
-    flex: 1,
-    alignSelf: 'stretch',
-  },
   seeAll: {
     flexDirection: 'row',
     alignItems: 'center',

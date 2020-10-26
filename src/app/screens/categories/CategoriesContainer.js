@@ -1,22 +1,25 @@
+import PropTypes from 'prop-types'
+import { useGraphInifnyList } from '@cranium/resource'
 import CategoriesView from './CategoriesView'
-import CATEGORIES from './categories.graphql'
-import isEmpty from 'lodash/isEmpty'
-import get from 'lodash/get'
-import { useEffect } from 'react'
-import { Button, Text } from 'react-native'
-import { useGraphInifnyList, usePrefetchQuery } from '@cranium/resource'
 import useGender from 'common/hooks/useGender'
+import getCategory from './utils/getCategory'
+import isEmpty from 'lodash/isEmpty'
 
+CategoriesContainer.propTypes = {
+  route: PropTypes.shape({
+    params: PropTypes.object,
+  }).isRequired,
+}
 
 export default function CategoriesContainer(props) {
   const variables = isEmpty(props.route.params) ? { level: 0 } : props.route.params
-  const categories = usePrefetchQuery(CATEGORIES, { parseValue: 'data.categories', namespace: get(variables, 'title') ? get(variables, 'title').replace(/\s/g, '') : undefined })({ first: 3, ...variables })
+  const categories = getCategory(variables)
   useGender(categories)
   const { loadNext, refresh, isRefreshing } = useGraphInifnyList(categories)
   return (
     <CategoriesView
       {...props}
-      loading={categories.isLoading}
+      isLoading={categories.isLoading && categories.data === undefined}
       data={categories.data}
       loadNext={loadNext}
       refetch={refresh}

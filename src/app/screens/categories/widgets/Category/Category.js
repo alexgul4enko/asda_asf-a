@@ -1,8 +1,33 @@
+import PropTypes from 'prop-types'
 import { useMemo } from 'react'
 import { Text } from 'react-native'
 import Link from 'common/widgets/link'
+import Icon from 'common/widgets/Icon'
 import CacheImage from 'common/widgets/CacheImage'
 import styles from './category.styles'
+
+Category.propTypes = {
+  name: PropTypes.string,
+  backgroundImage: PropTypes.shape({
+    url: PropTypes.string,
+  }).isRequired,
+  promoImage: PropTypes.shape({
+    url: PropTypes.string,
+  }).isRequired,
+  children: PropTypes.shape({
+    totalCount: PropTypes.number,
+  }).isRequired,
+  description: PropTypes.string,
+  id: PropTypes.string,
+  slug: PropTypes.string,
+}
+
+Category.defaultProps = {
+  name: undefined,
+  description: undefined,
+  id: undefined,
+  slug: undefined,
+}
 
 export default function Category({ name, backgroundImage, promoImage, children, description, id, slug }) {
   const source = useMemo(() => {
@@ -30,17 +55,11 @@ export default function Category({ name, backgroundImage, promoImage, children, 
         <CacheImage
           source={source}
           style={styles.img}
-          resizeMode="contain"
+          resizeMode="cover"
         />
       )}
-      {
-        children.totalCount ? (
-          <Link to="Products" style={styles.all} params={{ slug }}>
-            <Text>See all</Text>
-          </Link>
-        ) : null
-      }
-      <Text>{name}</Text>
+      <Text style={styles.title}>{name}</Text>
+      <Icon name="chevron-right-01" size={24}/>
     </Link>
   )
 }

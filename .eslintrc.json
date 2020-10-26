@@ -52,6 +52,12 @@
     "react/display-name": ["off", { "ignoreTranspilerName": true }]
   },
   "globals": {
-    "__DEV__": true
+    "__DEV__": true,
+    "gettext": false,
+    "ngettext": false,
+    "gettext_noop": false,
+    "pgettext": false,
+    "npgettext": false,
+    "interpolate": false
   }
 }

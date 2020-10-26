@@ -1,39 +1,35 @@
-import { FlatList, SafeAreaView, Text } from 'react-native'
-import Link from 'common/widgets/link'
-import Icon from 'common/widgets/Icon'
-import Category from './widgets/Category'
-import styles from './categories.styles'
-import isEmpty from 'lodash/isEmpty'
+import ListPropTypes from 'common/prop-types/List'
+import { FlatList, SafeAreaView } from 'react-native'
+import { LoadingWrapper } from 'common/widgets/loading'
+import ListEmptyComponent from 'common/widgets/listEmptyComponent'
+import Header from './widgets/header'
+import keyExtractor from './utils/keyExtractor'
+import renderItem from './utils/renderItem'
 import get from 'lodash/get'
+import styles from './categories.styles'
 
 
-function keyExtractor(item) {
-  return item.node.id + item.node.slug
+CategoriesView.propTypes = ListPropTypes
+
+CategoriesView.defaultProps = {
+  data: undefined,
 }
 
-function renderItem({ item }) {
-  return <Category {...item.node}/>
-}
-
-export default function CategoriesView({ data, loadNext, refetch, refreshing, route }) {
+export default function CategoriesView({ data, loadNext, refetch, refreshing, isLoading }) {
   return (
     <SafeAreaView style={styles.root}>
-      {
-        isEmpty(route.params) && (
-          <Link to="Products">
-            <Icon name="search-01"/>
-            <Text>Search</Text>
-          </Link>
-        )
-      }
-      <FlatList
-        data={get(data, 'edges', [])}
-        renderItem={renderItem}
-        keyExtractor={keyExtractor}
-        onEndReached={loadNext}
-        onRefresh={refetch}
-        refreshing={refreshing}
-      />
+      <LoadingWrapper isLoading={isLoading}>
+        <FlatList
+          ListHeaderComponent={<Header/>}
+          data={get(data, 'edges', [])}
+          renderItem={renderItem}
+          keyExtractor={keyExtractor}
+          onEndReached={loadNext}
+          onRefresh={refetch}
+          refreshing={refreshing}
+          ListEmptyComponent={<ListEmptyComponent/>}
+        />
+      </LoadingWrapper>
     </SafeAreaView>
   )
 }

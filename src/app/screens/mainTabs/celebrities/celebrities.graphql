@@ -1,5 +1,5 @@
-query Celebrities($first: Int, $cursor: String) {
-  celebrities (first: $first, after: $cursor) {
+query Celebrities($first: Int, $cursor: String, $search: String) {
+  celebrities (first: $first, after: $cursor, filter: { search: $search }) {
     totalCount,
     pageInfo {
       endCursor,

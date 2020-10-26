@@ -23,5 +23,6 @@ export default StyleSheet.create({
     fontWeight: '600',
     paddingTop: 8,
     paddingBottom: 10,
+    width: theme.width / 2 - 24,
   },
 })

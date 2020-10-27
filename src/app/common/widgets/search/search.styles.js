@@ -12,7 +12,7 @@ export default StyleSheet.create({
     flex: 1,
     flexDirection: 'row',
     alignSelf: 'stretch',
-    backgroundColor: '#dcdcdc',
+    backgroundColor: theme.borderColor,
     alignItems: 'center',
     justifyContent: 'center',
     paddingHorizontal: 16,

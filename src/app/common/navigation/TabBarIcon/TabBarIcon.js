@@ -5,6 +5,7 @@ TabBarIcon.propTypes = {
   focused: PropTypes.bool.isRequired,
   color: PropTypes.string.isRequired,
   size: PropTypes.number.isRequired,
+  icon: PropTypes.string.isRequired,
 }
 
 export default function TabBarIcon({ color, size, focused, icon }) {
@@ -12,7 +13,7 @@ export default function TabBarIcon({ color, size, focused, icon }) {
     <Icon
       name={focused ? `${icon}-active` : icon}
       color={color}
-      size={20}
+      size={32}
     />
   )
 }

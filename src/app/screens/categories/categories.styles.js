@@ -5,6 +5,7 @@ export default StyleSheet.create({
   root: {
     flex: 1,
     alignSelf: 'stretch',
+    backgroundColor: '#ffffff',
   },
   seeAll: {
     flexDirection: 'row',

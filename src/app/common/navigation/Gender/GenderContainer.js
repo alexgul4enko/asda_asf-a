@@ -1,45 +1,86 @@
-import { useCallback } from 'react'
-import { ActionSheetIOS, Platform } from 'react-native'
+import { useCallback, useMemo } from 'react'
+import Animated, { Easing } from 'react-native-reanimated'
 import { useSetData } from '@cranium/resource'
 import { useSelector } from 'react-redux'
-import DialogAndroid from 'react-native-dialogs'
 import Gender from './Gender'
 import get from 'lodash/get'
+import interpolateColors from 'common/utils/interpolateColors'
 import theme from 'theme'
+import styles from './gender.styles'
 
 export default function GenderContainer() {
   const setGender = useSetData('gender')
   const gender = useSelector(state => get(state, 'gender.data'))
 
-  const changeGender = useCallback(() => {
-    if(Platform.OS === 'ios') {
-      return ActionSheetIOS.showActionSheetWithOptions(
-        {
-          options: ['Men', 'Women', 'Cancel'],
-          destructiveButtonIndex: 2,
-          cancelButtonIndex: 2,
-        },
-        buttonIndex => {
-          if(buttonIndex === 2) { return }
-          setGender(buttonIndex === 1 ? 'F' : 'M')
-        },
-      )
-    }
-    DialogAndroid.showPicker(
-      null,
-      null, {
-        items: [{ label: 'Men', id: 'M' }, { label: 'Women', id: 'F' }],
-        positiveText: null,
-        negativeText: 'Cancel',
-        contentColor: theme.fontColor,
-        negativeColor: theme.textPurple,
-      })
-      .then(({ selectedItem, action }) => {
-        if(action !== 'actionSelect') { return }
-        setGender(selectedItem.id)
-      })
-  }, [])
+  const animatedValue = useMemo(() => new Animated.Value(gender === 'M' ? 1 : 0), [])
+  const menStyle = useMemo(() => ([
+    styles.tab,
+    {
+      backgroundColor: interpolateColors(
+        animatedValue,
+        [0, 1],
+        [theme.primaryLight, '#ffffff'],
+      ),
+      borderColor: interpolateColors(
+        animatedValue,
+        [0, 1],
+        [theme.primaryLight, theme.primary],
+      ),
+    },
+  ]), [animatedValue])
+  const womenStyle = useMemo(() => ([
+    styles.tab,
+    {
+      backgroundColor: interpolateColors(
+        animatedValue,
+        [0, 1],
+        ['#ffffff', theme.primaryLight],
+      ),
+      borderColor: interpolateColors(
+        animatedValue,
+        [0, 1],
+        [theme.primary, theme.primaryLight],
+      ),
+    },
+  ]), [animatedValue])
+
+  const menText = useMemo(() => ({
+    color: interpolateColors(
+      animatedValue,
+      [0, 1],
+      [theme.grey, '#000000'],
+    ),
+  }), [animatedValue])
+  const womenText = useMemo(() => ({
+    color: interpolateColors(
+      animatedValue,
+      [0, 1],
+      ['#000000', theme.grey],
+    ),
+  }), [animatedValue])
+  const animate = useCallback((toValue) => {
+    Animated.timing(animatedValue, {
+      duration: 200,
+      toValue,
+      easing: Easing.inOut(Easing.ease),
+    }).start()
+  }, [animatedValue])
+  const setMen = useCallback(() => {
+    setGender('M')
+    animate(1)
+  }, [setGender, animate])
+  const setWomen = useCallback(() => {
+    setGender('F')
+    animate(0)
+  }, [setGender, animate])
   return (
-    <Gender gender={gender} changeGender={changeGender}/>
+    <Gender
+      womenStyle={womenStyle}
+      menStyle={menStyle}
+      menText={menText}
+      womenText={womenText}
+      setMen={setMen}
+      setWomen={setWomen}
+    />
   )
 }

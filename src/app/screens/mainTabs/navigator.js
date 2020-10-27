@@ -28,8 +28,9 @@ export default function HomeNavigation() {
         inactiveTintColor: theme.grey,
         labelStyle: {
           fontWeight: '600',
-          fontSize: 8,
+          fontSize: 10,
           lineHeight: 12,
+          paddingBottom: 4,
         },
       }}
     >

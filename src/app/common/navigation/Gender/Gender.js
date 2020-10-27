@@ -16,16 +16,16 @@ GenderView.propTypes = {
 export default function GenderView({ womenStyle, menStyle, menText, womenText, setMen, setWomen }) {
   return (
     <View style={styles.main}>
-      <Animated.View style={menStyle}>
-        <Button style={styles.btn} onPress={setMen}>
+      <Button style={styles.btnMen} onPress={setMen}>
+        <Animated.View style={menStyle}>
           <Animated.Text style={[styles.text, menText]}>{gettext('MEN')}</Animated.Text>
-        </Button>
-      </Animated.View>
-      <Animated.View style={womenStyle}>
-        <Button style={styles.btn} onPress={setWomen}>
+        </Animated.View>
+      </Button>
+      <Button style={styles.btnWomen} onPress={setWomen}>
+        <Animated.View style={womenStyle}>
           <Animated.Text style={[styles.text, womenText]}>{gettext('WOMEN')}</Animated.Text>
-        </Button>
-      </Animated.View>
+        </Animated.View>
+      </Button>
     </View>
 
   )

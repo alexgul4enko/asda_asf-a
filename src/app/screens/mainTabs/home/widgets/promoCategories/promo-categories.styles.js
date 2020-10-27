@@ -1,9 +1,7 @@
 import { StyleSheet } from 'react-native'
 
 export default StyleSheet.create({
-  content: {
-    flex: 1,
-    alignSelf: 'stretch',
-    backgroundColor: '#ffffff',
+  root: {
+    minHeight: 150,
   },
 })

@@ -1,0 +1,18 @@
+query GET_PROMOTIONS {
+  promotionPlaceholders {
+    id
+    name
+    codename
+    promotion {
+      id
+      url
+      title
+      isActive
+      buttonText
+      description
+      bannerImage {
+        url
+      }
+    }
+  }
+}

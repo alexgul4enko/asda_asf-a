@@ -1,11 +1,30 @@
+import PropTypes from 'prop-types'
 import { useMemo } from 'react'
 import { View, Image } from 'react-native'
 import CacheImage from '../CacheImage'
 import styles from './avatar.styles'
 
-export default function Avatar({ url, size, style, resizeMode, defaultImage }) {
+Avatar.propTypes = {
+  url: PropTypes.string,
+  noImage: PropTypes.string,
+  size: PropTypes.number,
+  style: Image.propTypes.style,
+  resizeMode: PropTypes.oneOf(['contain', 'cover', 'center', 'stretch']),
+  defaultImage: PropTypes.string,
+}
+
+Avatar.defaultProps = {
+  url: undefined,
+  noImage: 'avatar',
+  size: 40,
+  style: undefined,
+  resizeMode: undefined,
+  defaultImage: undefined,
+}
+
+export default function Avatar({ url, size, style, resizeMode, defaultImage, noImage = 'avatar' }) {
   const source = useMemo(() => {
-    return url ? { uri: url } : { uri: 'avatar' }
+    return url ? { uri: url } : { uri: noImage }
   }, [url])
   const imageStyle = useMemo(() => {
     return [{

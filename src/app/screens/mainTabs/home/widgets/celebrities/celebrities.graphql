@@ -1,0 +1,15 @@
+query Celebrities {
+  celebrities (first: 6) {
+    edges {
+      node {
+        id,
+        firstName,
+        lastName,
+        avatar {
+          url
+        }
+      }
+    }
+  }
+}
+

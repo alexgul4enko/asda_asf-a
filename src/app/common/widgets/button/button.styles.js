@@ -13,6 +13,10 @@ export default StyleSheet.create({
     fontWeight: '500',
     textAlign: 'center',
   },
+  outlineButton: {
+    borderWidth: StyleSheet.hairlineWidth,
+    borderColor: theme.primary,
+  },
   primaryButton: {
     backgroundColor: theme.primary,
   },

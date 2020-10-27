@@ -1,0 +1,21 @@
+query GET_PROMO_CATEGORIES( $orderBy: CategorySortField!, $direction: OrderDirection! )  {
+  categories(first: 4, sortBy: { field: $orderBy, direction: $direction }) {
+    edges {
+      node {
+        id
+        slug
+        name
+        promoLinkText
+        productWithMinPrice {
+          minimalVariantPrice {
+            currency
+            amount
+          }
+        }
+        promoImage {
+          url
+        }
+      }
+    }
+  }
+}

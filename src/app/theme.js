@@ -22,6 +22,7 @@ const variables = {
   grey: '#8D8D8D',
   primaryLight: '#F8F0E6',
   borderColor: '#EDEDED',
+  primaryColor: '#CA9A90',
 }
 
 const headerStyles = StyleSheet.create({

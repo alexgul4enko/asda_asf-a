@@ -3,16 +3,23 @@ import { StyleSheet } from 'react-native'
 export default StyleSheet.create({
   main: {
     flexDirection: 'row',
-    paddingLeft: 16,
   },
   tab: {
     borderWidth: StyleSheet.hairlineWidth,
     paddingVertical: 2,
     paddingHorizontal: 5,
   },
-  btn: {
+  btnMen: {
     padding: 0,
     alignSelf: 'stretch',
+    paddingVertical: 10,
+    paddingLeft: 16,
+  },
+  btnWomen: {
+    padding: 0,
+    alignSelf: 'stretch',
+    paddingVertical: 10,
+    paddingRight: 16,
   },
   text: {
     fontWeight: '600',

@@ -1,3 +1,3 @@
-import Home from './HomeView'
+import Home from './HomeContainer'
 
 export default Home

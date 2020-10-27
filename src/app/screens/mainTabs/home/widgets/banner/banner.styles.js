@@ -1,9 +1,13 @@
 import { StyleSheet } from 'react-native'
 
 export default StyleSheet.create({
-  content: {
+  btn: {
+    padding: 0,
+    marginVertical: 24,
+    marginHorizontal: 12,
+  },
+  image: {
     flex: 1,
     alignSelf: 'stretch',
-    backgroundColor: '#ffffff',
   },
 })

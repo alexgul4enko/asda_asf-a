@@ -1,9 +1,8 @@
 import { useMemo } from 'react'
-import { Text, View, Platform, ViewPropTypes, Pressable } from 'react-native'
+import { Text, Platform, ViewPropTypes, Pressable } from 'react-native'
 import { TouchableOpacity } from 'react-native-gesture-handler'
 import PropTypes from 'prop-types'
 import styles from './button.styles'
-import theme from 'theme'
 
 Button.propTypes = {
   title: PropTypes.node,
@@ -13,6 +12,7 @@ Button.propTypes = {
   children: PropTypes.node,
   style: ViewPropTypes.style,
   textStyle: Text.propTypes.style,
+  outline: PropTypes.bool,
 }
 
 Button.defaultProps = {
@@ -20,6 +20,7 @@ Button.defaultProps = {
   title: undefined,
   disabled: false,
   children: undefined,
+  outline: undefined,
   style: {},
   textStyle: {},
 }
@@ -32,10 +33,11 @@ export default function Button({
   disabled,
   style,
   primary,
+  outline,
   textStyle,
   ...rest
 }) {
-  const buttonStyles = useMemo(() => ([styles.button, primary && styles.primaryButton, style]), [style])
+  const buttonStyles = useMemo(() => ([styles.button, primary && styles.primaryButton, outline && styles.outlineButton, style]), [style])
   const textStyles = useMemo(() => ([styles.title, primary && styles.primaryTitle, textStyle]), [textStyle])
   const content = useMemo(() => (title ? <Text style={textStyles}>{title}</Text> : children), [title, children, textStyles])
   if(Platform.OS === 'ios') {

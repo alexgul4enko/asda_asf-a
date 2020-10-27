@@ -1,16 +1,42 @@
 import PropTypes from 'prop-types'
-import { View, Text } from 'react-native'
-import Button from 'common/widgets/button'
+import { ScrollView } from 'react-native'
+import Propmo from './widgets/promo'
+import PromoCategories from './widgets/promoCategories'
+import Celebrities from './widgets/celebrities'
+import Header from './widgets/header'
+import Banner from './widgets/banner'
+import Slider from './widgets/slider'
+import MeetUs from './widgets/meetUs'
 import styles from './home.styles'
 
 Home.propTypes = {
-  route: PropTypes.object.isRequired,
+  headerBanner: PropTypes.object.isRequired,
+  firstBanner: PropTypes.object.isRequired,
+  secondBanner: PropTypes.object.isRequired,
+  slides: PropTypes.array,
 }
 
-export default function Home({ route }) {
+Home.defaultProps = {
+  slides: undefined,
+}
+
+export default function Home({ headerBanner, firstBanner, secondBanner, slides }) {
   return (
-    <View style={styles.content}>
-      <Text>{route.name}</Text>
-    </View>
+    <ScrollView style={styles.content}>
+      <MeetUs/>
+      <Header {...headerBanner}/>
+      <Slider slides={slides}/>
+      <Propmo title={gettext('Top categories')}>
+        <PromoCategories type="TOP"/>
+      </Propmo>
+      <Propmo title={gettext('Celebrity Picks')} primary>
+        <Celebrities />
+      </Propmo>
+      <Banner {...firstBanner}/>
+      <Propmo title={gettext('Explorer popular categories')} block>
+        <PromoCategories type="POPULAR"/>
+      </Propmo>
+      <Banner {...secondBanner}/>
+    </ScrollView>
   )
 }

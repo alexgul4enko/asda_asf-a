@@ -10,13 +10,13 @@ Category.propTypes = {
   name: PropTypes.string,
   backgroundImage: PropTypes.shape({
     url: PropTypes.string,
-  }).isRequired,
+  }),
   promoImage: PropTypes.shape({
     url: PropTypes.string,
-  }).isRequired,
+  }),
   children: PropTypes.shape({
     totalCount: PropTypes.number,
-  }).isRequired,
+  }),
   description: PropTypes.string,
   id: PropTypes.string,
   slug: PropTypes.string,
@@ -27,6 +27,9 @@ Category.defaultProps = {
   description: undefined,
   id: undefined,
   slug: undefined,
+  backgroundImage: undefined,
+  promoImage: undefined,
+  children: undefined,
 }
 
 export default function Category({ name, backgroundImage, promoImage, children, description, id, slug }) {

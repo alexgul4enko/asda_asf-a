@@ -17,8 +17,8 @@ export default StyleSheet.create({
     borderRadius: 0,
   },
   title: {
-    fontSize: 12,
-    lineHeight: 14,
+    fontSize: 14,
+    lineHeight: 16,
     textAlign: 'center',
     fontWeight: '600',
     paddingTop: 8,

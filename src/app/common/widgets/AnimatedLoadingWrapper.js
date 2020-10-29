@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types'
 import { Component, Fragment } from 'react'
 import Animated, { Easing } from 'react-native-reanimated'
-import { ActivityIndicator, StyleSheet } from 'react-native'
+import { ActivityIndicator, StyleSheet, Text } from 'react-native'
 import theme from 'theme'
 
 const propTypes = {

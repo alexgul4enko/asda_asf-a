@@ -16,7 +16,8 @@
     "ecmaFeatures": {
       "jsx": true,
       "modules": true,
-      "globalReturn": true
+      "globalReturn": true,
+      "experimentalObjectRestSpread": true
     }
   },
   "plugins": [

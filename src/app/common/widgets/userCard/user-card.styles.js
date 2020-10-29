@@ -9,8 +9,6 @@ export default StyleSheet.create({
     padding: 0,
   },
   avatar: {
-    flex: 1,
-    alignSelf: 'stretch',
     height: 180,
     width: theme.width / 2 - 24,
     borderWidth: 0,

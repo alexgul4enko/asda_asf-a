@@ -7,7 +7,7 @@ import Designers from './designers'
 import Celebrities from './celebrities'
 import Profile from './profile'
 import Categories from 'screens/categories'
-import NavigationButtons from './navidation/NavigationButtons'
+import UserPick from 'common/navigation/userPick'
 import theme from 'theme'
 
 
@@ -76,5 +76,5 @@ export default function HomeNavigation() {
 export const homeOptions = {
   headerTitle: () => <Logo/>,
   headerLeft: () => <Gender/>,
-  headerRight: () => <NavigationButtons/>,
+  headerRight: () => <UserPick/>,
 }

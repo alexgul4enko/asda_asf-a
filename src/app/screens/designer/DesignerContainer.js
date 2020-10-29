@@ -1,7 +1,7 @@
 import Designer from './Designer'
 
-export default function DesignerContainer(props) {
+export default function DesignerContainer() {
   return (
-    <Designer {...props}/>
+    <Designer />
   )
 }

@@ -1,0 +1,17 @@
+query CELEBRITY ($id: ID! ){
+  celebrity(id: $id) {
+    id
+    firstName
+    lastName
+    socialMedias {
+      type
+      url
+    }
+    celebrity {
+      description
+      coverImage {
+        url
+      }
+    }
+  }
+}

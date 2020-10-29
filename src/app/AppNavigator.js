@@ -1,8 +1,8 @@
 import Config from 'react-native-config'
 import { useEffect, useRef } from 'react'
 import messaging from '@react-native-firebase/messaging'
-import { createStackNavigator } from '@react-navigation/stack'
-import { NavigationContainer, getStateFromPath, getPathFromState } from '@react-navigation/native'
+import { createSharedElementStackNavigator } from 'react-navigation-shared-element'
+import { NavigationContainer } from '@react-navigation/native'
 import BackIcon from 'common/navigation/BackIcon'
 import Welcome from 'screens/welcome'
 import Home, { homeOptions } from 'screens/mainTabs'
@@ -11,16 +11,15 @@ import Celebrity, { celebrityOptions } from './screens/celebrity'
 import Categories, { categoriesOptions } from './screens/categories'
 import Products, { productsOptions } from './screens/products'
 import Product, { productOptions } from './screens/product'
-import NotFount from './screens/notFound'
+// import NotFount from './screens/notFound'
 import Favourites from './screens/favourites'
 import Cart from './screens/cart'
 import { Login } from './screens/auth'
-import theme from 'theme'
 import { handleNotification } from './common/notifications'
 import { CheckAccess } from '@cranium/access'
 import { access } from 'common/session'
 
-const MainStack = createStackNavigator()
+const MainStack = createSharedElementStackNavigator()
 
 const linking = {
   prefixes: [Config.API_URL, Config.SHEME_NAME + '://'],
@@ -45,7 +44,6 @@ const linking = {
     },
   },
 }
-const firstInstall = true
 
 export default function AppNavigator() {
   const navigationRef = useRef()
@@ -65,7 +63,20 @@ export default function AppNavigator() {
         }}>
           <MainStack.Screen name="main" component={Home} options={homeOptions} />
           <MainStack.Screen name="Designer" component={Designer} options={designerOptions} />
-          <MainStack.Screen name="Celebrity" component={Celebrity} options={celebrityOptions} />
+          <MainStack.Screen
+            name="Celebrity"
+            component={Celebrity}
+            options={celebrityOptions}
+            // sharedElementsConfig={(route, otherRoute, showing) => {
+            //   const { id } = route.params
+            //   return [
+            //     {
+            //       id: `item.${id}.photo`,
+            //       animation: 'fade',
+            //     },
+            //   ]
+            // }}
+          />
           <MainStack.Screen name="Categories" component={Categories} options={categoriesOptions} />
           <MainStack.Screen name="Products" component={Products} options={productsOptions} />
           <MainStack.Screen name="Product" component={Product} options={productOptions} />

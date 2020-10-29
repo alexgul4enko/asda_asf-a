@@ -55,6 +55,7 @@ export default function CacheImage({
   const handleLoad = useCallback((e) => {
     onLoad && typeof onLoad === 'function' && onLoad(e)
     if(!responsive) { return }
+
     const { width, height } = e.nativeEvent
     const aspectRatio = width / height
     setRatio(aspectRatio)

@@ -1,0 +1,6 @@
+query GET_PRODUCT ($id: ID!) {
+  product(id: $id) {
+    id
+    inWishlist
+  }
+}

@@ -1,16 +1,16 @@
 import { View } from 'react-native'
 import Icon from 'common/widgets/Icon'
 import Link from 'common/widgets/link'
-import styles from './navigation-buttons.styles'
+import styles from './user-pick.styles'
 
 export default function NavigationButtons() {
   return (
     <View style={styles.row}>
-      <Link style={styles.btn} to="Favourites">
-        <Icon name="favourite-01"/>
+      <Link style={styles.favourites} to="Favourites">
+        <Icon name="favourite-01" size={20}/>
       </Link>
-      <Link style={styles.btn} to="Cart">
-        <Icon name="cart"/>
+      <Link style={styles.cart} to="Cart">
+        <Icon name="cart" size={20}/>
       </Link>
     </View>
   )

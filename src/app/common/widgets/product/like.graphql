@@ -1,0 +1,7 @@
+mutation ADD_TO_WISHLIST($id: ID!) {
+  wishlistAddProduct(productId: $id) {
+    wishlist {
+      id
+    }
+  }
+}

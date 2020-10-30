@@ -6,15 +6,16 @@ import Icon from 'common/widgets/Icon'
 import Animated, { Easing } from 'react-native-reanimated'
 import AnimatedLoadingWrapper from '../AnimatedLoadingWrapper'
 import { useCallback, useMemo, useEffect, useState } from 'react'
-import { useSelector } from 'react-redux'
 import { useQuery } from '@cranium/resource'
-import get from 'lodash/get'
 import reducer from './utils/reducer'
+import { hasPermission } from '@cranium/access'
+import { access } from 'common/session'
 import styles from './product.styles'
 import DISLIKE from './dislike.graphql'
 import LIKE from './like.graphql'
 import Product from './product.graphql'
 import theme from 'theme'
+
 
 LikeButton.propTypes = {
   like: PropTypes.bool.isRequired,
@@ -40,7 +41,6 @@ export default function LikeButton({ like, id }) {
       easing: Easing.inOut(Easing.ease),
     }).start()
   }, [like])
-  const token = useSelector(state => get(state, 'session.data.token'))
   const { request } = useQuery(LIKE, { reducer: 'none', namespace: 'like' })
   const handlePress = useCallback(() => {
     const query = like ? DISLIKE : LIKE
@@ -50,7 +50,7 @@ export default function LikeButton({ like, id }) {
       .finally(() => setLoading(false))
     return true
   }, [like, request, id, setLoading])
-  if(!token) {
+  if(hasPermission(access.F_UNAUTHORISED)) {
     return (
       <Link to="Login" style={styles.like}>
         <View>

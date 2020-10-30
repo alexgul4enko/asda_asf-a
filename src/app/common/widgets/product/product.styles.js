@@ -61,4 +61,9 @@ export default StyleSheet.create({
     position: 'absolute',
     // left: 16,
   },
+  delete: {
+    position: 'absolute',
+    top: 0,
+    right: 0,
+  },
 })

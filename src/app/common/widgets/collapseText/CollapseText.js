@@ -1,11 +1,11 @@
 import PropTypes from 'prop-types'
-import { Text, ViewPropTypes } from 'react-native'
+import { Text } from 'react-native'
 import { useState, useCallback } from 'react'
 import styles from './collapse-text.styles'
 
 CollapseText.propTypes = {
   children: PropTypes.string,
-  style: ViewPropTypes.style,
+  style: PropTypes.any,
 }
 
 CollapseText.defaultProps = {

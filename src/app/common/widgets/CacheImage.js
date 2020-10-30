@@ -63,7 +63,12 @@ export default function CacheImage({
   if(hasError) {
     return (
       defaultImage && (
-        <Image source={defaultImage} resizeMode={resizeMode} {...rest} />
+        <Image
+          {...rest}
+          source={defaultImage}
+          resizeMode={resizeMode}
+          style={_style}
+        />
       )
     )
   }

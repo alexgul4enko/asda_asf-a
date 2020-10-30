@@ -4,5 +4,8 @@ export default function parseSlug(slug) {
   if(!slug) {
     return
   }
-  return slug.split('-').slice(0, 2).map(capitalize).join(' ')
+  if(slug.startsWith('-')) {
+    return
+  }
+  return slug.split('-').slice(0, -1).map(capitalize).join(' ')
 }

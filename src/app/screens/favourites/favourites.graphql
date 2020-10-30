@@ -1,0 +1,48 @@
+query Favourites ($first: Int, $cursor: String) {
+  me {
+    wishlist(first: $first, after: $cursor) {
+      totalCount
+      pageInfo {
+        hasNextPage
+        endCursor
+      }
+      edges {
+        node {
+          id
+          product {
+            name
+            id
+            thumbnail(size: 510) {
+              url
+            }
+            pricing {
+              onSale
+              priceRange {
+                start {
+                  currency
+                  gross {
+                    amount
+                  }
+                }
+                stop {
+                  currency
+                  gross {
+                    amount
+                  }
+                }
+              }
+              priceRangeUndiscounted {
+                stop {
+                  currency
+                  gross {
+                    amount
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

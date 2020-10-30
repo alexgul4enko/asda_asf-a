@@ -10,7 +10,7 @@ import CELEBRITYPRODUCTS from './selebrityProducts.graphql'
 export default function CelebrityContainer(props) {
   const id = useMemo(() => idFromSlug(get(props, 'route.params.slug')), [get(props, 'route.params.slug')])
   const celebrity = usePrefetchQuery(SELEBRITY, { parseValue: 'data.celebrity' })({ id })
-  const products = usePrefetchQuery(CELEBRITYPRODUCTS, { parseValue: 'data.products' })({ first: 2, id })
+  const products = usePrefetchQuery(CELEBRITYPRODUCTS, { parseValue: 'data.products' })({ first: 16, id })
   const { loadNext, refresh, isRefreshing } = useGraphInifnyList(products)
   const onRefresh = useCallback(() => {
     refresh()
@@ -24,8 +24,8 @@ export default function CelebrityContainer(props) {
       celebrity={celebrity.data}
       products={products.data}
       loadNext={loadNext}
-      refresh={onRefresh}
-      isRefreshing={isRefreshing}
+      refetch={onRefresh}
+      refreshing={isRefreshing}
     />
   )
 }

@@ -6,13 +6,13 @@ import Header from './widgets/header'
 import keyExtractor from './utils/keyExtractor'
 import renderItem from './utils/renderItem'
 import get from 'lodash/get'
-import styles from './celebrity.styles'
+import styles from './designer.styles'
 
-CelebrityView.propTypes = ListPropTypes
+DesignerView.propTypes = ListPropTypes
 
-export default function CelebrityView({
+export default function DesignerView({
   isLoading,
-  celebrity,
+  designer,
   products,
   loadNext,
   refetch,
@@ -22,7 +22,7 @@ export default function CelebrityView({
     <View style={styles.root}>
       <LoadingWrapper isLoading={isLoading}>
         <FlatList
-          ListHeaderComponent={ <Header {...celebrity}/>}
+          ListHeaderComponent={ <Header {...designer}/>}
           keyExtractor={keyExtractor}
           renderItem={renderItem}
           data={get(products, 'edges')}

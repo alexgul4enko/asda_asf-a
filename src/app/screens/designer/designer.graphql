@@ -1,0 +1,22 @@
+query DESIGNER ($id: ID! ){
+  designer(id: $id) {
+    id
+    avatar {
+      url
+    }
+    firstName
+    lastName
+    socialMedias {
+      type
+      url
+    }
+    designer {
+      coverImage {
+        url
+      }
+      description
+
+      brand
+    }
+  }
+}

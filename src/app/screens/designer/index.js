@@ -1,7 +1,7 @@
-import DesignerContainer from './DesignerContainer'
+import Designer from './DesignerContainer'
 import designerOptions from './naviagtionOptions'
 
-export default DesignerContainer
+export default Designer
 
 export {
   designerOptions,

@@ -1,7 +1,31 @@
-import Designer from './Designer'
+import DesignerView from './DesignerView'
+import { useMemo, useCallback } from 'react'
+import { usePrefetchQuery, useGraphInifnyList } from '@cranium/resource'
+import get from 'lodash/get'
+import idFromSlug from 'common/utils/idFromSlug'
+import DESIGNER from './designer.graphql'
+import DESIGNERPRODUCTS from './designerProducts.graphql'
 
-export default function DesignerContainer() {
+
+export default function DesignerContainer(props) {
+  const id = useMemo(() => idFromSlug(get(props, 'route.params.slug')), [get(props, 'route.params.slug')])
+  const designer = usePrefetchQuery(DESIGNER, { parseValue: 'data.designer' })({ id })
+  const products = usePrefetchQuery(DESIGNERPRODUCTS, { parseValue: 'data.products' })({ first: 16, id })
+  const { loadNext, refresh, isRefreshing } = useGraphInifnyList(products)
+  const onRefresh = useCallback(() => {
+    refresh()
+    designer.request({ id }, { reducer: 'replace' })
+  }, [refresh, designer.request])
+
   return (
-    <Designer />
+    <DesignerView
+      {...props}
+      isLoading={designer.initialLoading}
+      designer={designer.data}
+      products={products.data}
+      loadNext={loadNext}
+      refetch={onRefresh}
+      refreshing={isRefreshing}
+    />
   )
 }

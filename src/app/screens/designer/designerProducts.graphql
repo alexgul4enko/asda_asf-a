@@ -1,0 +1,50 @@
+query PRODUCTS ($first: Int, $cursor: String, $id: ID!){
+  products(first: $first, after: $cursor, filter: { designer: $id }) {
+    totalCount
+    pageInfo {
+      hasNextPage
+      endCursor
+    }
+    edges {
+      node {
+        id
+        slug
+        name
+        updatedAt
+        inWishlist
+        isVip
+        thumbnail(size: 510) {
+          url
+        }
+        minimalVariantPrice {
+          amount
+        }
+        pricing {
+          onSale
+          priceRange {
+            start {
+              currency
+              gross {
+                amount
+              }
+            }
+            stop {
+              currency
+              gross {
+                amount
+              }
+            }
+          }
+          priceRangeUndiscounted {
+            stop {
+              currency
+              gross {
+                amount
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

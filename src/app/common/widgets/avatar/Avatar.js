@@ -26,6 +26,9 @@ export default function Avatar({ url, size, style, resizeMode, defaultImage, noI
   const source = useMemo(() => {
     return url ? { uri: url } : { uri: noImage }
   }, [url])
+  const errorImage = useMemo(() => {
+    return defaultImage || { uri: noImage }
+  }, [defaultImage, noImage])
   const imageStyle = useMemo(() => {
     return [{
       width: size,
@@ -40,7 +43,7 @@ export default function Avatar({ url, size, style, resizeMode, defaultImage, noI
           style={styles.image}
           source={source}
           resizeMode={resizeMode}
-          defaultImage={defaultImage}
+          defaultImage={errorImage}
         />
       ) : (
         <Image

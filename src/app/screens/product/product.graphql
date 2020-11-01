@@ -1,0 +1,121 @@
+query PRODUCT ($id: ID) {
+  product(id: $id) {
+    id
+    name
+    seoTitle
+    seoDescription
+    isVip
+    isAvailable
+    descriptionJson
+    inWishlist
+    discountPercent
+    isVip
+    variants {
+      id
+      sku
+      name
+      discountPercent
+      quantityAvailable
+      attributes {
+        values {
+          name
+          id
+          image {
+            url
+          }
+        }
+        attribute {
+          name
+          id
+        }
+      }
+      pricing {
+        onSale
+        priceUndiscounted {
+          gross {
+            amount
+          }
+        }
+        price {
+          currency
+          gross {
+            amount
+          }
+          net {
+            amount
+          }
+          tax {
+            amount
+          }
+        }
+      }
+      images {
+        id
+        url
+      }
+    }
+    attributes {
+      values {
+        id
+        name
+      }
+      attribute {
+        id
+        name
+        values {
+          id
+          name
+        }
+      }
+    }
+    category {
+      id
+      slug
+      name
+      ancestors(last: 5) {
+        edges {
+          node {
+            id
+            name
+            slug
+          }
+        }
+      }
+    }
+    pricing {
+      onSale
+      priceRangeUndiscounted {
+        start {
+          currency
+          gross {
+            amount
+          }
+        }
+        stop {
+          gross {
+            amount
+          }
+        }
+      }
+      priceRange {
+        start {
+          currency
+          gross {
+            amount
+          }
+        }
+        stop {
+          gross {
+            amount
+          }
+        }
+      }
+    }
+    images {
+      url
+    }
+    thumbnail {
+      url
+    }
+  }
+}

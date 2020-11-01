@@ -25,7 +25,7 @@ export default function Link({ to, params, onPress, ...props }) {
   const haldleClick = useCallback(() => {
     navigation.navigate(to, params)
     onPress && onPress()
-  }, [navigation])
+  }, [navigation.navigate, params, to, onPress])
 
   return <Button {...props} onPress={haldleClick} />
 }

@@ -1,5 +1,5 @@
 import CategoriesContainer from './CategoriesContainer'
-import categoriesOptions from './naviagtionOptions'
+import categoriesOptions from './navigationOptions'
 
 export default CategoriesContainer
 

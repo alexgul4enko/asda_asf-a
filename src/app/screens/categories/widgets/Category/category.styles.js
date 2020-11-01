@@ -17,6 +17,7 @@ export default StyleSheet.create({
   img: {
     width: 40,
     height: 40,
+    borderRadius: 0,
   },
   title: {
     fontWeight: '400',
@@ -27,5 +28,9 @@ export default StyleSheet.create({
   },
   all: {
     backgroundColor: 'pink',
+  },
+  rootLink: {
+    fontWeight: '600',
+    fontSize: 14,
   },
 })

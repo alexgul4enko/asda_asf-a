@@ -1,45 +1,54 @@
-import { SafeAreaView, FlatList, View, Text, TextInput } from 'react-native'
-import { SimpleKeyboardLayout } from 'common/layouts'
-import Icon from 'common/widgets/Icon'
-import Product from './widgets/Product'
-import styles from './products.styles'
+import ListPropTypes from 'common/prop-types/List'
+import PropTypes from 'prop-types'
+import { SafeAreaView, FlatList } from 'react-native'
+import Header from './widgets/header'
+import { LoadingWrapper } from 'common/widgets/loading'
+import ListEmptyComponent from 'common/widgets/listEmptyComponent'
+import Search from 'common/widgets/search'
+import { useTranslations } from '@cranium/i18n'
 import isEmpty from 'lodash/isEmpty'
+import keyExtractor from './utils/keyExtractor'
+import renderItem from './utils/renderItem'
 import get from 'lodash/get'
+import styles from './products.styles'
 
-
-function keyExtractor(item) {
-  return item.node.id
+ProductsView.propTypes = {
+  ...ListPropTypes,
+  route: PropTypes.object.isRequired,
+  onSearch: PropTypes.func.isRequired,
+  filter: PropTypes.func.isRequired,
 }
 
-function renderItem({ item }) {
-  return <Product {...item.node}/>
-}
-// TODO: create Search component
-export default function ProductsView({ data, loadNext, refetch, refreshing, route, handleSearch }) {
+export default function ProductsView({
+  data,
+  loadNext,
+  refetch,
+  refreshing,
+  route,
+  onSearch,
+  isLoading,
+  filter,
+}) {
+  const { gettext } = useTranslations()
   return (
     <SafeAreaView style={styles.root}>
-      <SimpleKeyboardLayout style={styles.root}>
-        {
-          isEmpty(route.params) && (
-            <View style={styles.search}>
-              <Icon name="search-01"/>
-              <TextInput
-                placeHolder="search"
-                style={styles.input}
-                onChangeText={handleSearch}
-              />
-            </View>
-          )
-        }
+      <LoadingWrapper isLoading={isLoading}>
         <FlatList
-          data={get(data, 'edges')}
-          renderItem={renderItem}
-          keyExtractor={keyExtractor}
+          ListHeaderComponent={isEmpty(route.params) ? (<Search onSearch={onSearch} placeholder={gettext('Search')} style={styles.search} />) : (<Header filter={filter}/>)}
           onEndReached={loadNext}
           onRefresh={refetch}
           refreshing={refreshing}
+          keyExtractor={keyExtractor}
+          renderItem={renderItem}
+          data={get(data, 'edges')}
+          numColumns={2}
+          contentContainerStyle={styles.listContent}
+          keyboardShouldPersistTaps="handled"
+          keyboardDismissMode="on-drag"
+          ListEmptyComponent={<ListEmptyComponent/>}
+          stickyHeaderIndices={[0]}
         />
-      </SimpleKeyboardLayout>
+      </LoadingWrapper>
     </SafeAreaView>
   )
 }

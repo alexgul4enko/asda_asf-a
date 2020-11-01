@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types'
 import { useMemo } from 'react'
 import {
   ScrollView,
@@ -6,24 +7,27 @@ import {
   ViewPropTypes,
   Platform,
 } from 'react-native'
-import PropTypes from 'prop-types'
+
 
 SimpleKeyboardLayout.propTypes = {
   keyboardShouldPersistTaps: PropTypes.oneOf(['never', 'always', 'handled']),
   children: PropTypes.node,
   style: ViewPropTypes.style,
+  keyboardVerticalOffset: PropTypes.number,
 }
 
 SimpleKeyboardLayout.defaultProps = {
   keyboardShouldPersistTaps: 'handled',
   children: null,
   style: undefined,
+  keyboardVerticalOffset: undefined,
 }
 
 export default function SimpleKeyboardLayout({
   children,
   style,
   keyboardShouldPersistTaps,
+  keyboardVerticalOffset,
 }) {
   const behavior = useMemo(() => Platform.OS === 'ios' ? 'padding' : undefined, [])
   const keyBoardStyle = useMemo(() => ([styles.main, style]), [style])
@@ -34,7 +38,7 @@ export default function SimpleKeyboardLayout({
       keyboardShouldPersistTaps={keyboardShouldPersistTaps}
       style={styles.main}
     >
-      <KeyboardAvoidingView behavior={behavior} style={keyBoardStyle}>
+      <KeyboardAvoidingView behavior={behavior} style={keyBoardStyle} keyboardVerticalOffset={keyboardVerticalOffset}>
         {children}
       </KeyboardAvoidingView>
     </ScrollView>

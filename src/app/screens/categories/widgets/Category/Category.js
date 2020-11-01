@@ -3,7 +3,8 @@ import { useMemo } from 'react'
 import { Text } from 'react-native'
 import Link from 'common/widgets/link'
 import Icon from 'common/widgets/Icon'
-import CacheImage from 'common/widgets/CacheImage'
+import Avatar from 'common/widgets/avatar'
+import get from 'lodash/get'
 import styles from './category.styles'
 
 Category.propTypes = {
@@ -17,51 +18,51 @@ Category.propTypes = {
   children: PropTypes.shape({
     totalCount: PropTypes.number,
   }),
-  description: PropTypes.string,
   id: PropTypes.string,
   slug: PropTypes.string,
+  rootLink: PropTypes.bool,
 }
 
 Category.defaultProps = {
   name: undefined,
-  description: undefined,
   id: undefined,
   slug: undefined,
   backgroundImage: undefined,
   promoImage: undefined,
   children: undefined,
+  rootLink: undefined,
 }
 
-export default function Category({ name, backgroundImage, promoImage, children, description, id, slug }) {
-  const source = useMemo(() => {
+export default function Category({ name, backgroundImage, promoImage, children, id, slug, rootLink }) {
+  const url = useMemo(() => {
     if(!promoImage && !backgroundImage) { return }
-    if(backgroundImage) {
-      return { uri: backgroundImage.url }
-    }
-    return { uri: promoImage.url }
+    return get(backgroundImage, 'url') || get(promoImage, 'url')
   }, [backgroundImage, promoImage])
+
+  const textStyle = useMemo(() => ([styles.title, rootLink && styles.rootLink]), [rootLink])
   const rootLinkOptions = useMemo(() => {
-    if(children.totalCount) {
+    if(get(children, 'totalCount')) {
       return {
         to: 'Categories',
-        params: { parent: id, title: name },
+        params: { parent: id, title: name, slug },
       }
     }
     return {
       to: 'Products',
       params: { slug },
     }
-  }, [children.totalCount, id, slug, name])
+  }, [get(children, 'totalCount'), id, slug, name])
   return (
     <Link {...rootLinkOptions} style={styles.btn}>
-      {source && (
-        <CacheImage
-          source={source}
+      {!rootLink ? (
+        <Avatar
+          url={url}
           style={styles.img}
           resizeMode="cover"
-        />
-      )}
-      <Text style={styles.title}>{name}</Text>
+          noImage="noimage"
+        />) : null
+      }
+      <Text style={textStyle}>{name}</Text>
       <Icon name="chevron-right-01" size={24}/>
     </Link>
   )

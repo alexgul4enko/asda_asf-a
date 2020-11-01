@@ -1,0 +1,6 @@
+query PRICE_RANGE ($filter: ProductFilterInput) {
+  productsMinMax(filter: $filter) {
+    min
+    max
+  }
+}

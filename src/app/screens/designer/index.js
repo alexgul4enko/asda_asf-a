@@ -1,5 +1,5 @@
 import Designer from './DesignerContainer'
-import designerOptions from './naviagtionOptions'
+import designerOptions from './navigationOptions'
 
 export default Designer
 

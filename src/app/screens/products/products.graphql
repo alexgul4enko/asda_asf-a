@@ -1,5 +1,5 @@
-query Products($first: Int, $cursor: String, $search: String, $slug: [String]) {
-  products (first: $first, after: $cursor, filter : { categorySlugs: $slug, search: $search  } ) {
+query Products($first: Int, $cursor: String, $filter: ProductFilterInput, $sortBy: ProductOrder) {
+  products (first: $first, after: $cursor, sortBy: $sortBy, filter: $filter ) {
     totalCount,
     pageInfo {
       endCursor,
@@ -8,11 +8,41 @@ query Products($first: Int, $cursor: String, $search: String, $slug: [String]) {
     edges {
       node {
         id
-        name
-        description
         slug
-        thumbnail {
+        name
+        updatedAt
+        inWishlist
+        isVip
+        thumbnail(size: 510) {
           url
+        }
+        minimalVariantPrice {
+          amount
+        }
+        pricing {
+          onSale
+          priceRange {
+            start {
+              currency
+              gross {
+                amount
+              }
+            }
+            stop {
+              currency
+              gross {
+                amount
+              }
+            }
+          }
+          priceRangeUndiscounted {
+            stop {
+              currency
+              gross {
+                amount
+              }
+            }
+          }
         }
       }
     }

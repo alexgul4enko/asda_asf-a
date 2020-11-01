@@ -1,0 +1,6 @@
+query Products_Count( $filter: ProductFilterInput, ) {
+  products (first: 1, filter: $filter ) {
+    totalCount,
+  }
+}
+

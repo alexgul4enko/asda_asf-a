@@ -1,0 +1,30 @@
+query CategoriesFilters($first: Int, $cursor: String, $slug: String) {
+  category (slug: $slug) {
+    children (first: $first, after: $cursor) {
+      totalCount
+      pageInfo {
+        endCursor
+        hasNextPage
+      }
+      edges {
+        node {
+          id
+          name
+          description
+          slug
+          promoImage {
+            url
+          }
+          level
+          backgroundImage {
+            url
+          }
+          children {
+            totalCount
+          }
+        }
+      }
+    }
+  }
+}
+

@@ -4,16 +4,15 @@ export default StyleSheet.create({
   root: {
     flex: 1,
     alignSelf: 'stretch',
-  },
-  search: {
-    flexDirection: 'row',
-    alignItems: 'stretch',
-    alignSelf: 'stretch',
-    height: 42,
-    backgroundColor: 'coral',
+    backgroundColor: '#ffffff',
   },
   input: {
     flex: 1,
     alignSelf: 'stretch',
+  },
+  listContent: {
+    paddingHorizontal: 12,
+    paddingBottom: 24,
+    backgroundColor: '#ffffff',
   },
 })

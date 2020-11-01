@@ -1,5 +1,5 @@
 import Celebrity from './CelebrityContainer'
-import celebrityOptions from './naviagtionOptions'
+import celebrityOptions from './navigationOptions'
 
 export default Celebrity
 

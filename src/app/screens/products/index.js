@@ -1,5 +1,5 @@
 import ProductsContainer from './ProductsContainer'
-import productsOptions from './naviagtionOptions'
+import productsOptions from './navigationOptions'
 
 export default ProductsContainer
 

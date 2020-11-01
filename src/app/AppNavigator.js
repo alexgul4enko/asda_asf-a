@@ -10,9 +10,19 @@ import Designer, { designerOptions } from './screens/designer'
 import Celebrity, { celebrityOptions } from './screens/celebrity'
 import Categories, { categoriesOptions } from './screens/categories'
 import Products, { productsOptions } from './screens/products'
+import {
+  Filters,
+  filtersOptions,
+  Attributes,
+  attributesOptions,
+  Price,
+  priceOptions,
+  CategoryFilter,
+  categoryFiltersOptions,
+} from './screens/products/filters'
 import Product, { productOptions } from './screens/product'
 // import NotFount from './screens/notFound'
-import Favourites from './screens/favourites'
+import Favourites, { favouritesOptions } from './screens/favourites'
 import Cart from './screens/cart'
 import { Login } from './screens/auth'
 import { handleNotification } from './common/notifications'
@@ -72,15 +82,19 @@ export default function AppNavigator() {
             //   return [
             //     {
             //       id: `item.${id}.photo`,
-            //       animation: 'fade',
+            //       animation: 'fade',    Filters
             //     },
             //   ]
             // }}
           />
           <MainStack.Screen name="Categories" component={Categories} options={categoriesOptions} />
           <MainStack.Screen name="Products" component={Products} options={productsOptions} />
+          <MainStack.Screen name="Filters" component={Filters} options={filtersOptions}/>
+          <MainStack.Screen name="Attributes" component={Attributes} options={attributesOptions}/>
+          <MainStack.Screen name="Price" component={Price} options={priceOptions}/>
+          <MainStack.Screen name="CategoryFilter" component={CategoryFilter} options={categoryFiltersOptions} />
           <MainStack.Screen name="Product" component={Product} options={productOptions} />
-          <MainStack.Screen name="Favourites" component={Favourites} />
+          <MainStack.Screen name="Favourites" component={Favourites} option={favouritesOptions}/>
           <MainStack.Screen name="Cart" component={Cart} />
           <MainStack.Screen name="Login" component={Login} />
         </MainStack.Navigator>

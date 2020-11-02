@@ -7,6 +7,7 @@ import { Text, View } from 'react-native'
 import LikeButton from './LikeButton'
 import styles from './product.styles'
 import get from 'lodash/get'
+import makeSlug from 'common/utils/makeSlug'
 import getPrice from './utils/getPrice'
 
 Product.propTypes = {
@@ -35,8 +36,9 @@ Product.defaultProps = {
 export default function Product({ id, name, slug, thumbnail, isVip, pricing, inWishlist }) {
   const price = useMemo(() => getPrice(get(pricing, 'priceRange')), [pricing])
   const salePrice = useMemo(() => get(pricing, 'onSale') && getPrice(get(pricing, 'priceRangeUndiscounted')), [pricing])
+  const params = useMemo(() => ({ slug: makeSlug(name, id) }), [id, name])
   return (
-    <Link to="Product" params={{ slug }} style={styles.link}>
+    <Link to="Product" params={params} style={styles.link}>
       <SharedElement id={`product.${id}.image`}>
         <Avatar
           url={get(thumbnail, 'url')}

@@ -21,13 +21,13 @@ import {
   categoryFiltersOptions,
 } from './screens/products/filters'
 import Product, { productOptions } from './screens/product'
-// import NotFount from './screens/notFound'
 import Favourites, { favouritesOptions } from './screens/favourites'
 import Cart from './screens/cart'
 import { Login } from './screens/auth'
 import { handleNotification } from './common/notifications'
 import { CheckAccess } from '@cranium/access'
 import { access } from 'common/session'
+import theme from 'theme'
 
 const MainStack = createSharedElementStackNavigator()
 
@@ -55,6 +55,14 @@ const linking = {
   },
 }
 
+const screenOptions = {
+  headerBackTitleVisible: false,
+  headerBackImage: BackIcon,
+  headerTitleStyle: {
+    maxWidth: theme.width - 200,
+  },
+}
+
 export default function AppNavigator() {
   const navigationRef = useRef()
   useEffect(() => {
@@ -67,26 +75,10 @@ export default function AppNavigator() {
         <Welcome/>
       </CheckAccess>
       <CheckAccess level={access.F_FIRST_INSTALL_PASSED}>
-        <MainStack.Navigator screenOptions={{
-          headerBackTitleVisible: false,
-          headerBackImage: BackIcon,
-        }}>
+        <MainStack.Navigator screenOptions={screenOptions}>
           <MainStack.Screen name="main" component={Home} options={homeOptions} />
           <MainStack.Screen name="Designer" component={Designer} options={designerOptions} />
-          <MainStack.Screen
-            name="Celebrity"
-            component={Celebrity}
-            options={celebrityOptions}
-            // sharedElementsConfig={(route, otherRoute, showing) => {
-            //   const { id } = route.params
-            //   return [
-            //     {
-            //       id: `item.${id}.photo`,
-            //       animation: 'fade',    Filters
-            //     },
-            //   ]
-            // }}
-          />
+          <MainStack.Screen name="Celebrity" component={Celebrity} options={celebrityOptions} />
           <MainStack.Screen name="Categories" component={Categories} options={categoriesOptions} />
           <MainStack.Screen name="Products" component={Products} options={productsOptions} />
           <MainStack.Screen name="Filters" component={Filters} options={filtersOptions}/>

@@ -1,7 +1,19 @@
-import { Text } from 'react-native'
+import PropTypes from 'prop-types'
+import { SafeAreaView } from 'react-native'
+import Gallery from './widgets/gallery'
 
-export default function ProductView() {
+ProductView.propTypes = {
+  images: PropTypes.array,
+}
+
+ProductView.defaultProps = {
+  images: [],
+}
+
+export default function ProductView({ images }) {
   return (
-    <Text>Product page</Text>
+    <SafeAreaView>
+      <Gallery data={images}/>
+    </SafeAreaView>
   )
 }

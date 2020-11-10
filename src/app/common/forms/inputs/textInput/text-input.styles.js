@@ -6,22 +6,28 @@ export default StyleSheet.create({
     alignSelf: 'stretch',
     flexDirection: 'row',
     alignItems: 'center',
-    borderBottomWidth: StyleSheet.hairlineWidth,
+    borderWidth: StyleSheet.hairlineWidth,
     borderStyle: 'solid',
-    borderBottomColor: 'transparent',
-    marginBottom: 10,
+    paddingHorizontal: 12,
   },
   input: {
     fontSize: theme.fontSize,
     flex: 1,
     color: theme.color,
     backgroundColor: 'transparent',
-    height: 45,
+    height: 42,
     padding: 0,
     margin: 0,
   },
   text: {
     color: theme.error,
     fontSize: theme.fontSize,
+  },
+  passwordButton: {
+    paddingRight: 0,
+    paddingVertical: 5,
+  },
+  disabled: {
+    backgroundColor: '#F6F6F6',
   },
 })

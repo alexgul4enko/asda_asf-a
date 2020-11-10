@@ -1,0 +1,8 @@
+mutation DEFAULT_ADDRESS($id: ID!) {
+  accountSetDefaultAddress(id: $id, type: SHIPPING) {
+    accountErrors {
+      message
+      code
+    }
+  }
+}

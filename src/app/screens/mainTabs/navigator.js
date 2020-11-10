@@ -1,4 +1,5 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
+import { useTranslations } from '@cranium/i18n'
 import TabBarIcon from 'common/navigation/TabBarIcon'
 import Logo from 'common/widgets/logo'
 import Gender from 'common/navigation/Gender'
@@ -21,6 +22,7 @@ function makeTabIcon(icon) {
 
 
 export default function HomeNavigation() {
+  const { gettext } = useTranslations()
   return (
     <Tab.Navigator
       tabBarOptions={{
@@ -39,6 +41,7 @@ export default function HomeNavigation() {
         component={Home}
         options={{
           tabBarIcon: makeTabIcon('tab-home'),
+          tabBarLabel: gettext('Home'),
         }}
       />
       <Tab.Screen
@@ -46,13 +49,15 @@ export default function HomeNavigation() {
         component={Designers}
         options={{
           tabBarIcon: makeTabIcon('tab-designers'),
+          tabBarLabel: gettext('Designers'),
         }}
       />
       <Tab.Screen
-        name="Search"
+        name="Catalog"
         component={Categories}
         options={{
           tabBarIcon: makeTabIcon('tab-categories'),
+          tabBarLabel: gettext('Catalog'),
         }}
       />
       <Tab.Screen
@@ -60,6 +65,7 @@ export default function HomeNavigation() {
         component={Celebrities}
         options={{
           tabBarIcon: makeTabIcon('tab-celebrities'),
+          tabBarLabel: gettext('Celebrities'),
         }}
       />
       <Tab.Screen
@@ -67,6 +73,7 @@ export default function HomeNavigation() {
         component={Profile}
         options={{
           tabBarIcon: makeTabIcon('tab-user'),
+          tabBarLabel: gettext('Me'),
         }}
       />
     </Tab.Navigator>

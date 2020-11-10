@@ -1,0 +1,35 @@
+query review($token: UUID!) {
+  orderByToken(token: $token) {
+    id
+    lines {
+      id
+      quantity
+      thumbnail {
+        url
+      }
+      productName
+      translatedProductName
+      unitPrice {
+        currency
+        gross {
+          amount
+        }
+      }
+      variant {
+        product {
+          id
+        }
+        attributes {
+          values {
+            id
+            name
+          }
+          attribute {
+            id
+            name
+          }
+        }
+      }
+    }
+  }
+}

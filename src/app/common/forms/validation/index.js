@@ -1,6 +1,7 @@
 import { compose, composeValidators, mainValidation } from './utils'
 import { email } from './email'
 import { required } from './required'
+import validateConfirmPassword from './validateConfirmPassword'
 
 export function validateEmail(fields) {
   return mainValidation(fields, email)
@@ -15,4 +16,5 @@ export {
   composeValidators,
   email,
   required,
+  validateConfirmPassword,
 }

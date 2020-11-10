@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 import theme from 'theme'
 
 BaseFieldLayout.propTypes = {
-  label: PropTypes.string,
+  label: PropTypes.node,
   required: PropTypes.bool,
   inputComponent: PropTypes.oneOfType([
     PropTypes.element,
@@ -38,7 +38,7 @@ export default function BaseFieldLayout({
   }, [meta.error, meta.touched, meta.dirtySinceLastSubmit, meta.submitError])
 
 
-  const Label = useMemo(() => !!label && <Text style={styles.desc}>{label}</Text>, [label])
+  const Label = useMemo(() => !!label && <Text style={styles.desc}>{label}{required ? '*' : ''}</Text>, [label, required])
   return (
     <View style={styles.view}>
       {Label}
@@ -51,12 +51,17 @@ export default function BaseFieldLayout({
 const styles = StyleSheet.create({
   view: {
     flexDirection: 'column',
-    marginBottom: theme.padding,
+    marginBottom: 8,
   },
   desc: {
-    fontSize: theme.fontSize,
+    fontWeight: '600',
+    lineHeight: 16,
+    fontSize: 12,
+    marginBottom: 6,
   },
   error: {
     color: theme.error,
+    fontSize: 12,
+    lineHeight: 14,
   },
 })

@@ -1,0 +1,8 @@
+query COUNTRY_AREAS ($country: CountryCode!) {
+  addressValidationRules(countryCode: $country) {
+    countryAreaChoices {
+      raw
+      verbose
+    }
+  }
+}

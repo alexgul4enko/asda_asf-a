@@ -11,21 +11,23 @@ Link.propTypes = {
   params: PropTypes.object,
   textStyle: StylePropType,
   onPress: PropTypes.func,
+  linkAction: PropTypes.string,
 }
 
 Link.defaultProps = {
   textStyle: styles.link,
   params: undefined,
   onPress: undefined,
+  linkAction: undefined,
 }
 
-export default function Link({ to, params, onPress, ...props }) {
+export default function Link({ to, params, onPress, linkAction, ...props }) {
   const navigation = useNavigation()
-
   const haldleClick = useCallback(() => {
-    navigation.navigate(to, params)
     onPress && onPress()
-  }, [navigation.navigate, params, to, onPress])
+    const action = linkAction === 'push' ? navigation.push : navigation.navigate
+    action(to, params)
+  }, [navigation.push, params, to, onPress])
 
   return <Button {...props} onPress={haldleClick} />
 }

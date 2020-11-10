@@ -1,0 +1,14 @@
+mutation COMPLETE_CHECKOUT($checkoutId: ID!, $redirectUrl: String) {
+  checkoutComplete(checkoutId: $checkoutId, redirectUrl: $redirectUrl) {
+    order {
+      token
+      lastPayment {
+        redirectPostUrl
+      }
+    }
+    checkoutErrors {
+      field
+      message
+    }
+  }
+}

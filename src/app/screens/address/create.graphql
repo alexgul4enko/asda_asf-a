@@ -1,0 +1,11 @@
+mutation CREATE_ADDRESS($input: AddressInput!) {
+  accountAddressCreate(type: SHIPPING, input: $input) {
+    address {
+      id
+    }
+    accountErrors {
+      message
+      field
+    }
+  }
+}

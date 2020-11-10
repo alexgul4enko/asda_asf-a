@@ -1,0 +1,8 @@
+mutation DELETE_ADDRESS($id: ID!) {
+  accountAddressDelete(id: $id) {
+    accountErrors {
+      message
+      field
+    }
+  }
+}

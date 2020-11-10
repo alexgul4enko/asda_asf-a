@@ -1,3 +1,7 @@
-import CartView from './CartView'
+import BagContainer from './BagContainer'
+import cartOptions from './navigationOptions'
 
-export default CartView
+export default BagContainer
+export {
+  cartOptions,
+}

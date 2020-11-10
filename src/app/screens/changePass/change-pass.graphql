@@ -1,0 +1,10 @@
+mutation CHANGE_PASSWORD ($oldPassword: String!, $newPassword: String!) {
+  passwordChange(oldPassword: $oldPassword, newPassword: $newPassword) {
+    user {
+      id
+    }
+    accountErrors {
+      message
+    }
+  }
+}

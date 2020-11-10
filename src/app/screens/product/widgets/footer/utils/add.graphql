@@ -1,0 +1,60 @@
+mutation ADD_CHECKOUT_LINES($checkoutId: ID!, $lines: [CheckoutLineInput]!) {
+  checkoutLinesAdd(checkoutId: $checkoutId, lines: $lines) {
+    checkout {
+      lines {
+        id
+        quantity
+        variant {
+          id
+          sku
+          name
+          quantityAvailable
+          attributes {
+            values {
+              id
+              name
+            }
+            attribute {
+              id
+              name
+              values {
+                id
+                name
+              }
+            }
+          }
+          product {
+            id
+            slug
+            name
+            thumbnail(size: 510) {
+              url
+            }
+          }
+          pricing {
+            price {
+              currency
+              gross {
+                amount
+              }
+              net {
+                amount
+              }
+              tax {
+                amount
+              }
+            }
+          }
+          images {
+            id
+            url
+          }
+        }
+      }
+    }
+    checkoutErrors {
+      field
+      message
+    }
+  }
+}

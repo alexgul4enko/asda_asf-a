@@ -1,5 +1,9 @@
 mutation Login($email: String!, $password: String!) {
   tokenCreate (email: $email, password: $password) {
     token
+    accountErrors {
+      code
+      message
+    }
   }
 }

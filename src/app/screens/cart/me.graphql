@@ -1,0 +1,27 @@
+query checkout_user {
+  me {
+    email,
+    addresses {
+      id
+      firstName
+      lastName
+      label
+      companyName
+      countryArea
+      isDefaultBillingAddress
+      isDefaultShippingAddress
+      city {
+        id
+        name
+      }
+      phone
+      country {
+        country
+        code
+      }
+      postalCode
+      streetAddress1
+      streetAddress2
+    }
+  }
+}

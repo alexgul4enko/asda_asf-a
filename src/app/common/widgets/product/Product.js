@@ -23,6 +23,9 @@ Product.propTypes = {
     priceRange: PropTypes.object,
     priceRangeUndiscounted: PropTypes.object,
   }),
+  inList: PropTypes.string,
+  linkAction: PropTypes.string,
+  hideLikeButton: PropTypes.bool,
 }
 
 Product.defaultProps = {
@@ -31,14 +34,17 @@ Product.defaultProps = {
   isVip: undefined,
   inWishlist: undefined,
   pricing: undefined,
+  inList: undefined,
+  linkAction: undefined,
+  hideLikeButton: undefined,
 }
 
-export default function Product({ id, name, slug, thumbnail, isVip, pricing, inWishlist }) {
+export default function Product({ id, name, slug, thumbnail, isVip, pricing, inWishlist, inList, hideLikeButton, linkAction }) {
   const price = useMemo(() => getPrice(get(pricing, 'priceRange')), [pricing])
   const salePrice = useMemo(() => get(pricing, 'onSale') && getPrice(get(pricing, 'priceRangeUndiscounted')), [pricing])
   const params = useMemo(() => ({ slug: makeSlug(name, id) }), [id, name])
   return (
-    <Link to="Product" params={params} style={styles.link}>
+    <Link to="Product" params={params} style={styles.link} linkAction={linkAction}>
       <SharedElement id={`product.${id}.image`}>
         <Avatar
           url={get(thumbnail, 'url')}
@@ -59,7 +65,7 @@ export default function Product({ id, name, slug, thumbnail, isVip, pricing, inW
       <Text style={styles.sale}>{salePrice}</Text>
       <View style={styles.row}>
         <Text style={styles.price}>{price}</Text>
-        <LikeButton like={inWishlist} id={id}/>
+        {hideLikeButton ? null : <LikeButton like={inWishlist} id={id} inList={inList} size={20}/>}
       </View>
     </Link>
   )

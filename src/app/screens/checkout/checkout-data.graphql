@@ -1,0 +1,87 @@
+query CHECKOUT {
+  me {
+    id
+    email
+    firstName
+    lastName
+    role
+    phone
+    gender
+    birthday
+    isVip
+    addresses {
+      id
+      firstName
+      lastName
+      label
+      companyName
+      countryArea
+      isDefaultBillingAddress
+      isDefaultShippingAddress
+      city {
+        id
+        name
+      }
+      phone
+      country {
+        country
+        code
+      }
+      postalCode
+      streetAddress1
+      streetAddress2
+      isDefaultShippingAddress
+    }
+    checkout {
+      id
+      token
+      note
+      paymentGateway
+      cacheOnDeliveryFee {
+        amount
+      }
+      voucherCode
+      selectedBillingAddressId
+      selectedShippingAddressId
+      availablePaymentGateways {
+        id
+        name
+      }
+      availableShippingMethods {
+        id
+        name
+        price {
+          amount
+        }
+      }
+      shippingMethod {
+        id
+      }
+      subtotalPrice {
+        currency
+        gross {
+          amount
+        }
+        net {
+          amount
+        }
+        tax {
+          amount
+        }
+      }
+      discount {
+        amount
+      }
+      shippingPrice {
+        gross {
+          amount
+        }
+      }
+      totalPrice {
+        gross {
+          amount
+        }
+      }
+    }
+  }
+}

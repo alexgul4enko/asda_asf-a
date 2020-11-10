@@ -1,28 +1,30 @@
+import NavigationPropTypes from 'common/prop-types/Navigation'
 import { Form } from 'react-final-form'
 import { useCallback } from 'react'
 import LoginView from './LoginView'
 import LOGIN from './login.graphql'
 import validate from './utils/validate'
-import { withGraphQL } from '@cranium/resource'
-import get from 'lodash/get'
+import { useQuery } from '@cranium/resource'
+import parseValue from './utils/parseValue'
 
-function LoginContainer({ navigation, session }) {
+LoginContainer.propTypes = NavigationPropTypes
+
+export default function LoginContainer({ navigation }) {
+  const { request } = useQuery(LOGIN, { namespace: 'session', parseValue })
   const handleSubmit = useCallback((variables) => {
-    return session.request(variables)
-  }, [session.request, navigation.goBack])
+    return request(variables)
+      .then(data => {
+        if(data && data.token) {
+          return navigation.goBack()
+        }
+        return data
+      })
+  }, [request, navigation.goBack])
   return (
     <Form
       onSubmit={handleSubmit}
       render={LoginView}
+      validate={validate}
     />
   )
 }
-
-function parseValue(resp) {
-  if(!get(resp, 'data.tokenCreate.token')) {
-    return Promise.reject({ _error: '401' })
-  }
-  return get(resp, 'data.tokenCreate')
-}
-
-export default withGraphQL(LOGIN, { namespace: 'session', parseValue })(LoginContainer)

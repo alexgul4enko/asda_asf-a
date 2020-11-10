@@ -17,6 +17,9 @@ export default function authMiddleware(store) {
       const headers = new Headers(consfigs.headers)
       headers.set('X-Gender', get(store.getState(), 'gender.data'))
       headers.set('Authorization', `JWT ${get(store.getState(), 'session.data.token', '')}`)
+      if(typeof consfigs.body !== 'string') {
+        headers.set('content-type', 'multipart/form-data;')
+      }
       return {
         ...consfigs,
         headers,

@@ -1,6 +1,7 @@
 const errors = {
-  required: 'Required',
-  email: 'Email is wrong',
+  required: gettext('Required'),
+  email: gettext('Email is wrong'),
+  samePass: gettext('Passwords should be equal'),
 }
 
 export default errors

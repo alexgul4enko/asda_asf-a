@@ -1,0 +1,15 @@
+query User {
+  me {
+    id
+    email
+    firstName
+    lastName
+    role
+    phone
+    birthday
+    gender
+    avatar {
+      url
+    }
+  }
+}

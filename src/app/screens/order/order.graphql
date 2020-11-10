@@ -1,0 +1,142 @@
+query ORDER($token: UUID!) {
+  orderByToken(token: $token) {
+    id
+    number
+    status
+    statusDisplay
+    paymentStatus
+    paymentStatusDisplay
+    paymentMethod
+    canPayNow
+    cashOnDeliveryFee {
+      gross {
+        amount
+      }
+    }
+    lastPayment {
+      redirectPostUrl
+    }
+    lines {
+      id
+      quantity
+      quantityFulfilled
+      thumbnail {
+        url
+      }
+      productName
+      translatedProductName
+      unitPrice {
+        currency
+        gross {
+          amount
+        }
+      }
+      variant {
+        product {
+          id
+        }
+        attributes {
+          values {
+            name
+            id
+          }
+          attribute {
+            name
+            id
+          }
+        }
+      }
+    }
+    fulfillments {
+      id
+      status
+      statusDisplay
+      trackingNumber
+      shipping {
+        trackingCode
+        deliveryStatus
+        deliveryCurrentLocation
+      }
+      lines {
+        id
+        quantity
+        orderLine {
+          id
+          thumbnail {
+            url
+          }
+          productName
+          translatedProductName
+          unitPrice {
+            currency
+            gross {
+              amount
+            }
+          }
+          variant {
+            product {
+              id
+            }
+            attributes {
+              values {
+                name
+                id
+              }
+              attribute {
+                name
+                id
+              }
+            }
+          }
+        }
+      }
+    }
+    subtotal {
+      tax {
+        amount
+      }
+      gross {
+        amount
+      }
+      net {
+        amount
+      }
+    }
+    total {
+      currency
+      gross {
+        amount
+      }
+    }
+    shippingPrice {
+      currency
+      gross {
+        amount
+      }
+    }
+    shippingAddress {
+      firstName
+      lastName
+      phone
+      streetAddress1
+      streetAddress2
+      country {
+        country
+      }
+      city {
+        name
+      }
+      postalCode
+    }
+    cashOnDeliveryFee {
+      currency
+      gross {
+        amount
+      }
+    }
+    discount {
+      amount
+      currency
+    }
+  }
+}

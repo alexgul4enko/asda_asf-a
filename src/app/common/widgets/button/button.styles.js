@@ -9,8 +9,8 @@ export default StyleSheet.create({
     justifyContent: 'center',
   },
   title: {
-    fontSize: theme.fontSizeTitle,
-    fontWeight: '500',
+    fontSize: 16,
+    fontWeight: '600',
     textAlign: 'center',
   },
   outlineButton: {
@@ -22,5 +22,16 @@ export default StyleSheet.create({
   },
   primaryTitle: {
     color: '#ffffff',
+  },
+  animated: {
+    padding: theme.fontSize,
+    alignSelf: 'stretch',
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  submit: {
+    padding: 0,
+    backgroundColor: 'transparent',
   },
 })

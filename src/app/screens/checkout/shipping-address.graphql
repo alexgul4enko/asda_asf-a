@@ -1,0 +1,16 @@
+mutation UPDATE_SHIPPING_ADDRESS(
+  $checkoutId: ID!
+  $shippingAddress: AddressInput!
+  $selectedShippingAddressId: String
+) {
+  checkoutShippingAddressUpdate(
+    checkoutId: $checkoutId
+    shippingAddress: $shippingAddress
+    selectedShippingAddressId: $selectedShippingAddressId
+  ) {
+    checkoutErrors {
+      field
+      message
+    }
+  }
+}

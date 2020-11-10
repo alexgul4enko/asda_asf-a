@@ -1,0 +1,16 @@
+query SHOP_ADDRESS {
+  shop {
+    companyAddress {
+      streetAddress1
+      streetAddress2
+      phone
+      city {
+        displayName
+      }
+      country {
+        country
+      }
+      postalCode
+    }
+  }
+}

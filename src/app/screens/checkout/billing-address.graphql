@@ -1,0 +1,16 @@
+mutation UPDATE_BILLING_ADDRESS(
+  $checkoutId: ID!
+  $billingAddress: AddressInput!
+  $selectedBillingAddressId: String
+) {
+  checkoutBillingAddressUpdate(
+    checkoutId: $checkoutId
+    billingAddress: $billingAddress
+    selectedBillingAddressId: $selectedBillingAddressId
+  ) {
+    checkoutErrors {
+      field
+      message
+    }
+  }
+}

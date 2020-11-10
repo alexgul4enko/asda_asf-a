@@ -22,12 +22,30 @@ import {
 } from './screens/products/filters'
 import Product, { productOptions } from './screens/product'
 import Favourites, { favouritesOptions } from './screens/favourites'
-import Cart from './screens/cart'
-import { Login } from './screens/auth'
+import Cart, { cartOptions } from './screens/cart'
+import Checkout, { checkoutOptions } from './screens/checkout'
+import {
+  Login,
+  loginOptions,
+  Register,
+  RegistrationSuccess,
+  registerOptions,
+} from './screens/auth'
+import AddressBook, { addressBookOptions } from './screens/addressBook'
+import Address, { addressOptions } from './screens/address'
+import Country, { countryOptions } from './screens/country'
+import City, { cityOptions } from './screens/city'
+import CountryArea, { countryAreaOptions } from './screens/countryArea'
+import Profile, { profileOptions } from './screens/profile'
+import ChangePass, { changePassOptions } from './screens/changePass'
+import Orders, { ordersOptions } from './screens/orders'
+import Order, { orderOptions } from './screens/order'
+import ReviewOrder from './screens/reviewOrder'
 import { handleNotification } from './common/notifications'
 import { CheckAccess } from '@cranium/access'
 import { access } from 'common/session'
 import theme from 'theme'
+
 
 const MainStack = createSharedElementStackNavigator()
 
@@ -86,9 +104,22 @@ export default function AppNavigator() {
           <MainStack.Screen name="Price" component={Price} options={priceOptions}/>
           <MainStack.Screen name="CategoryFilter" component={CategoryFilter} options={categoryFiltersOptions} />
           <MainStack.Screen name="Product" component={Product} options={productOptions} />
-          <MainStack.Screen name="Favourites" component={Favourites} option={favouritesOptions}/>
-          <MainStack.Screen name="Cart" component={Cart} />
-          <MainStack.Screen name="Login" component={Login} />
+          <MainStack.Screen name="Favourites" component={Favourites} options={favouritesOptions}/>
+          <MainStack.Screen name="Cart" component={Cart} options={cartOptions}/>
+          <MainStack.Screen name="Checkout" component={Checkout} options={checkoutOptions}/>
+          <MainStack.Screen name="Login" component={Login} options={loginOptions}/>
+          <MainStack.Screen name="Register" component={Register} options={registerOptions}/>
+          <MainStack.Screen name="RegistrationSuccess" component={RegistrationSuccess} options={registerOptions}/>
+          <MainStack.Screen name="AddressBook" component={AddressBook} options={addressBookOptions}/>
+          <MainStack.Screen name="Address" component={Address} options={addressOptions}/>
+          <MainStack.Screen name="Country" component={Country} options={countryOptions}/>
+          <MainStack.Screen name="City" component={City} options={cityOptions}/>
+          <MainStack.Screen name="CountryArea" component={CountryArea} options={countryAreaOptions}/>
+          <MainStack.Screen name="EditProfile" component={Profile} options={profileOptions}/>
+          <MainStack.Screen name="ChangePass" component={ChangePass} options={changePassOptions}/>
+          <MainStack.Screen name="Orders" component={Orders} options={ordersOptions}/>
+          <MainStack.Screen name="Order" component={Order} options={orderOptions}/>
+          <MainStack.Screen name="ReviewOrder" component={ReviewOrder} />
         </MainStack.Navigator>
       </CheckAccess>
     </NavigationContainer>

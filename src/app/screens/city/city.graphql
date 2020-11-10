@@ -1,0 +1,16 @@
+query CITIES ($first: Int, $cursor: String, $country: String, $search: String) {
+  cities(first: $first, after: $cursor, filter: { country: $country, search: $search }) {
+    edges {
+      node {
+        name
+        id
+        displayName
+        nameAscii
+      }
+    }
+    pageInfo {
+      hasNextPage
+      endCursor
+    }
+  }
+}

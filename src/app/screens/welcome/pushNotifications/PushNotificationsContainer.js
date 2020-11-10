@@ -4,25 +4,25 @@ import PushNotificationsView from './PushNotificationsView'
 import messaging from '@react-native-firebase/messaging'
 import { Platform, Alert, Linking, AppState } from 'react-native'
 import iid from '@react-native-firebase/iid'
-import { getUniqueId } from 'react-native-device-info'
+// import { getUniqueId } from 'react-native-device-info'
 
 
 function goToSettings() {
-  return new Promise((res, rej) => {
+  return new Promise((resolve, reject) => {
     Alert.alert(
       'Enable push notifications from settings',
       null,
       [
         {
           text: 'Cancel',
-          onPress: rej,
+          onPress: reject,
           style: 'cancel',
         },
-        { text: 'OK', onPress: res },
+        { text: 'OK', onPress: resolve },
       ],
       {
         cancelable: true,
-        onDismiss: rej,
+        onDismiss: reject,
       }
     )
   })
@@ -30,18 +30,18 @@ function goToSettings() {
 
 
 function openSettingsApp() {
-  return new Promise((res, rej) => {
+  return new Promise((resolve, reject) => {
     Linking.openURL('app-settings:')
       .then(() => {
         function handleChange(nextAppState) {
           if(nextAppState === 'active') {
-            res()
+            resolve()
             AppState.removeEventListener('change', handleChange)
           }
         }
         AppState.addEventListener('change', handleChange)
       })
-      .catch(err => rej(err))
+      .catch(err => reject(err))
   })
 }
 
@@ -49,7 +49,6 @@ function openSettingsApp() {
 function requestUserPermission() {
   return messaging().requestPermission()
     .then(authStatus => {
-      console.log({ authStatus })
       if(authStatus === messaging.AuthorizationStatus.AUTHORIZED ||
         authStatus === messaging.AuthorizationStatus.PROVISIONAL) {
         return authStatus

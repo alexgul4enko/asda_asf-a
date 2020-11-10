@@ -3,6 +3,7 @@ query PRODUCT ($id: ID) {
     id
     name
     seoTitle
+    slug
     seoDescription
     isVip
     isAvailable

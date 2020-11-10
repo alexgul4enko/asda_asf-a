@@ -1,0 +1,87 @@
+query CHECKOUT_LIST {
+  me {
+    checkout {
+      id
+      token
+      cacheOnDeliveryFee {
+        amount
+      }
+      voucherCode
+      subtotalPrice {
+        currency
+        gross {
+          amount
+        }
+        net {
+          amount
+        }
+        tax {
+          amount
+        }
+      }
+      discount {
+        amount
+      }
+      shippingPrice {
+        gross {
+          amount
+        }
+      }
+      totalPrice {
+        gross {
+          amount
+        }
+      }
+      lines {
+        id
+        quantity
+        variant {
+          id
+          sku
+          name
+          quantityAvailable
+          attributes {
+            values {
+              id
+              name
+            }
+            attribute {
+              id
+              name
+              values {
+                id
+                name
+              }
+            }
+          }
+          product {
+            id
+            slug
+            name
+            thumbnail(size: 510) {
+              url
+            }
+          }
+          pricing {
+            price {
+              currency
+              gross {
+                amount
+              }
+              net {
+                amount
+              }
+              tax {
+                amount
+              }
+            }
+          }
+          images {
+            id
+            url
+          }
+        }
+      }
+    }
+  }
+}

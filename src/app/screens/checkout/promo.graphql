@@ -1,0 +1,8 @@
+mutation ADD_PROMO_CODE($checkoutId: ID!, $promoCode: String!) {
+  checkoutAddPromoCode(checkoutId: $checkoutId, promoCode: $promoCode) {
+    checkoutErrors {
+      field
+      message
+    }
+  }
+}

@@ -1,0 +1,8 @@
+mutation UPDATE_PAYMENT_METHOD($checkoutId: ID!, $input: PaymentInput!) {
+  checkoutPaymentCreate(checkoutId: $checkoutId, input: $input) {
+    paymentErrors {
+      message
+      field
+    }
+  }
+}

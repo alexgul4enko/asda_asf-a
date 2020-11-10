@@ -11,8 +11,8 @@ export default StyleSheet.create({
     alignItems: 'flex-start',
   },
   img: {
-    width: theme.width / 2 - 20,
-    height: theme.width / 2 - 20,
+    width: theme.width / 2 - 28,
+    height: theme.width / 2 - 28,
     borderWidth: 0,
     borderRadius: 0,
   },

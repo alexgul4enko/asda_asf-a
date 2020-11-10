@@ -20,8 +20,19 @@ import theme from 'theme'
 LikeButton.propTypes = {
   like: PropTypes.bool.isRequired,
   id: PropTypes.string.isRequired,
+  size: PropTypes.number,
+  options: PropTypes.object,
 }
-export default function LikeButton({ like, id }) {
+
+LikeButton.defaultProps = {
+  size: 20,
+  options: {
+    reducer,
+    namespace: 'products',
+  },
+}
+
+export default function LikeButton({ like, id, size, options }) {
   const [isLoading, setLoading] = useState(false)
   const animatedValue = useMemo(() => new Animated.Value(like ? 1 : 0), [])
   const animatedStyle = useMemo(() => {
@@ -46,17 +57,18 @@ export default function LikeButton({ like, id }) {
     const query = like ? DISLIKE : LIKE
     setLoading(true)
     request({ id }, { query })
-      .then(() => request({ id }, { query: Product, reducer, namespace: 'products' }))
+      .then(() => request({ id }, { query: Product, ...options, forceUpdates: true, queries: [] }))
       .finally(() => setLoading(false))
     return true
-  }, [like, request, id, setLoading])
+  }, [like, request, id, setLoading, options])
+
   if(hasPermission(access.F_UNAUTHORISED)) {
     return (
       <Link to="Login" style={styles.like}>
         <View>
-          <Icon name="favourite-01" size={17} color={theme.primary}/>
+          <Icon name="favourite-01" size={size} color={theme.primary}/>
           <Animated.View style={animatedStyle}>
-            <Icon name="favourite-fill-01" size={17} color={theme.primary}/>
+            <Icon name="favourite-fill-01" size={size} color={theme.primary}/>
           </Animated.View>
         </View>
       </Link>
@@ -65,9 +77,9 @@ export default function LikeButton({ like, id }) {
   return (
     <Button onPress={handlePress} style={styles.like}>
       <AnimatedLoadingWrapper isLoading={isLoading}>
-        <Icon name="favourite-01" size={17} color={theme.primary}/>
+        <Icon name="favourite-01" size={size} color={theme.primary}/>
         <Animated.View style={animatedStyle}>
-          <Icon name="favourite-fill-01" size={17} color={theme.primary}/>
+          <Icon name="favourite-fill-01" size={size} color={theme.primary}/>
         </Animated.View>
       </AnimatedLoadingWrapper>
     </Button>

@@ -26,7 +26,7 @@ export default function MeetUs() {
               </Button>
             </View>
             <View style={styles.row}>
-              <Link to="Login" outline style={styles.btn}>
+              <Link to="Register" outline style={styles.btn}>
                 <Text>{gettext('Register')}</Text>
               </Link>
               <Link to="Login" primary style={styles.btn}>

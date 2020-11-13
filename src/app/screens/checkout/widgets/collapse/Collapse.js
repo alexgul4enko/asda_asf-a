@@ -6,11 +6,12 @@ import styles from './collapse.styles'
 
 Collapse.propTypes = {
   children: PropTypes.node,
-  isOpen: PropTypes.bool.isRequired,
+  isOpen: PropTypes.bool,
 }
 
 Collapse.defaultProps = {
   children: undefined,
+  isOpen: false,
 }
 
 export default function Collapse({ children, isOpen }) {

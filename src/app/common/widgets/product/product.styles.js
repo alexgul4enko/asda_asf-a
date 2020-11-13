@@ -32,6 +32,7 @@ export default StyleSheet.create({
     fontSize: 14,
     lineHeight: 16,
     marginTop: 8,
+    height: 32,
   },
   sale: {
     color: theme.grey,

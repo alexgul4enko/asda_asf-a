@@ -18,7 +18,7 @@ export default function Empty() {
           source={source}
           style={styles.image}
         />
-        <Link to="Search" primary style={styles.button}>
+        <Link to="Catalog" primary style={styles.button}>
           <Text style={styles.link}>{gettext('Continue shopping')}</Text>
           <Icon name="chevron-right-01" color="#ffffff" size={16}/>
         </Link>

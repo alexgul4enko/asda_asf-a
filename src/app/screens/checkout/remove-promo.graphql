@@ -1,0 +1,8 @@
+mutation REMOVE_PROMO_CODE($checkoutId: ID!, $promoCode: String!) {
+  checkoutRemovePromoCode(checkoutId: $checkoutId, promoCode: $promoCode) {
+    checkoutErrors {
+      field
+      message
+    }
+  }
+}

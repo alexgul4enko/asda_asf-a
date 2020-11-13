@@ -1,0 +1,24 @@
+query GET_GALLERY(
+  $first: Int!
+  $after: String
+  $filter: UserDigitalContentFilterInput
+) {
+  userDigitalContents(first: $first, after: $after, filter: $filter) {
+    edges {
+      node {
+        id
+        url
+        name
+        type
+        image {
+          url
+        }
+      }
+    }
+    totalCount
+    pageInfo {
+      endCursor
+      hasNextPage
+    }
+  }
+}

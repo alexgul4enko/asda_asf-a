@@ -14,7 +14,7 @@ BagItem.propTypes = {
   quantity: PropTypes.node,
   variant: PropTypes.object,
   style: PropTypes.any,
-  deleteItem: PropTypes.func.isRequired,
+  deleteItem: PropTypes.func,
 }
 
 BagItem.defaultProps = {
@@ -22,6 +22,7 @@ BagItem.defaultProps = {
   quantity: undefined,
   variant: undefined,
   style: undefined,
+  deleteItem: undefined,
 }
 
 export default function BagItem({ children, quantity, variant, style, deleteItem }) {

@@ -6,7 +6,7 @@ import styles from './delivery.styles'
 
 Delivery.propTypes = {
   value: PropTypes.any,
-  onChange: PropTypes.func.isRequired,
+  onChange: PropTypes.func,
   options: PropTypes.array,
   currency: PropTypes.string,
   style: PropTypes.any,
@@ -17,6 +17,7 @@ Delivery.defaultProps = {
   options: undefined,
   currency: undefined,
   style: undefined,
+  onChange: undefined,
 }
 
 export default function Delivery({ value, onChange, options, currency, style }) {

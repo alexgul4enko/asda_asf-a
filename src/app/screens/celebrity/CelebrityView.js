@@ -22,7 +22,7 @@ export default function CelebrityView({
     <View style={styles.root}>
       <LoadingWrapper isLoading={isLoading}>
         <FlatList
-          ListHeaderComponent={ <Header {...celebrity}/>}
+          ListHeaderComponent={<Header {...celebrity}/>}
           keyExtractor={keyExtractor}
           renderItem={renderItem}
           data={get(products, 'edges')}

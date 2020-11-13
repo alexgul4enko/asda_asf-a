@@ -13,7 +13,7 @@ import styles from './checkout.styles'
 import theme from 'theme'
 
 CheckoutView.propTypes = {
-  finishCheckout: PropTypes.func.isRequired,
+  finishCheckout: PropTypes.func,
   refetch: PropTypes.func.isRequired,
   refreshing: PropTypes.bool.isRequired,
   checkout: PropTypes.object,
@@ -31,6 +31,7 @@ CheckoutView.propTypes = {
   subtotalPrice: PropTypes.object,
   loading: PropTypes.bool.isRequired,
   isLoading: PropTypes.bool.isRequired,
+  removeDiscount: PropTypes.func.isRequired,
 }
 
 CheckoutView.defaultProps = {
@@ -39,6 +40,7 @@ CheckoutView.defaultProps = {
   shippingAddress: undefined,
   billingAddress: undefined,
   subtotalPrice: undefined,
+  finishCheckout: undefined,
 }
 
 export default function CheckoutView({
@@ -60,6 +62,7 @@ export default function CheckoutView({
   subtotalPrice,
   loading,
   isLoading,
+  removeDiscount,
 }) {
   return (
     <SafeAreaView style={styles.root}>
@@ -119,6 +122,9 @@ export default function CheckoutView({
             subtotalPrice={get(checkout, 'subtotalPrice')}
             shippingPrice={get(checkout, 'shippingPrice')}
             totalPrice={get(checkout, 'totalPrice')}
+            voucherCode={get(checkout, 'voucherCode')}
+            discount={get(checkout, 'discount')}
+            removeDiscount={removeDiscount}
           />
         </ScrollView>
         <Toast error={isEmpty(errors) ? null : errors} timeout={10000}/>

@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types'
 import { ScrollView, SafeAreaView, Text, View, RefreshControl } from 'react-native'
+import { useTranslations } from '@cranium/i18n'
 import { LoadingWrapper } from 'common/widgets/loading'
 import Icon from 'common/widgets/Icon'
 import Collapse from 'common/widgets/collapse'
@@ -91,6 +92,7 @@ export default function ProductView({
   thumbnail,
   submitError,
 }) {
+  const { gettext } = useTranslations()
   const price = useMemo(() => {
     if(!isEmpty(get(variant, 'pricing'))) {
       return `${get(variant, 'pricing.price.currency')} ${get(variant, 'pricing.price.net.amount').toLocaleString()}`
@@ -148,12 +150,21 @@ export default function ProductView({
                 <Text style={styles.Riyadh}>{gettext('Riyadh')}</Text>
               </Text>
             </View>
-            <Collapse title={gettext('Product Details')}>
-              <Text>{description}</Text>
-            </Collapse>
-            <Collapse title={gettext('Product Specifications')}>
-              <VariantsWidget data={attributes} />
-            </Collapse>
+            {
+              isEmpty(description) ? null : (
+                <Collapse title={gettext('Product Details')}>
+                  {description}
+                </Collapse>
+              )
+            }
+            {
+              !isEmpty(attributes) ? (
+                <Collapse title={gettext('Product Specifications')}>
+                  <VariantsWidget data={attributes} />
+                </Collapse>
+              ) : null
+            }
+
             <Recomendations products={products} namespace={`${namespace}Recomendations`}/>
             <RecentProducts id={id} namespace={`${namespace}Recent`}/>
           </View>

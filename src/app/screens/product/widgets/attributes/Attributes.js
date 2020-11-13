@@ -41,6 +41,8 @@ export default function Attributes({ isAvailable, variants, selectVariant, count
     })
     if(variant.length === 1) {
       selectVariant(variant[0])
+    } else {
+      selectVariant({})
     }
   }, [selection, setSelection, variants])
 

@@ -40,7 +40,7 @@ import Profile, { profileOptions } from './screens/profile'
 import ChangePass, { changePassOptions } from './screens/changePass'
 import Orders, { ordersOptions } from './screens/orders'
 import Order, { orderOptions } from './screens/order'
-import ReviewOrder from './screens/reviewOrder'
+import ReviewOrder, { reviewOptions } from './screens/reviewOrder'
 import { handleNotification } from './common/notifications'
 import { CheckAccess } from '@cranium/access'
 import { access } from 'common/session'
@@ -119,7 +119,7 @@ export default function AppNavigator() {
           <MainStack.Screen name="ChangePass" component={ChangePass} options={changePassOptions}/>
           <MainStack.Screen name="Orders" component={Orders} options={ordersOptions}/>
           <MainStack.Screen name="Order" component={Order} options={orderOptions}/>
-          <MainStack.Screen name="ReviewOrder" component={ReviewOrder} />
+          <MainStack.Screen name="ReviewOrder" component={ReviewOrder} options={reviewOptions}/>
         </MainStack.Navigator>
       </CheckAccess>
     </NavigationContainer>

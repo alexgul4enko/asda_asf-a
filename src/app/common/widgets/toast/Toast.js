@@ -8,7 +8,7 @@ import isEmpty from 'lodash/isEmpty'
 import styles from './toast.styles'
 
 Toast.propTypes = {
-  error: PropTypes.node,
+  error: PropTypes.any,
   timeout: PropTypes.number,
 }
 

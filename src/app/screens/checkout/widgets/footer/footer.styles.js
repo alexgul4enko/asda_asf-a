@@ -54,4 +54,12 @@ export default StyleSheet.create({
     color: '#ffffff',
     marginRight: 2,
   },
+  discount: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  discountButton: {
+    paddingVertical: 0,
+    paddingHorizontal: 8,
+  },
 })

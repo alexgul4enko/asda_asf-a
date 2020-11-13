@@ -2,13 +2,14 @@ import NavigationPropTypes from 'common/prop-types/Navigation'
 import CheckoutView from './CheckoutView'
 import { usePrefetchQuery, useGraphInifnyList, useSetData } from '@cranium/resource'
 import { useState, useCallback, useEffect, useMemo } from 'react'
-import Linking from 'react-native'
+import { Linking } from 'react-native'
 import get from 'lodash/get'
 import omit from 'lodash/omit'
 import CHECKOUTDATA from './checkout-data.graphql'
 import SHIPPING from './update-shipping.graphql'
 import PAYMENT from './update-payment.graphql'
 import PROMO from './promo.graphql'
+import REMOVEPROMO from './remove-promo.graphql'
 import SHIPPINGADDRESS from './shipping-address.graphql'
 import BILLINGADDRESS from './billing-address.graphql'
 import COMPLETE from './checkout.graphql'
@@ -65,6 +66,20 @@ export default function CheckoutContainer({ navigation }) {
         checkout.request()
       })
   }, [checkout.request, get(checkout, 'data.checkout.id')])
+
+  const removeDiscount = useCallback(_ => {
+    checkout.request({
+      checkoutId: get(checkout, 'data.checkout.id'),
+      promoCode: get(checkout, 'data.checkout.voucherCode'),
+    }, {
+      query: REMOVEPROMO,
+      reducer: 'none',
+      parseErrors: 'data.checkoutAddPromoCode.checkoutErrors',
+    })
+      .then((data) => {
+        checkout.request()
+      })
+  }, [checkout.request, get(checkout, 'data.checkout.id'), get(checkout, 'data.checkout.voucherCode')])
 
 
   const shippingAddress = useMemo(() => {
@@ -178,6 +193,7 @@ export default function CheckoutContainer({ navigation }) {
       setupShippingAddress={setupShippingAddress}
       setupBillingAddress={setupBillingAddress}
       complete={complete}
+      removeDiscount={removeDiscount}
     />
   )
 }

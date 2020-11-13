@@ -16,19 +16,34 @@ function terms() {
 }
 
 Footer.propTypes = {
-  complete: PropTypes.func.isRequired,
+  complete: PropTypes.func,
   subtotalPrice: PropTypes.object,
   shippingPrice: PropTypes.object,
   totalPrice: PropTypes.object,
+  voucherCode: PropTypes.string,
+  discount: PropTypes.object,
+  removeDiscount: PropTypes.func,
 }
 
 Footer.defaultProps = {
+  complete: undefined,
   subtotalPrice: undefined,
   shippingPrice: undefined,
   totalPrice: undefined,
+  voucherCode: undefined,
+  discount: undefined,
+  removeDiscount: undefined,
 }
 
-export default function Footer({ complete, subtotalPrice, shippingPrice, totalPrice }) {
+export default function Footer({
+  complete,
+  subtotalPrice,
+  shippingPrice,
+  totalPrice,
+  voucherCode,
+  discount,
+  removeDiscount,
+}) {
   const subPrice = useMemo(() => {
     const amount = get(subtotalPrice, 'gross.amount')
     const currency = get(subtotalPrice, 'currency')
@@ -53,6 +68,15 @@ export default function Footer({ complete, subtotalPrice, shippingPrice, totalPr
     }
     return [currency, (amount || 0).toLocaleString()].join(' ')
   }, [subtotalPrice, totalPrice])
+  const discountName = useMemo(() => {
+    if(!get(discount, 'amount') || !voucherCode) { return null }
+    return <Text>{gettext('Discount')} ({voucherCode})</Text>
+  }, [discount])
+  const discountAmount = useMemo(() => {
+    const amount = get(discount, 'amount')
+    const currency = get(subtotalPrice, 'currency')
+    return [currency, (amount || 0).toLocaleString()].join(' ')
+  }, [discount, subtotalPrice])
   return (
     <View style={styles.footer}>
       <Text style={styles.title}>{gettext('Order summary (inc. VAT)')}</Text>
@@ -64,6 +88,17 @@ export default function Footer({ complete, subtotalPrice, shippingPrice, totalPr
         <Text style={styles.priceAttr}>{gettext('Shipping')}</Text>
         <Text style={styles.priceAttr}>{shipPrice}</Text>
       </View>
+      {
+        discountName ? (
+          <View style={styles.row}>
+            <View style={styles.discount}>
+              <Text style={styles.priceAttr}>{discountName}</Text>
+              <Button style={styles.discountButton} onPress={removeDiscount}><Icon name="close-01" size={22}/></Button>
+            </View>
+            <Text style={styles.priceAttr}>{discountAmount}</Text>
+          </View>
+        ) : null
+      }
       <View style={styles.row}>
         <Text style={styles.priceTotal}>{gettext('Total')}</Text>
         <Text style={styles.priceTotal}>{total}</Text>

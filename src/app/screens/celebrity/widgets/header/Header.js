@@ -3,9 +3,13 @@ import { View, Text } from 'react-native'
 import Avatar from 'common/widgets/avatar'
 import CollapseText from 'common/widgets/collapseText'
 import { SocialButton } from 'common/widgets/button'
+import { usePrefetchQuery } from '@cranium/resource'
 import { useMemo } from 'react'
 import get from 'lodash/get'
 import styles from './header.styles'
+import GALLERY from './gallery.graphql'
+import Gallery from './gallery'
+import { QS } from 'api'
 
 Header.propTypes = {
   firstName: PropTypes.string,
@@ -17,6 +21,7 @@ Header.propTypes = {
     }),
     description: PropTypes.string,
   }),
+  id: PropTypes.string,
 }
 
 Header.defaultProps = {
@@ -24,9 +29,24 @@ Header.defaultProps = {
   firstName: undefined,
   lastName: undefined,
   socialMedias: undefined,
+  id: undefined,
 }
 
-export default function Header({ celebrity, firstName, lastName, socialMedias }) {
+
+export default function Header({ celebrity, firstName, lastName, socialMedias, id }) {
+  const gallery = usePrefetchQuery(GALLERY, { parseValue: 'data.userDigitalContents' })({ first: 40, filter: { userId: id } })
+  const data = useMemo(() => {
+    if(!Array.isArray(get(gallery, 'data.edges'))) {
+      return []
+    }
+    return gallery.data.edges.map(({ node }) => {
+      let imageUrl = get(node, 'image.url') || node.url
+      if(node.type === 'VIDEO') {
+        imageUrl = `https://img.youtube.com/vi/${QS.parseQueryParams(imageUrl).v}/0.jpg`
+      }
+      return { ...node, imageUrl }
+    })
+  }, [get(gallery, 'data.edges')])
   const socialButtons = useMemo(() => {
     if(!Array.isArray(socialMedias)) { return null }
     return socialMedias.map(med => (<
@@ -52,8 +72,10 @@ export default function Header({ celebrity, firstName, lastName, socialMedias })
         <CollapseText style={styles.desc}>
           {get(celebrity, 'description')}
         </CollapseText>
+        <Gallery data={data}/>
         <Text style={styles.title}>{gettext('My top product list')}</Text>
       </View>
+
     </View>
   )
 }

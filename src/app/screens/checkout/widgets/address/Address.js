@@ -15,7 +15,7 @@ Address.propTypes = {
   postalCode: PropTypes.string,
   streetAddress1: PropTypes.string,
   headerTitle: PropTypes.node.isRequired,
-  onChange: PropTypes.func.isRequired,
+  onChange: PropTypes.func,
 }
 
 Address.defaultProps = {
@@ -25,6 +25,7 @@ Address.defaultProps = {
   city: undefined,
   postalCode: undefined,
   streetAddress1: undefined,
+  onChange: undefined,
 }
 export default function Address({
   notitle,

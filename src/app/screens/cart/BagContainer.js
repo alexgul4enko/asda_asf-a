@@ -3,6 +3,7 @@ import Card from './widgets/card'
 import BagView from './BagView'
 import { useSelector } from 'react-redux'
 import { useCallback, useMemo } from 'react'
+import { useFocusEffect } from '@react-navigation/native'
 import { usePrefetchQuery, useGraphInifnyList, useClear } from '@cranium/resource'
 import { hasPermission } from '@cranium/access'
 import { access } from 'common/session'
@@ -26,6 +27,13 @@ export default function BagContainer({ navigation }) {
   const deleteItem = useDeleteItem(checkoutList)
   const updateCount = useUpdateCount(checkoutList)
   const isLoggedIn = hasPermission(access.F_PROTECTED)
+
+  useFocusEffect(
+    useCallback(() => {
+      checkoutList.request({})
+      me.request({})
+    }, [])
+  )
 
   const renderItem = useCallback(({ item }) => {
     return (

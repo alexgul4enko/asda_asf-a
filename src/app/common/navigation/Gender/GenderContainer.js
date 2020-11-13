@@ -19,12 +19,12 @@ export default function GenderContainer() {
       backgroundColor: interpolateColors(
         animatedValue,
         [0, 1],
-        [theme.primaryLight, '#ffffff'],
+        ['#ffffff', theme.primary],
       ),
       borderColor: interpolateColors(
         animatedValue,
         [0, 1],
-        [theme.primaryLight, theme.primary],
+        [theme.primary, theme.primary],
       ),
     },
   ]), [animatedValue])
@@ -34,12 +34,12 @@ export default function GenderContainer() {
       backgroundColor: interpolateColors(
         animatedValue,
         [0, 1],
-        ['#ffffff', theme.primaryLight],
+        [theme.primary, '#ffffff'],
       ),
       borderColor: interpolateColors(
         animatedValue,
         [0, 1],
-        [theme.primary, theme.primaryLight],
+        [theme.primary, theme.primary],
       ),
     },
   ]), [animatedValue])
@@ -48,14 +48,14 @@ export default function GenderContainer() {
     color: interpolateColors(
       animatedValue,
       [0, 1],
-      [theme.grey, '#000000'],
+      [theme.primary, '#ffffff'],
     ),
   }), [animatedValue])
   const womenText = useMemo(() => ({
     color: interpolateColors(
       animatedValue,
       [0, 1],
-      ['#000000', theme.grey],
+      ['#ffffff', theme.primary],
     ),
   }), [animatedValue])
   const animate = useCallback((toValue) => {

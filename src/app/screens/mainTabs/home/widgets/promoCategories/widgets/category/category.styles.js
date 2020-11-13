@@ -6,6 +6,7 @@ export default StyleSheet.create({
     paddingHorizontal: 0,
     paddingVertical: 8,
     marginHorizontal: 6,
+    width: 120,
   },
   image: {
     width: 100,
@@ -27,5 +28,13 @@ export default StyleSheet.create({
     lineHeight: 14,
     marginTop: 6,
     color: theme.primaryColor,
+  },
+  link: {
+    fontSize: 10,
+    lineHeight: 14,
+    color: '#000000',
+    textAlign: 'center',
+    marginTop: 4,
+    textDecorationLine: 'underline',
   },
 })

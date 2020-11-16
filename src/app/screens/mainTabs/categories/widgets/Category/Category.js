@@ -21,6 +21,7 @@ Category.propTypes = {
   id: PropTypes.string,
   slug: PropTypes.string,
   rootLink: PropTypes.bool,
+  type: PropTypes.string,
 }
 
 Category.defaultProps = {
@@ -31,9 +32,10 @@ Category.defaultProps = {
   promoImage: undefined,
   children: undefined,
   rootLink: undefined,
+  type: 'category',
 }
 
-export default function Category({ name, backgroundImage, promoImage, children, id, slug, rootLink }) {
+export default function Category({ name, backgroundImage, promoImage, children, id, slug, rootLink, type }) {
   const url = useMemo(() => {
     if(!promoImage && !backgroundImage) { return }
     return get(backgroundImage, 'url') || get(promoImage, 'url')
@@ -49,9 +51,9 @@ export default function Category({ name, backgroundImage, promoImage, children, 
     }
     return {
       to: 'Products',
-      params: { slug, type: 'category' },
+      params: { slug, type },
     }
-  }, [get(children, 'totalCount'), id, slug, name])
+  }, [get(children, 'totalCount'), id, slug, name, type])
   return (
     <Link {...rootLinkOptions} style={styles.btn}>
       {!rootLink ? (

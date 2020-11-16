@@ -9,9 +9,12 @@ import PRODUCTS from './products.graphql'
 ProductsContainer.propTypes = NavigationPropTypes
 
 export default function ProductsContainer(props) {
-  const filter = useMemo(() => ({
-    categorySlugs: [get(props, 'route.params.slug')].filter(Boolean),
-  }), [props.route.params])
+  const filter = useMemo(() => {
+    const type = get(props, 'route.params.type') === 'category' ? 'categorySlugs' : 'collectionSlugs'
+    return {
+      [type]: [get(props, 'route.params.slug')].filter(Boolean),
+    }
+  }, [props.route.params])
 
   const products = usePrefetchQuery(PRODUCTS, { parseValue: 'data.products' })({ first: 16, filter })
   const { loadNext, refresh, isRefreshing } = useGraphInifnyList(products)

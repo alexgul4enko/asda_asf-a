@@ -3,7 +3,7 @@ import FiltersView from './FiltersView'
 import Clear from '../clear'
 import { useSelector } from 'react-redux'
 import { usePrefetchQuery } from '@cranium/resource'
-import { useLayoutEffect, useCallback } from 'react'
+import { useLayoutEffect, useCallback, useMemo } from 'react'
 import get from 'lodash/get'
 import omit from 'lodash/omit'
 import ATTRIBUTES from './attributes.graphql'
@@ -12,7 +12,13 @@ import PRODUCTS from './products.graphql'
 ProductsContainer.propTypes = NavigationPropTypes
 
 export default function ProductsContainer({ route, navigation }) {
-  const attributes = usePrefetchQuery(ATTRIBUTES, { parseValue: 'data.attributes' })(route.params)
+  const filter = useMemo(() => {
+    const type = get(route, 'params.type') === 'category' ? 'inCategorySlug' : 'inCategorySlug'// 'inCollectionSlug'
+    return {
+      [type]: get(route, 'params.slug'),
+    }
+  }, [route.params])
+  const attributes = usePrefetchQuery(ATTRIBUTES, { parseValue: 'data.attributes' })({ filter })
   const filters = useSelector(state => omit(get(state, 'products.filters'), ['first', 'cursor', 'sortBy']))
   const products = usePrefetchQuery(PRODUCTS, { parseValue: 'data.products' })(filters)
   const clear = useCallback(() => {

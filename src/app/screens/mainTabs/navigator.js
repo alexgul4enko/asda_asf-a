@@ -7,7 +7,7 @@ import Home from './home'
 import Designers from './designers'
 import Celebrities from './celebrities'
 import Profile from './profile'
-import Categories from 'screens/categories'
+import Categories from './categories'
 import UserPick from 'common/navigation/userPick'
 import theme from 'theme'
 

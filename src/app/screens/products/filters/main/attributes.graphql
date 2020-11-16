@@ -1,5 +1,5 @@
-query ATTRIBUTES ($slug: String)  {
-  attributes(first: 100, filter: { inCategorySlug: $slug }) {
+query ATTRIBUTES ($filter: AttributeFilterInput)  {
+  attributes(first: 100, filter: $filter) {
     edges {
       node {
         id

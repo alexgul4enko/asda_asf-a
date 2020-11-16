@@ -7,6 +7,7 @@ import Header from './widgets/header'
 import Banner from './widgets/banner'
 import Slider from './widgets/slider'
 import MeetUs from './widgets/meetUs'
+import Insta from './widgets/insta'
 import styles from './home.styles'
 
 Home.propTypes = {
@@ -37,6 +38,7 @@ export default function Home({ headerBanner, firstBanner, secondBanner, slides }
         <PromoCategories type="POPULAR"/>
       </Propmo>
       <Banner {...secondBanner}/>
+      <Insta/>
     </ScrollView>
   )
 }

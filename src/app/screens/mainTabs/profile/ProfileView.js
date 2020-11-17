@@ -4,6 +4,7 @@ import Link from 'common/widgets/link'
 import Icon from 'common/widgets/Icon'
 import Button from 'common/widgets/button'
 import MeetUs from './widgets/meetUs'
+import LanguageSelector from './widgets/radio'
 import { usePrefetchQuery, useClear } from '@cranium/resource'
 import { useMemo, useCallback } from 'react'
 import { access } from 'common/session'
@@ -64,6 +65,8 @@ export default function ProfileView() {
           </Link>
 
         </CheckAccess>
+        <Text style={styles.title}>{gettext('Change language')}</Text>
+        <LanguageSelector/>
         <Text style={styles.title}>{gettext('Support')}</Text>
         <Button
           style={styles.link}

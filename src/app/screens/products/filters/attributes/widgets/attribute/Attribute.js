@@ -18,6 +18,7 @@ Attribute.propTypes = {
   id: PropTypes.string,
   selectItem: PropTypes.func.isRequired,
   isActive: PropTypes.bool,
+  translation: PropTypes.object,
 }
 
 Attribute.defaultProps = {
@@ -26,9 +27,10 @@ Attribute.defaultProps = {
   slug: undefined,
   id: undefined,
   isActive: undefined,
+  translation: undefined,
 }
 
-export default function Attribute({ image, name, slug, id, selectItem, isActive }) {
+export default function Attribute({ image, name, slug, id, selectItem, isActive, translation }) {
   const animatedValue = useMemo(() => new Animated.Value(isActive ? 1 : 0), [])
   const style = useMemo(() => ([
     styles.item,
@@ -65,7 +67,7 @@ export default function Attribute({ image, name, slug, id, selectItem, isActive 
           ) : null
 
         }
-        <Text style={styles.text}>{name}</Text>
+        <Text style={styles.text}>{get(translation, 'name') || name}</Text>
       </Button>
     </Animated.View>
   )

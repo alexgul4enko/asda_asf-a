@@ -3,17 +3,16 @@ import { useGraphInifnyList } from '@cranium/resource'
 import CategoriesView from './CategoriesView'
 import useGender from 'common/hooks/useGender'
 import getCategory from './utils/getCategory'
-import isEmpty from 'lodash/isEmpty'
 
 CategoriesContainer.propTypes = {
   route: PropTypes.shape({
     params: PropTypes.object,
+    key: PropTypes.string,
   }).isRequired,
 }
 
 export default function CategoriesContainer(props) {
-  const variables = isEmpty(props.route.params) ? { level: 0 } : props.route.params
-  const categories = getCategory(variables)
+  const categories = getCategory({ ...props.route.params, key: props.route.key })
   useGender(categories)
   const { loadNext, refresh, isRefreshing } = useGraphInifnyList(categories)
   return (

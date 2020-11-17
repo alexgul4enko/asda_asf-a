@@ -5,6 +5,7 @@ import Link from 'common/widgets/link'
 import Icon from 'common/widgets/Icon'
 import Avatar from 'common/widgets/avatar'
 import get from 'lodash/get'
+import makeSlug from 'common/utils/makeSlug'
 import styles from './category.styles'
 
 Category.propTypes = {
@@ -21,6 +22,7 @@ Category.propTypes = {
   id: PropTypes.string,
   slug: PropTypes.string,
   rootLink: PropTypes.bool,
+  translation: PropTypes.object,
 }
 
 Category.defaultProps = {
@@ -31,9 +33,10 @@ Category.defaultProps = {
   promoImage: undefined,
   children: undefined,
   rootLink: undefined,
+  translation: undefined,
 }
 
-export default function Category({ name, backgroundImage, promoImage, children, id, slug, rootLink }) {
+export default function Category({ name, backgroundImage, promoImage, children, id, rootLink, slug, translation }) {
   const url = useMemo(() => {
     if(!promoImage && !backgroundImage) { return }
     return get(backgroundImage, 'url') || get(promoImage, 'url')
@@ -41,17 +44,18 @@ export default function Category({ name, backgroundImage, promoImage, children, 
 
   const textStyle = useMemo(() => ([styles.title, rootLink && styles.rootLink]), [rootLink])
   const rootLinkOptions = useMemo(() => {
+    const _slug = rootLink ? slug : makeSlug(get(translation, 'name') || name, id)
     if(get(children, 'totalCount')) {
       return {
         to: 'Categories',
-        params: { parent: id, title: name, slug },
+        params: { parent: id, title: get(translation, 'name') || name, slug: _slug },
       }
     }
     return {
       to: 'Products',
-      params: { slug, type: 'category' },
+      params: { slug: _slug, type: 'category' },
     }
-  }, [get(children, 'totalCount'), id, slug, name])
+  }, [get(children, 'totalCount'), id, name, translation, rootLink, slug])
   return (
     <Link {...rootLinkOptions} style={styles.btn}>
       {!rootLink ? (
@@ -62,7 +66,7 @@ export default function Category({ name, backgroundImage, promoImage, children, 
           noImage="noimage"
         />) : null
       }
-      <Text style={textStyle}>{name}</Text>
+      <Text style={textStyle}>{get(translation, 'name') || name}</Text>
       <Icon name={I18nManager.isRTL ? 'chevron-left-01' : 'chevron-right-01'} size={24}/>
     </Link>
   )

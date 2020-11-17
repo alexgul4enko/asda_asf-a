@@ -17,14 +17,16 @@ Variant.propTypes = {
   isActive: PropTypes.bool.isRequired,
   select: PropTypes.func.isRequired,
   disabled: PropTypes.bool.isRequired,
+  translation: PropTypes.object,
 }
 
 Variant.defaultProps = {
   image: undefined,
   name: undefined,
+  translation: undefined,
 }
 
-export default function Variant({ image, id, name, isActive, select, disabled }) {
+export default function Variant({ image, id, name, isActive, select, disabled, translation }) {
   const animatedValue = useMemo(() => new Animated.Value(isActive ? 1 : 0), [])
   const animatedStyle = useMemo(() => {
     if(!get(image, 'url')) {
@@ -105,7 +107,7 @@ export default function Variant({ image, id, name, isActive, select, disabled })
               resizeMode="cover"
             />
           ) : (
-            <Animated.Text style={textStyles}>{name}</Animated.Text>
+            <Animated.Text style={textStyles}>{get(translation, 'name') || name}</Animated.Text>
           )
         }
       </Button>

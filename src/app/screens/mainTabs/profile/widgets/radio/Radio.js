@@ -1,33 +1,26 @@
 import PropTypes from 'prop-types'
 import Animated, { Easing } from 'react-native-reanimated'
 import Button from 'common/widgets/button'
-import { Text, I18nManager } from 'react-native'
+import { Text } from 'react-native'
 import { useMemo, useEffect, useCallback } from 'react'
 import interpolateColors from 'common/utils/interpolateColors'
-import get from 'lodash/get'
-import styles from './delivery.styles'
+import styles from './lang.styles'
 import theme from 'theme'
 
 Radio.propTypes = {
   isActive: PropTypes.bool,
   onChange: PropTypes.func.isRequired,
   value: PropTypes.any,
-  name: PropTypes.node,
-  price: PropTypes.object,
-  currency: PropTypes.string,
-  translation: PropTypes.object,
+  title: PropTypes.string,
 }
 
 Radio.defaultProps = {
   isActive: undefined,
   value: undefined,
-  name: undefined,
-  price: undefined,
-  currency: undefined,
-  translation: undefined,
+  title: undefined,
 }
 
-export default function Radio({ isActive, onChange, value, name, price, currency, translation }) {
+export default function Radio({ isActive, onChange, value, title }) {
   const animatedValue = useMemo(() => new Animated.Value(isActive ? 1 : 0), [])
   const rootCircle = useMemo(() => ([
     styles.rootCircle,
@@ -69,11 +62,6 @@ export default function Radio({ isActive, onChange, value, name, price, currency
   const handlePress = useCallback(() => {
     onChange(value)
   }, [onChange, value])
-
-  const title = useMemo(() => {
-    const pricetext = get(price, 'amount') ? `+${currency}${get(price, 'amount')}` : null
-    return I18nManager.isRTL ? [name, pricetext].filter(Boolean).reverse().join(' | ') : [name, pricetext].filter(Boolean).join(' | ')
-  }, [name, price, currency])
 
   return (
     <Animated.View style={optionStyles}>

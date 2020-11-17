@@ -7,7 +7,6 @@ import DELETE from './delete.graphql'
 export default function useDeleteItem({ data, request }) {
   const bag = useSelector(state => get(state, 'bag.data'))
   const setBag = useSetData('bag')
-
   return useCallback((id) => {
     if(get(data, 'id')) {
       return request({

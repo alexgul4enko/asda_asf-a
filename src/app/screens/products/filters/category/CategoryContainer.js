@@ -20,22 +20,22 @@ export default function CategoryContainer({ navigation }) {
   const onSearch = useSearch(products.request)
 
   const handleSearch = useCallback((values) => {
-    const vals = values.filter(item => item !== get(category, 'filters.slug'))
+    const vals = values.filter(item => item !== get(category, 'filters.id'))
     onSearch({
       filter: {
         ...get(products, 'filters.filter'),
-        categorySlugs: isEmpty(vals) ? [get(category, 'filters.slug')] : vals,
+        categories: isEmpty(vals) ? [get(category, 'filters.id')] : vals,
       },
     })
-  }, [onSearch, get(category, 'filters.slug')])
+  }, [onSearch, get(category, 'filters.id')])
 
 
-  const [selectedItems, setSelected] = useState(get(products, 'filters.filter.categorySlugs'))
+  const [selectedItems, setSelected] = useState(get(products, 'filters.filter.categories'))
 
-  const selectItem = useCallback((slug) => {
-    const selections = selectedItems.includes(slug)
-      ? selectedItems.filter(item => item !== slug)
-      : [...selectedItems, slug]
+  const selectItem = useCallback((id) => {
+    const selections = selectedItems.includes(id)
+      ? selectedItems.filter(item => item !== id)
+      : [...selectedItems, id]
     handleSearch(selections)
     setSelected(selections)
   }, [selectedItems, setSelected, handleSearch])
@@ -45,7 +45,7 @@ export default function CategoryContainer({ navigation }) {
       <Category
         {...item.node}
         selectItem={selectItem}
-        isActive={selectedItems.includes(get(item, 'node.slug'))}
+        isActive={selectedItems.includes(get(item, 'node.id'))}
       />
     )
   }, [selectItem, selectedItems])

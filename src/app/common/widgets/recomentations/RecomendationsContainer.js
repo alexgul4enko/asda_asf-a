@@ -15,7 +15,6 @@ RecomendationsContainer.defaultProps = {
 
 export default function RecomendationsContainer({ products, namespace }) {
   const recomendations = usePrefetchQuery(RECOMENDATIONS, { parseValue: 'data.youMayAlsoLike', namespace })({ first: 20, products })
-
   return (
     <RecomendationsView
       isLoading={recomendations.initialLoading}

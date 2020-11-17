@@ -21,6 +21,7 @@ Category.propTypes = {
   }),
   type: PropTypes.oneOf(['TOP', 'POPULAR']).isRequired,
   promoLinkText: PropTypes.string,
+  translation: PropTypes.object,
 }
 
 Category.defaultProps = {
@@ -28,6 +29,7 @@ Category.defaultProps = {
   productWithMinPrice: undefined,
   promoImage: undefined,
   promoLinkText: undefined,
+  translation: undefined,
 }
 
 export default function Category({
@@ -38,6 +40,7 @@ export default function Category({
   promoImage,
   type,
   promoLinkText,
+  translation,
 }) {
   const params = useMemo(() => ({ slug, type: 'category' }), [slug])
   return (
@@ -55,7 +58,7 @@ export default function Category({
         ellipsizeMode="tail"
         style={styles.title}
       >
-        {name}
+        {get(translation, 'name') || name}
       </Text>
       {
         type === 'TOP' ? (
@@ -79,7 +82,7 @@ export default function Category({
         allowFontScaling={false}
         ellipsizeMode="tail"
       >
-        {type === 'TOP' ? promoLinkText : null}
+        {type === 'TOP' ? (get(translation, 'promoLinkText') || promoLinkText) : null}
       </Text>
     </Link>
   )

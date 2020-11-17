@@ -16,6 +16,7 @@ Product.propTypes = {
   quantity: PropTypes.number,
   unitPrice: PropTypes.object,
   quantityFulfilled: PropTypes.number,
+  translatedProductName: PropTypes.string,
 }
 
 Product.defaultProps = {
@@ -25,9 +26,10 @@ Product.defaultProps = {
   quantity: 1,
   unitPrice: undefined,
   quantityFulfilled: undefined,
+  translatedProductName: undefined,
 }
 
-export default function Product({ thumbnail, quantityFulfilled, productName, variant, quantity, unitPrice }) {
+export default function Product({ thumbnail, quantityFulfilled, productName, variant, quantity, unitPrice, translatedProductName }) {
   const color = useMemo(() => {
     return typeof quantityFulfilled === 'number' ? '#F54046' : '#37B24D'
   }, [quantityFulfilled])
@@ -37,10 +39,10 @@ export default function Product({ thumbnail, quantityFulfilled, productName, var
     return variant.attributes.map(({ values, attribute }) => {
       return (
         <View style={styles.variantRow} key={get(attribute, 'id')}>
-          <Text style={styles.variant}>{get(attribute, 'name')}</Text>
+          <Text style={styles.variant}>{get(attribute, 'translation.name') || get(attribute, 'name')}</Text>
           <Text style={styles.variant}> </Text>
           <Text style={styles.variant}>:</Text>
-          <Text style={[styles.variant, styles.value]}>{get(values, '[0].name')}</Text>
+          <Text style={[styles.variant, styles.value]}>{get(values, '[0]translation.name') || get(values, '[0].name')}</Text>
         </View>
       )
     })
@@ -71,7 +73,7 @@ export default function Product({ thumbnail, quantityFulfilled, productName, var
             ellipsizeMode="tail"
             style={styles.name}
           >
-            {productName}
+            {translatedProductName || productName}
           </Text>
           {attributes}
         </View>

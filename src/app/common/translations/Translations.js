@@ -1,26 +1,71 @@
 import PropTypes from 'prop-types'
+import { LoadingWrapper } from 'common/widgets/loading'
 import { TranslateProvider } from '@cranium/i18n'
+import { useMemo, useState } from 'react'
 import AsyncStorage from '@react-native-community/async-storage'
+import * as RNLocalize from 'react-native-localize'
+import get from 'lodash/get'
 import { API } from '@cranium/api'
+import api from 'api'
 
-// TODO: add tranlates url to env
-const api = new API({
-  baseURL: 'https://wecre8.inprogress.rocks',
+const langAPI = new API({
+  baseURL: 'https://api.wecre8.inprogress.rocks/',
 })
+
+
+const lang = get(RNLocalize.findBestAvailableLanguage(['en', 'ar']), 'languageTag', 'en')
 
 Translations.propTypes = {
   children: PropTypes.node,
 }
 
+Translations.defaultProps = {
+  children: null,
+}
+
 export default function Translations({ children }) {
+  const [loading, setLoading] = useState(true)
+  const request = useMemo(() => ({
+    get: function(url, params) {
+      api.interceptors.request.use({
+        onSuccess: (consfigs) => {
+          const headers = new Headers(consfigs.headers)
+          headers.set('accept-language', params.params.lang)
+
+          if(consfigs.method === 'POST' && typeof consfigs.body === 'string' && consfigs.body.includes('languageCode')) {
+            const { query, variables } = JSON.parse(consfigs.body)
+            return {
+              ...consfigs,
+              headers,
+              body: JSON.stringify({
+                query,
+                variables: { ...(variables || {}), languageCode: params.params.lang.toUpperCase() },
+              }),
+            }
+          }
+          return {
+            ...consfigs,
+            headers,
+          }
+        },
+      })
+      setLoading(false)
+      return langAPI.get(url, params)
+        .then(data => get(data, 'catalog', {}))
+    },
+  }), [setLoading])
   return (
     <TranslateProvider
-      defaultLanguage="en"
+      langKey="wecre8Lang"
+      defaultLanguage={lang}
       storage={AsyncStorage}
-      url="jsi18n"
-      api={api}
+      url="static-translations/:lang"
+      api={request}
+      monoLanguageJSON
     >
-      {children}
+      <LoadingWrapper isLoading={loading}>
+        {children}
+      </LoadingWrapper>
     </TranslateProvider>
   )
 }

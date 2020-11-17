@@ -63,7 +63,7 @@ export default function Header({ designer, firstName, lastName, socialMedias, av
       </View>
       <View style={styles.info}>
         <CollapseText style={styles.desc}>
-          {get(designer, 'description')}
+          {get(designer, 'translation.description', get(designer, 'description')) }
         </CollapseText>
         <Text style={styles.title}>{gettext('My top product list')}</Text>
       </View>

@@ -1,4 +1,5 @@
 import Category from '../Category'
+import { I18nManager } from 'react-native'
 import { useRoute } from '@react-navigation/native'
 import { useTranslations } from '@cranium/i18n'
 
@@ -8,7 +9,7 @@ export default function Header() {
   return (
     <Category
       {...route.params}
-      name={`${gettext('View all in')} ${route.params.title}`}
+      name={ I18nManager.isRTL ? `${route.params.title} ${gettext('View all in')}` : `${gettext('View all in')} ${route.params.title}`}
       rootLink
     />
   )

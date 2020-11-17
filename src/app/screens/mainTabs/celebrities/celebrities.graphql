@@ -1,4 +1,4 @@
-query Celebrities($first: Int, $cursor: String, $search: String) {
+query Celebrities($first: Int, $cursor: String, $search: String, $languageCode: LanguageCodeEnum!) {
   celebrities (first: $first, after: $cursor, filter: { search: $search }) {
     totalCount,
     pageInfo {
@@ -10,6 +10,10 @@ query Celebrities($first: Int, $cursor: String, $search: String) {
         id,
         firstName,
         lastName,
+        translation(languageCode: $languageCode) {
+          firstName
+          lastName
+        }
         avatar {
           url
         }

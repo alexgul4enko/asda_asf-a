@@ -16,18 +16,20 @@ UserCard.propTypes = {
   lastName: PropTypes.string,
   id: PropTypes.string.isRequired,
   to: PropTypes.string.isRequired,
+  translation: PropTypes.object,
 }
 
 UserCard.defaultProps = {
   avatar: undefined,
   firstName: undefined,
   lastName: undefined,
+  translation: undefined,
 }
 
-export default function UserCard({ avatar, firstName, lastName, id, to }) {
+export default function UserCard({ avatar, firstName, lastName, id, to, translation }) {
   const name = useMemo(() => {
-    return [firstName, lastName].filter(Boolean).join(' ')
-  }, [firstName, lastName])
+    return [get(translation, 'firstName') || firstName, get(translation, 'lastName') || lastName].filter(Boolean).join(' ')
+  }, [firstName, lastName, translation])
   const params = useMemo(() => ({ slug: makeSlug(name, id), avatar: get(avatar, 'url'), id }), [id, name, avatar])
   return (
     <Link to={to} params={params} style={styles.btn}>

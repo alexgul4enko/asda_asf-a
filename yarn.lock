@@ -749,10 +749,10 @@
   resolved "https://registry.yarnpkg.com/@cranium/cache/-/cache-1.0.17.tgz#3f745b7b0775746e4eec80f7992dcbbd92f193b8"
   integrity sha512-4sNJB4k9LnfR9MMwSjgtyWBbQk+Fw0EIccJBq4v2/MUMPlDYTH7JlfClTIhfVJ5SscNceasZHePr8nzRvb96Ww==
 
-"@cranium/i18n@^1.0.37":
-  version "1.0.37"
-  resolved "https://registry.yarnpkg.com/@cranium/i18n/-/i18n-1.0.37.tgz#1f9835e0c15107dc821bc94a704816708fb28af5"
-  integrity sha512-zmQ4LRXNqq4c3wN+1FKmmKhoLvvA8EQeATvRLTInTlB3MkajBv/J9bEx9oENo3cAcScKh/JRT7X2CH6zEcQZ+Q==
+"@cranium/i18n@^1.0.40":
+  version "1.0.40"
+  resolved "https://registry.yarnpkg.com/@cranium/i18n/-/i18n-1.0.40.tgz#51ae5b717539a8129e6fe4d4592a50f354a80db4"
+  integrity sha512-YwsJiStBdNWMG8uE1/5PYoDgefjixXLDlurfxG/y5E7hUFKy/b6q03eUafhIzUFMqy07TdmLz7p/5lmqihiIrw==
 
 "@cranium/queryparams@^1.0.29":
   version "1.0.29"
@@ -7088,6 +7088,11 @@ react-native-iphone-x-helper@^1.2.1:
   version "1.2.1"
   resolved "https://registry.yarnpkg.com/react-native-iphone-x-helper/-/react-native-iphone-x-helper-1.2.1.tgz#645e2ffbbb49e80844bb4cbbe34a126fda1e6772"
   integrity sha512-/VbpIEp8tSNNHIvstuA3Swx610whci1Zpc9mqNkqn14DkMbw+ORviln2u0XyHG1kPvvwTNGZY6QpeFwxYaSdbQ==
+
+react-native-localize@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/react-native-localize/-/react-native-localize-2.0.0.tgz#79a2ed4a9981f94ce62db93e4e6a4b8f08fd1bdd"
+  integrity sha512-D2S4JZ+aQle7qpSG3pg3kpqETwbr2Ikz9LL7VcmACMm+dQd+TTKGU5+zQjqR88UQcxJTUssuCF7IgoZC2KgwFw==
 
 react-native-reanimated@^1.13.0:
   version "1.13.0"

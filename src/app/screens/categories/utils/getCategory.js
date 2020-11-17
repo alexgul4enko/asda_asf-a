@@ -4,5 +4,8 @@ import get from 'lodash/get'
 
 
 export default function getCategory(variables) {
-  return usePrefetchQuery(SUB_CATEGORIES, { parseValue: 'data.category.children', namespace: get(variables, 'title').replace(/\s/g, '') })({ first: 20, ...variables })
+  return usePrefetchQuery(SUB_CATEGORIES, {
+    parseValue: 'data.category.children',
+    namespace: get(variables, 'key').replace(/\s/g, ''),
+  })({ first: 20, ...variables })
 }

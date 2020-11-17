@@ -35,6 +35,7 @@ Header.defaultProps = {
 
 export default function Header({ celebrity, firstName, lastName, socialMedias, id }) {
   const gallery = usePrefetchQuery(GALLERY, { parseValue: 'data.userDigitalContents' })({ first: 40, filter: { userId: id } })
+
   const data = useMemo(() => {
     if(!Array.isArray(get(gallery, 'data.edges'))) {
       return []
@@ -70,7 +71,7 @@ export default function Header({ celebrity, firstName, lastName, socialMedias, i
       </View>
       <View style={styles.info}>
         <CollapseText style={styles.desc}>
-          {get(celebrity, 'description')}
+          {get(celebrity, 'translation.description', get(celebrity, 'description'))}
         </CollapseText>
         <Gallery data={data}/>
         <Text style={styles.title}>{gettext('My top product list')}</Text>

@@ -89,7 +89,7 @@ export default function FooterContainer({ like, id, namespace, isAvailable, vari
   const add = useCallback(() => {
     setActive(true)
     addTobag(item, setActive)
-  }, [setActive, addTobag])
+  }, [setActive, addTobag, item])
 
 
   const close = useCallback(() => {

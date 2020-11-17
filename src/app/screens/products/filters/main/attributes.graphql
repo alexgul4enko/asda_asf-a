@@ -1,13 +1,19 @@
-query ATTRIBUTES ($filter: AttributeFilterInput)  {
+query ATTRIBUTES ($filter: AttributeFilterInput, $languageCode: LanguageCodeEnum!)  {
   attributes(first: 100, filter: $filter) {
     edges {
       node {
         id
+        translation(languageCode: $languageCode) {
+          name
+        }
         name
         slug
         displayType
         values {
           id
+          translation(languageCode: $languageCode) {
+            name
+          }
           name
           slug
           image {

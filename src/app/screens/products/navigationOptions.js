@@ -1,10 +1,10 @@
 import UserPick from 'common/navigation/userPick'
 import get from 'lodash/get'
-import capitalize from 'lodash/capitalize'
+import parseSlug from 'common/utils/parseSlug'
 
 export default function({ route }) {
   return {
-    title: get(route, 'params.slug') ? capitalize(route.params.slug.split('-').join(' ')) : gettext('Search'),
+    title: get(route, 'params.slug') ? parseSlug(route.params.slug) : gettext('Search'),
     headerRight: () => <UserPick/>,
   }
 }

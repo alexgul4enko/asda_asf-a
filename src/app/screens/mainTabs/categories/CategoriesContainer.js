@@ -15,6 +15,7 @@ CategoriesContainer.propTypes = {
 
 export default function CategoriesContainer(props) {
   const categories = usePrefetchQuery(CATEGORIES, { parseValue: 'data' })({ first: 20, level: 0 })
+
   useGender(categories)
   const data = useMemo(() => {
     const collection = get(categories, 'data.collections.edges')

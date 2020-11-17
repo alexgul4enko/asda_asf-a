@@ -1,4 +1,4 @@
-mutation DELETE_CHECKOUT_LINE($checkoutId: ID!, $lineId: ID!) {
+mutation DELETE_CHECKOUT_LINE($checkoutId: ID!, $lineId: ID!, $languageCode: LanguageCodeEnum!) {
   checkoutLineDelete(checkoutId: $checkoutId, lineId: $lineId) {
     checkout {
       subtotalPrice {
@@ -33,18 +33,30 @@ mutation DELETE_CHECKOUT_LINE($checkoutId: ID!, $lineId: ID!) {
           id
           sku
           name
+          translation(languageCode: $languageCode) {
+            name
+          }
           quantityAvailable
           attributes {
             values {
               id
               name
+              translation(languageCode: $languageCode) {
+                name
+              }
             }
             attribute {
               id
               name
+              translation(languageCode: $languageCode) {
+                name
+              }
               values {
                 id
                 name
+                translation(languageCode: $languageCode) {
+                  name
+                }
               }
             }
           }
@@ -52,6 +64,9 @@ mutation DELETE_CHECKOUT_LINE($checkoutId: ID!, $lineId: ID!) {
             id
             slug
             name
+            translation(languageCode: $languageCode) {
+              name
+            }
             thumbnail(size: 510) {
               url
             }

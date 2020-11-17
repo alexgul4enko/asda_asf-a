@@ -5,6 +5,7 @@ import Animated, { Easing } from 'react-native-reanimated'
 import { useCallback, useMemo, useEffect } from 'react'
 import interpolateColors from 'common/utils/interpolateColors'
 import styles from './category.styles'
+import get from 'lodash/get'
 import theme from 'theme'
 
 Category.propTypes = {
@@ -13,6 +14,7 @@ Category.propTypes = {
   id: PropTypes.string,
   selectItem: PropTypes.func.isRequired,
   isActive: PropTypes.bool,
+  translation: PropTypes.object,
 }
 
 Category.defaultProps = {
@@ -20,9 +22,10 @@ Category.defaultProps = {
   slug: undefined,
   id: undefined,
   isActive: undefined,
+  translation: undefined,
 }
 
-export default function Category({ name, slug, selectItem, isActive }) {
+export default function Category({ name, slug, id, selectItem, isActive, translation }) {
   const animatedValue = useMemo(() => new Animated.Value(isActive ? 1 : 0), [])
   const style = useMemo(() => ([
     styles.item,
@@ -43,11 +46,11 @@ export default function Category({ name, slug, selectItem, isActive }) {
   }, [isActive])
 
 
-  const handlePress = useCallback(() => selectItem(slug), [slug, selectItem])
+  const handlePress = useCallback(() => selectItem(id), [id, selectItem])
   return (
     <Animated.View style={style}>
       <Button onPress={handlePress} style={styles.button}>
-        <Text style={styles.text}>{name}</Text>
+        <Text style={styles.text}>{get(translation, 'name') || name}</Text>
       </Button>
     </Animated.View>
   )

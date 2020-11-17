@@ -3,6 +3,7 @@ import { useCallback, useMemo } from 'react'
 import { useGraphInifnyList, useSearch, usePrefetchQuery } from '@cranium/resource'
 import ProductsView from './ProductsView'
 import get from 'lodash/get'
+import idFromSlug from 'common/utils/idFromSlug'
 import PRODUCTS from './products.graphql'
 
 
@@ -10,12 +11,13 @@ ProductsContainer.propTypes = NavigationPropTypes
 
 export default function ProductsContainer(props) {
   const filter = useMemo(() => {
-    const type = get(props, 'route.params.type') === 'category' ? 'categorySlugs' : 'collectionSlugs'
+    const type = get(props, 'route.params.type') === 'category' ? 'categories' : 'collections'
+    const slug = get(props, 'route.params.slug')
+    const id = idFromSlug(slug, get(props, 'route.params.type') === 'category' ? 'Category' : 'Collection')
     return {
-      [type]: [get(props, 'route.params.slug')].filter(Boolean),
+      [type]: [id].filter(Boolean),
     }
   }, [props.route.params])
-
   const products = usePrefetchQuery(PRODUCTS, { parseValue: 'data.products' })({ first: 16, filter })
   const { loadNext, refresh, isRefreshing } = useGraphInifnyList(products)
   const onSearch = useSearch(products.request)

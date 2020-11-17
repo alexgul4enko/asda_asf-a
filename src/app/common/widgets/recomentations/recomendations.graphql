@@ -1,4 +1,4 @@
-query YOU_MAY_ALSO_LIKE($products: [ID]) {
+query YOU_MAY_ALSO_LIKE($products: [ID], $languageCode: LanguageCodeEnum!) {
   youMayAlsoLike(first: 29, productIds: $products) {
     totalCount
     pageInfo {
@@ -9,6 +9,9 @@ query YOU_MAY_ALSO_LIKE($products: [ID]) {
       node {
         id
         slug
+        translation(languageCode: $languageCode) {
+          name
+        }
         name
         updatedAt
         inWishlist

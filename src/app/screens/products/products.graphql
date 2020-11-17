@@ -1,4 +1,4 @@
-query Products($first: Int, $cursor: String, $filter: ProductFilterInput, $sortBy: ProductOrder) {
+query Products($first: Int, $cursor: String, $filter: ProductFilterInput, $sortBy: ProductOrder, $languageCode: LanguageCodeEnum!) {
   products (first: $first, after: $cursor, sortBy: $sortBy, filter: $filter ) {
     totalCount,
     pageInfo {
@@ -9,6 +9,9 @@ query Products($first: Int, $cursor: String, $filter: ProductFilterInput, $sortB
       node {
         id
         slug
+        translation(languageCode: $languageCode) {
+          name
+        }
         name
         updatedAt
         inWishlist

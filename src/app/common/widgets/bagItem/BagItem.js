@@ -30,9 +30,9 @@ export default function BagItem({ children, quantity, variant, style, deleteItem
     return variant.attributes.map(({ attribute, values }) => {
       return (
         <View style={styles.attribute} key={attribute.id}>
-          <Text style={styles.name}>{attribute.name}</Text>
+          <Text style={styles.name}>{get(attribute, 'translation.name') || attribute.name }</Text>
           <Text style={styles.name}>:</Text>
-          <Text style={styles.value}>{get(values, '[0].name')}</Text>
+          <Text style={styles.value}>{get(values, '[0]translation.name') || get(values, '[0].name')}</Text>
         </View>
       )
     })
@@ -57,7 +57,7 @@ export default function BagItem({ children, quantity, variant, style, deleteItem
             allowFontScaling={false}
             ellipsizeMode="tail"
           >
-            {get(variant, 'product.name')}
+            {get(variant, 'product.translation.name') || get(variant, 'product.name')}
           </Text>
           {values}
         </View>

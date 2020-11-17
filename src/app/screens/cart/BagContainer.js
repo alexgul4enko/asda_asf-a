@@ -21,6 +21,7 @@ BagContainer.propTypes = NavigationPropTypes
 
 export default function BagContainer({ navigation }) {
   const checkoutList = usePrefetchQuery(CHECKOUT, { parseValue })({})
+
   const me = usePrefetchQuery(ME, { parseValue: 'data.me' })({})
   const bag = useSelector(state => get(state, 'bag.data'))
   const clearBag = useClear('bag')
@@ -28,9 +29,11 @@ export default function BagContainer({ navigation }) {
   const deleteItem = useDeleteItem(checkoutList)
   const updateCount = useUpdateCount(checkoutList)
   const isLoggedIn = hasPermission(access.F_PROTECTED)
-
   useFocusEffect(
     useCallback(() => {
+      if(checkoutList.initialLoading) {
+        return
+      }
       checkoutList.request({})
       me.request({})
     }, [])
@@ -59,6 +62,7 @@ export default function BagContainer({ navigation }) {
     }
     if(get(checkoutList, 'data.id')) {
       const shipping = get(checkoutList, 'data.shippingPrice.gross.amount') || 0
+
       const total = get(checkoutList, 'data.totalPrice.gross.amount') || 0
       const checkoutTotalPrice = I18nManager.isRTL
         ? [get(checkoutList, 'data.subtotalPrice.currency'), (shipping + total).toLocaleString()].reverse().join(' ')

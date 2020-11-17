@@ -11,6 +11,7 @@ PromoCategoriesContainer.propTypes = {
 
 export default function PromoCategoriesContainer({ type }) {
   const categories = usePrefetchQuery(PROMOCATEGORiES, { parseValue: 'data.categories', namespace: camelCase(`${type}_categories`) })({ orderBy: type, direction: 'ASC' })
+
   useGender(categories)
   return (
     <PromoCategoriesView

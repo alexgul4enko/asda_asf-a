@@ -2,12 +2,16 @@ query GET_GALLERY(
   $first: Int!
   $after: String
   $filter: UserDigitalContentFilterInput
+  $languageCode: LanguageCodeEnum!
 ) {
   userDigitalContents(first: $first, after: $after, filter: $filter) {
     edges {
       node {
         id
         url
+        translation(languageCode: $languageCode) {
+          name
+        }
         name
         type
         image {

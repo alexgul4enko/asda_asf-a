@@ -48,6 +48,7 @@ ProductView.propTypes = {
     url: PropTypes.string,
   }),
   submitError: PropTypes.any,
+  translation: PropTypes.object,
 }
 
 ProductView.defaultProps = {
@@ -67,6 +68,7 @@ ProductView.defaultProps = {
   id: undefined,
   pricing: undefined,
   submitError: undefined,
+  translation: undefined,
 }
 
 export default function ProductView({
@@ -91,6 +93,7 @@ export default function ProductView({
   setCount,
   thumbnail,
   submitError,
+  translation,
 }) {
   const { gettext } = useTranslations()
   const price = useMemo(() => {
@@ -113,9 +116,9 @@ export default function ProductView({
     const disc = get(variant, 'discountPercent', discountPercent)
     return disc ? `-${disc}%` : null
   }, [discountPercent, variant])
-  const description = useMemo(() => parseDescription(descriptionJson), [descriptionJson])
+  const description = useMemo(() => parseDescription(get(translation, 'descriptionJson') || descriptionJson), [descriptionJson, translation])
   const products = useMemo(() => ([id]), [id])
-  const slug = useMemo(() => makeSlug(name, id), [name, id])
+  const slug = useMemo(() => makeSlug(get(translation, 'name') || name, id), [name, id, translation])
   return (
     <SafeAreaView style={styles.root}>
       <LoadingWrapper isLoading={isLoading}>
@@ -130,7 +133,7 @@ export default function ProductView({
           {isVip ? <Text style={styles.vip}>{gettext('vip')}</Text> : null}
 
           <View style={styles.content}>
-            <Text style={styles.name}>{name}</Text>
+            <Text style={styles.name}>{get(translation, 'name') || name}</Text>
             <View style={styles.skuRow}>
               <Text style={styles.sku}>{gettext('SKU')}</Text>
               <Text style={styles.sku}>:</Text>
@@ -192,7 +195,7 @@ export default function ProductView({
           variant={variant}
           count={count}
           thumbnail={thumbnail}
-          name={name}
+          name={get(translation, 'name') || name}
         />
         <Toast error={submitError}/>
       </LoadingWrapper>

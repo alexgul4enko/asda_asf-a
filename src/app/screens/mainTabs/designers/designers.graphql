@@ -1,4 +1,4 @@
-query Designers($first: Int, $cursor: String, $search: String) {
+query Designers($first: Int, $cursor: String, $search: String, $languageCode: LanguageCodeEnum!) {
   designers (first: $first, after: $cursor, filter: { search: $search }) {
     totalCount,
     pageInfo {
@@ -10,6 +10,10 @@ query Designers($first: Int, $cursor: String, $search: String) {
         id,
         firstName,
         lastName,
+        translation(languageCode: $languageCode) {
+          firstName
+          lastName
+        }
         avatar {
           url
         }

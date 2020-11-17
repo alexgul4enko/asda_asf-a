@@ -15,6 +15,7 @@ Product.propTypes = {
   }),
   quantity: PropTypes.number,
   unitPrice: PropTypes.object,
+  translatedProductName: PropTypes.string,
 }
 
 Product.defaultProps = {
@@ -23,18 +24,19 @@ Product.defaultProps = {
   variant: undefined,
   quantity: 1,
   unitPrice: undefined,
+  translatedProductName: undefined,
 }
 
-export default function Product({ thumbnail, productName, variant, quantity, unitPrice }) {
+export default function Product({ thumbnail, productName, variant, quantity, unitPrice, translatedProductName }) {
   const attributes = useMemo(() => {
     if(!Array.isArray(get(variant, 'attributes'))) { return null }
     return variant.attributes.map(({ values, attribute }) => {
       return (
         <View style={styles.variantRow} key={get(attribute, 'id')}>
-          <Text style={styles.variant}>{get(attribute, 'name')}</Text>
+          <Text style={styles.variant}>{get(attribute, 'translation.name') || get(attribute, 'name')}</Text>
           <Text style={styles.variant}>:</Text>
           <Text style={styles.variant}> </Text>
-          <Text style={[styles.variant, styles.value]}>{get(values, '[0].name')}</Text>
+          <Text style={[styles.variant, styles.value]}>{get(values, '[0]translation.name') || get(values, '[0].name')}</Text>
         </View>
       )
     })
@@ -61,7 +63,7 @@ export default function Product({ thumbnail, productName, variant, quantity, uni
             ellipsizeMode="tail"
             style={styles.name}
           >
-            {productName}
+            {translatedProductName || productName}
           </Text>
           {attributes}
           <View style={styles.variantRow}>

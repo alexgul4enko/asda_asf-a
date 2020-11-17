@@ -22,6 +22,7 @@ WishListProducts.propTypes = {
     priceRange: PropTypes.object,
     priceRangeUndiscounted: PropTypes.object,
   }),
+  translation: PropTypes.object,
 }
 
 WishListProducts.defaultProps = {
@@ -30,9 +31,10 @@ WishListProducts.defaultProps = {
   isVip: undefined,
   inWishlist: undefined,
   pricing: undefined,
+  translation: undefined,
 }
 
-export default function WishListProducts({ id, name, thumbnail, isVip, pricing, inWishlist }) {
+export default function WishListProducts({ id, name, thumbnail, isVip, pricing, inWishlist, translation }) {
   const slug = useMemo(() => makeSlug(name, id), [name, id])
   const price = useMemo(() => getPrice(get(pricing, 'priceRange')), [pricing])
   const salePrice = useMemo(() => get(pricing, 'onSale') && getPrice(get(pricing, 'priceRangeUndiscounted')), [pricing])
@@ -52,7 +54,7 @@ export default function WishListProducts({ id, name, thumbnail, isVip, pricing, 
         ellipsizeMode="tail"
         style={styles.name}
       >
-        {name}
+        {get(translation, 'name') || name}
       </Text>
       <Text style={styles.sale}>{salePrice}</Text>
       <View style={styles.row}>

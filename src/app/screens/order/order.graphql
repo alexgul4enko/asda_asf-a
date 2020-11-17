@@ -1,4 +1,4 @@
-query ORDER($token: UUID!) {
+query ORDER($token: UUID!, $languageCode: LanguageCodeEnum!) {
   orderByToken(token: $token) {
     id
     number
@@ -38,10 +38,16 @@ query ORDER($token: UUID!) {
         attributes {
           values {
             name
+            translation(languageCode: $languageCode) {
+              name
+            }
             id
           }
           attribute {
             name
+            translation(languageCode: $languageCode) {
+              name
+            }
             id
           }
         }
@@ -80,10 +86,16 @@ query ORDER($token: UUID!) {
             attributes {
               values {
                 name
+                translation(languageCode: $languageCode) {
+                  name
+                }
                 id
               }
               attribute {
                 name
+                translation(languageCode: $languageCode) {
+                  name
+                }
                 id
               }
             }

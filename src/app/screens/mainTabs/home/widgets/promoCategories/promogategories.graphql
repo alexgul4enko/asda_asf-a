@@ -1,4 +1,4 @@
-query GET_PROMO_CATEGORIES( $orderBy: CategorySortField!, $direction: OrderDirection! )  {
+query GET_PROMO_CATEGORIES( $orderBy: CategorySortField!, $direction: OrderDirection!, $languageCode: LanguageCodeEnum! )  {
   categories(first: 4, sortBy: { field: $orderBy, direction: $direction }) {
     edges {
       node {
@@ -6,6 +6,10 @@ query GET_PROMO_CATEGORIES( $orderBy: CategorySortField!, $direction: OrderDirec
         slug
         name
         promoLinkText
+        translation(languageCode: $languageCode) {
+          name
+          promoLinkText
+        }
         productWithMinPrice {
           minimalVariantPrice {
             currency

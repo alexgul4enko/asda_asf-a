@@ -6,6 +6,7 @@ import UPDATE from './update.graphql'
 
 export default function useUpdateCount({ data, request }) {
   const bag = useSelector(state => get(state, 'bag.data'))
+
   const setBag = useSetData('bag')
   return useCallback((id, count) => {
     if(get(data, 'id')) {
@@ -23,7 +24,7 @@ export default function useUpdateCount({ data, request }) {
             quantity: item.quantity,
           }
         }),
-      }, { query: UPDATE, parseValue: 'data.checkoutLinesUpdate', reducer: 'none', parseErrors: 'data.checkoutLinesUpdate.checkoutErrors' })
+      }, { query: UPDATE, parseValue: 'data.checkoutLinesUpdate.checkout', reducer: 'object', parseErrors: 'data.checkoutLinesUpdate.checkoutErrors' })
     }
     return setBag(bag.map((item) => {
       if(item.id === id) {

@@ -15,6 +15,7 @@ export default function ProductContainer({ route }) {
   const [count, setCount] = useState(1)
   const id = useMemo(() => idFromSlug(get(route, 'params.slug'), 'Product'), [get(route, 'params.slug')])
   const product = usePrefetchQuery(PRODUCT, { parseValue: 'data.product', namespace: get(route, 'params.slug') })({ id })
+
   const { refresh, isRefreshing } = useGraphInifnyList(product)
   markAsViewed(id)
   const submitError = useSelector(state => get(state, 'checkoutBag.errors'))

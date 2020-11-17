@@ -18,7 +18,6 @@ Gallery.defaultProps = {
 export default function Gallery({ data }) {
   const [visible, setVisible] = useState([])
 
-
   const open = useCallback(({ uri, title }) => {
     setVisible([{ source: { uri }, title }])
   }, [setVisible])
@@ -47,6 +46,7 @@ export default function Gallery({ data }) {
         visible={!isEmpty(visible)}
         data={visible}
         onDismiss={close}
+        initial={0}
       />
     </View>
   )

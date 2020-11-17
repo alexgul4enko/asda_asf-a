@@ -1,5 +1,5 @@
-query CategoriesFilters($first: Int, $cursor: String, $slug: String) {
-  category (slug: $slug) {
+query CategoriesFilters($first: Int, $cursor: String, $id: ID, $languageCode: LanguageCodeEnum!) {
+  category (id: $id) {
     children (first: $first, after: $cursor) {
       totalCount
       pageInfo {
@@ -9,6 +9,9 @@ query CategoriesFilters($first: Int, $cursor: String, $slug: String) {
       edges {
         node {
           id
+          translation(languageCode: $languageCode) {
+            name
+          }
           name
           description
           slug

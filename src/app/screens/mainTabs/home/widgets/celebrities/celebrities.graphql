@@ -1,10 +1,14 @@
-query Celebrities {
+query TopCelebrities($languageCode: LanguageCodeEnum!) {
   celebrities (first: 6) {
     edges {
       node {
         id,
         firstName,
         lastName,
+        translation(languageCode: $languageCode) {
+          firstName
+          lastName
+        }
         avatar {
           url
         }

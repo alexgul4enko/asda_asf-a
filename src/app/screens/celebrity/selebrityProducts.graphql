@@ -1,4 +1,4 @@
-query PRODUCTS ($first: Int, $cursor: String, $id: ID!){
+query PRODUCTS ($first: Int, $cursor: String, $id: ID!, $languageCode: LanguageCodeEnum!){
   products(first: $first, after: $cursor, filter: { celebrity: $id }) {
     totalCount
     pageInfo {
@@ -10,6 +10,9 @@ query PRODUCTS ($first: Int, $cursor: String, $id: ID!){
         id
         slug
         name
+        translation(languageCode: $languageCode) {
+          name
+        }
         updatedAt
         inWishlist
         isVip

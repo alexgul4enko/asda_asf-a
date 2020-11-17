@@ -1,4 +1,4 @@
-query review($token: UUID!) {
+query review($token: UUID!, $languageCode: LanguageCodeEnum!) {
   orderByToken(token: $token) {
     id
     lines {
@@ -7,6 +7,7 @@ query review($token: UUID!) {
       thumbnail {
         url
       }
+
       productName
       translatedProductName
       unitPrice {
@@ -23,10 +24,16 @@ query review($token: UUID!) {
           values {
             id
             name
+            translation(languageCode: $languageCode) {
+              name
+            }
           }
           attribute {
             id
             name
+            translation(languageCode: $languageCode) {
+              name
+            }
           }
         }
       }

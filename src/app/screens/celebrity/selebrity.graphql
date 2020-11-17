@@ -1,13 +1,20 @@
-query CELEBRITY ($id: ID! ){
+query CELEBRITY ($id: ID!, $languageCode: LanguageCodeEnum! ){
   celebrity(id: $id) {
     id
     firstName
     lastName
+    translation(languageCode: $languageCode) {
+      firstName
+      lastName
+    }
     socialMedias {
       type
       url
     }
     celebrity {
+     translation(languageCode: $languageCode) {
+        description
+      }
       description
       coverImage {
         url

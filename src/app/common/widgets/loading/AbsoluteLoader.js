@@ -22,7 +22,7 @@ export default function AbsoluteLoader({ isLoading }) {
   ]), [animatedValue])
   useEffect(() => {
     Animated.timing(animatedValue, {
-      duration: 200,
+      duration: 50,
       toValue: isLoading ? 1 : 0,
       easing: Easing.inOut(Easing.ease),
     }).start()

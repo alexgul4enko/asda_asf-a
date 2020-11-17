@@ -6,6 +6,7 @@ import { useGraphInifnyList, usePrefetchQuery } from '@cranium/resource'
 export default function FavouritesContainer(props) {
   const favourites = usePrefetchQuery(FAVOURITES, { parseValue: 'data.me.wishlist' })({ first: 16 })
   const { loadNext, refresh, isRefreshing } = useGraphInifnyList(favourites)
+
   return (
     <FavouritesView
       {...props}

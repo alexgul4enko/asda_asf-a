@@ -4,6 +4,7 @@ import useOrder from './useOrder'
 import { useSelector } from 'react-redux'
 import { useRoute } from '@react-navigation/native'
 import { useMemo } from 'react'
+import idFromSlug from 'common/utils/idFromSlug'
 import get from 'lodash/get'
 import isEmpty from 'lodash/isEmpty'
 
@@ -17,8 +18,9 @@ export default function HeaderContainer({ filter }) {
   const filters = useSelector(state => get(state, 'products.filters.filter', {}))
 
   const appliedFilters = useMemo(() => {
-    const subCategories = get(filters, 'categorySlugs', []).filter(item => item !== get(route, 'params.slug'))
-
+    const slug = get(route, 'params.slug')
+    const id = idFromSlug(slug, get(route, 'params.type') === 'category' ? 'Category' : 'Collection')
+    const subCategories = get(filters, 'categories', []).filter(item => item !== id)
     const filtersCount = [
       subCategories.length,
       isEmpty(get(filters, 'price')) ? 0 : 1,
@@ -27,7 +29,7 @@ export default function HeaderContainer({ filter }) {
 
     if(!filtersCount) { return null }
     return `(${filtersCount})`
-  }, [filters, get(route, 'params.slug')])
+  }, [filters, get(route, 'params')])
 
   return (
     <Header

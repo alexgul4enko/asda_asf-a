@@ -1,4 +1,4 @@
-query SubCategories($first: Int, $cursor: String, $parent: ID) {
+query SubCategories($first: Int, $cursor: String, $parent: ID, $languageCode: LanguageCodeEnum!) {
   category (id: $parent) {
     children (first: $first, after: $cursor) {
       totalCount
@@ -9,6 +9,9 @@ query SubCategories($first: Int, $cursor: String, $parent: ID) {
       edges {
         node {
           id
+          translation(languageCode: $languageCode) {
+            name
+          }
           name
           description
           slug

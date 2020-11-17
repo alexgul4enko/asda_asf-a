@@ -1,8 +1,11 @@
-query Categories($first: Int, $cursor: String, $level: Int) {
+query Categories($first: Int, $cursor: String, $level: Int, $languageCode: LanguageCodeEnum!) {
   collections(first: 70, filter: { published: PUBLISHED }) {
     edges {
       node {
         id,
+        translation(languageCode: $languageCode) {
+          name
+        }
         name
         slug
         backgroundImage{
@@ -10,7 +13,6 @@ query Categories($first: Int, $cursor: String, $level: Int) {
         }
         publicationDate
         description
-        
       }
     }
   }
@@ -26,6 +28,9 @@ query Categories($first: Int, $cursor: String, $level: Int) {
           id
         }
         id,
+        translation(languageCode: $languageCode) {
+          name
+        }
         name,
         description,
         slug,

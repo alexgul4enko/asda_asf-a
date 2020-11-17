@@ -35,7 +35,7 @@ static void InitializeFlipper(UIApplication *application) {
   InitializeFlipper(application);
 #endif
   [[RCTI18nUtil sharedInstance] allowRTL:YES];
-   [[RCTI18nUtil sharedInstance] forceRTL:YES];
+  
   RCTBridge *bridge = [[RCTBridge alloc] initWithDelegate:self launchOptions:launchOptions];
   RCTRootView *rootView = [[RCTRootView alloc] initWithBridge:bridge
                                                    moduleName:@"wecre8"

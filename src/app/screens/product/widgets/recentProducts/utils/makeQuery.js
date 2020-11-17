@@ -4,7 +4,7 @@ export default function makeQuery(ids, id) {
   if(isEmpty(ids) || !Array.isArray(ids)) { return }
   const products = ids.filter(item => item !== id)
   if(isEmpty(products)) { return }
-  return `query RECENT { ${products.reduce((selector, id) => selector + ' ' + makeSelector(id), '')} }`
+  return `query RECENT ($languageCode: LanguageCodeEnum!) { ${products.reduce((selector, id) => selector + ' ' + makeSelector(id), '')} }`
 }
 
 function makeSelector(id) {
@@ -13,6 +13,9 @@ function makeSelector(id) {
     id
     slug
     name
+    translation(languageCode: $languageCode) {
+      name
+    }
     updatedAt
     inWishlist
     isVip

@@ -26,6 +26,7 @@ Product.propTypes = {
   inList: PropTypes.string,
   linkAction: PropTypes.string,
   hideLikeButton: PropTypes.bool,
+  translation: PropTypes.object,
 }
 
 Product.defaultProps = {
@@ -37,12 +38,13 @@ Product.defaultProps = {
   inList: undefined,
   linkAction: undefined,
   hideLikeButton: undefined,
+  translation: undefined,
 }
 
-export default function Product({ id, name, slug, thumbnail, isVip, pricing, inWishlist, inList, hideLikeButton, linkAction }) {
+export default function Product({ id, name, slug, thumbnail, isVip, pricing, inWishlist, inList, hideLikeButton, linkAction, translation }) {
   const price = useMemo(() => getPrice(get(pricing, 'priceRange')), [pricing])
   const salePrice = useMemo(() => get(pricing, 'onSale') && getPrice(get(pricing, 'priceRangeUndiscounted')), [pricing])
-  const params = useMemo(() => ({ slug: makeSlug(name, id) }), [id, name])
+  const params = useMemo(() => ({ slug: makeSlug(get(translation, 'name') || name, id) }), [id, name, translation])
   return (
     <Link to="Product" params={params} style={styles.link} linkAction={linkAction}>
       <SharedElement id={`product.${id}.image`}>
@@ -60,7 +62,7 @@ export default function Product({ id, name, slug, thumbnail, isVip, pricing, inW
         ellipsizeMode="tail"
         style={styles.name}
       >
-        {name}
+        {get(translation, 'name') || name}
       </Text>
       <Text style={styles.sale}>{salePrice}</Text>
       <View style={styles.row}>

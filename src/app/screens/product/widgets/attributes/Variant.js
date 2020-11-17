@@ -14,6 +14,7 @@ Variant.propTypes = {
   handreTypeSelection: PropTypes.func.isRequired,
   selection: PropTypes.object,
   variants: PropTypes.array,
+  translation: PropTypes.object,
 }
 
 Variant.defaultProps = {
@@ -21,9 +22,10 @@ Variant.defaultProps = {
   values: undefined,
   selection: undefined,
   variants: undefined,
+  translation: undefined,
 }
 
-export default function Variant({ name, values, id, handreTypeSelection, selection, variants }) {
+export default function Variant({ name, values, id, handreTypeSelection, selection, variants, translation }) {
   const [selected, select] = useState((Array.isArray(values) && values.length === 1) ? values[0].id : undefined)
 
   const availableVariants = useMemo(() => {
@@ -71,7 +73,7 @@ export default function Variant({ name, values, id, handreTypeSelection, selecti
   return (
     <View style={styles.variant}>
       <View style={styles.variantTitleRow}>
-        <Text style={styles.variantTitle}>{name}</Text>
+        <Text style={styles.variantTitle}>{get(translation, 'name') || name}</Text>
         <Text style={styles.variantTitle}>:</Text>
       </View>
       <View style={styles.boxes}>

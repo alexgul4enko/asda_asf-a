@@ -1,4 +1,4 @@
-query PRODUCT ($id: ID) {
+query PRODUCT ($id: ID, $languageCode: LanguageCodeEnum!) {
   product(id: $id) {
     id
     name
@@ -11,14 +11,26 @@ query PRODUCT ($id: ID) {
     inWishlist
     discountPercent
     isVip
+    translation(languageCode: $languageCode) {
+      name
+      descriptionJson
+      seoTitle
+      seoDescription
+    }
     variants {
       id
       sku
       name
+      translation(languageCode: $languageCode) {
+        name
+      }
       discountPercent
       quantityAvailable
       attributes {
         values {
+          translation(languageCode: $languageCode) {
+            name
+          }
           name
           id
           image {
@@ -26,6 +38,9 @@ query PRODUCT ($id: ID) {
           }
         }
         attribute {
+          translation(languageCode: $languageCode) {
+            name
+          }
           name
           id
         }
@@ -59,13 +74,22 @@ query PRODUCT ($id: ID) {
       values {
         id
         name
+        translation(languageCode: $languageCode) {
+          name
+        }
       }
       attribute {
         id
         name
+        translation(languageCode: $languageCode) {
+          name
+        }
         values {
           id
           name
+          translation(languageCode: $languageCode) {
+            name
+          }
         }
       }
     }
@@ -73,10 +97,16 @@ query PRODUCT ($id: ID) {
       id
       slug
       name
+      translation(languageCode: $languageCode) {
+        name
+      }
       ancestors(last: 5) {
         edges {
           node {
             id
+            translation(languageCode: $languageCode) {
+              name
+            }
             name
             slug
           }

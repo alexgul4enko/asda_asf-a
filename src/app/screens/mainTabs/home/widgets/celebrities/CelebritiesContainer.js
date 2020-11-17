@@ -6,7 +6,6 @@ import CELEBRITY from './celebrities.graphql'
 export default function CelebritiesContainer(props) {
   const celebrities = usePrefetchQuery(CELEBRITY, { parseValue: 'data.celebrities' })()
   useGender(celebrities)
-
   return (
     <CelebritiesView
       {...props}

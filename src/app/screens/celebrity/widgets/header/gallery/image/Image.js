@@ -3,6 +3,7 @@ import Avatar from 'common/widgets/avatar'
 import Icon from 'common/widgets/Icon'
 import { TouchableWithoutFeedback, View, Text, Linking } from 'react-native'
 import { useCallback } from 'react'
+import get from 'lodash/get'
 import styles from './image.styles'
 
 Image.propTypes = {
@@ -11,22 +12,24 @@ Image.propTypes = {
   name: PropTypes.string,
   type: PropTypes.string,
   url: PropTypes.string,
+  translation: PropTypes.object,
 }
 
 Image.defaultProps = {
   name: undefined,
   type: undefined,
   url: undefined,
+  translation: undefined,
 }
 
 
-export default function Image({ setVisible, imageUrl, name, type, url }) {
+export default function Image({ translation, setVisible, imageUrl, name, type, url }) {
   const handlePress = useCallback(() => {
     if(type === 'VIDEO') {
       return Linking.openURL(url)
     }
-    setVisible({ type, uri: imageUrl, title: name })
-  }, [type, imageUrl, setVisible, name, url])
+    setVisible({ type, uri: imageUrl, title: get(translation, 'name') || name })
+  }, [type, imageUrl, setVisible, name, url, translation])
   return (
     <TouchableWithoutFeedback onPress={handlePress}>
       <View style={styles.card}>
@@ -51,7 +54,7 @@ export default function Image({ setVisible, imageUrl, name, type, url }) {
           allowFontScaling={false}
           ellipsizeMode="tail"
         >
-          {name}
+          {get(translation, 'name') || name}
         </Text>
       </View>
     </TouchableWithoutFeedback>

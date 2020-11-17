@@ -1,4 +1,4 @@
-query DESIGNER ($id: ID! ){
+query DESIGNER ($id: ID!,  $languageCode: LanguageCodeEnum! ){
   designer(id: $id) {
     id
     avatar {
@@ -6,6 +6,10 @@ query DESIGNER ($id: ID! ){
     }
     firstName
     lastName
+    translation(languageCode: $languageCode) {
+      firstName
+      lastName
+    }
     socialMedias {
       type
       url
@@ -14,8 +18,11 @@ query DESIGNER ($id: ID! ){
       coverImage {
         url
       }
+      translation(languageCode: $languageCode) {
+        description
+        brand
+      }
       description
-
       brand
     }
   }

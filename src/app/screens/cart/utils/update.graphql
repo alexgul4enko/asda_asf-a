@@ -1,4 +1,4 @@
-mutation UPDATE_CHECKOUT_LINES($checkoutId: ID!, $lines: [CheckoutLineInput]!) {
+mutation UPDATE_CHECKOUT_LINES($checkoutId: ID!, $lines: [CheckoutLineInput]!, $languageCode: LanguageCodeEnum!) {
   checkoutLinesUpdate(checkoutId: $checkoutId, lines: $lines) {
     checkout {
       subtotalPrice {
@@ -33,18 +33,30 @@ mutation UPDATE_CHECKOUT_LINES($checkoutId: ID!, $lines: [CheckoutLineInput]!) {
           id
           sku
           name
+          translation(languageCode: $languageCode) {
+            name
+          }
           quantityAvailable
           attributes {
             values {
               id
               name
+              translation(languageCode: $languageCode) {
+                name
+              }
             }
             attribute {
               id
               name
+              translation(languageCode: $languageCode) {
+                name
+              }
               values {
                 id
                 name
+                translation(languageCode: $languageCode) {
+                  name
+                }
               }
             }
           }
@@ -52,6 +64,9 @@ mutation UPDATE_CHECKOUT_LINES($checkoutId: ID!, $lines: [CheckoutLineInput]!) {
             id
             slug
             name
+            translation(languageCode: $languageCode) {
+              name
+            }
             thumbnail(size: 510) {
               url
             }

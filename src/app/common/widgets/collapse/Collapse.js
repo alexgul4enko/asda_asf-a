@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types'
-import { View, Text } from 'react-native'
+import { View, Text, I18nManager } from 'react-native'
 import Button from 'common/widgets/button'
 import Icon from 'common/widgets/Icon'
 import Animated, { Easing } from 'react-native-reanimated'
@@ -55,7 +55,7 @@ export default function Collapse({ title, children, style }) {
       <Button onPress={handlePress} style={styles.header}>
         <Text style={title}>{title}</Text>
         <Animated.View style={iconStyle}>
-          <Icon name="chevron-right-01" size={20}/>
+          <Icon name={I18nManager.isRTL ? 'chevron-left-01' : 'chevron-right-01'} size={20}/>
         </Animated.View>
       </Button>
       <Animated.View style={{ height: collapseValue, overflow: 'hidden' }}>

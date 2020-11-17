@@ -1,4 +1,4 @@
-import { StyleSheet } from 'react-native'
+import { StyleSheet, I18nManager } from 'react-native'
 import theme from 'theme'
 
 export default StyleSheet.create({
@@ -18,6 +18,7 @@ export default StyleSheet.create({
     height: 42,
     padding: 0,
     margin: 0,
+    textAlign: I18nManager.isRTL ? 'right' : 'left',
   },
   text: {
     color: theme.error,

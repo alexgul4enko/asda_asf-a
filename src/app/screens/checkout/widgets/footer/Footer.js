@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types'
-import { View, Text } from 'react-native'
+import { View, Text, I18nManager } from 'react-native'
 import Button from 'common/widgets/button'
 import Icon from 'common/widgets/Icon'
 import { useMemo } from 'react'
@@ -50,7 +50,7 @@ export default function Footer({
     if(!currency) {
       return null
     }
-    return [currency, (amount || 0).toLocaleString()].join(' ')
+    return I18nManager.isRTL ? [currency, (amount || 0).toLocaleString()].reverse().join(' ') : [currency, (amount || 0).toLocaleString()].join(' ')
   }, [subtotalPrice])
   const shipPrice = useMemo(() => {
     const amount = get(shippingPrice, 'gross.amount')
@@ -58,7 +58,7 @@ export default function Footer({
     if(!currency) {
       return null
     }
-    return [currency, (amount || 0).toLocaleString()].join(' ')
+    return I18nManager.isRTL ? [currency, (amount || 0).toLocaleString()].reverse().join(' ') : [currency, (amount || 0).toLocaleString()].join(' ')
   }, [subtotalPrice, shippingPrice])
   const total = useMemo(() => {
     const amount = get(totalPrice, 'gross.amount')
@@ -66,16 +66,20 @@ export default function Footer({
     if(!currency) {
       return null
     }
-    return [currency, (amount || 0).toLocaleString()].join(' ')
+    return I18nManager.isRTL ? [currency, (amount || 0).toLocaleString()].reverse().join(' ') : [currency, (amount || 0).toLocaleString()].join(' ')
   }, [subtotalPrice, totalPrice])
   const discountName = useMemo(() => {
     if(!get(discount, 'amount') || !voucherCode) { return null }
-    return <Text>{gettext('Discount')} ({voucherCode})</Text>
+    return I18nManager.isRTL ? (
+      <Text>({voucherCode}) {gettext('Discount')}</Text>
+    ) : (
+      <Text>{gettext('Discount')} ({voucherCode})</Text>
+    )
   }, [discount])
   const discountAmount = useMemo(() => {
     const amount = get(discount, 'amount')
     const currency = get(subtotalPrice, 'currency')
-    return [currency, (amount || 0).toLocaleString()].join(' ')
+    return I18nManager.isRTL ? [currency, (amount || 0).toLocaleString()].reverse().join(' ') : [currency, (amount || 0).toLocaleString()].join(' ')
   }, [discount, subtotalPrice])
   return (
     <View style={styles.footer}>
@@ -105,7 +109,7 @@ export default function Footer({
       </View>
       <Button onPress={complete} primary style={styles.button}>
         <Text style={styles.complete}>{gettext('Proceed to checkout')}</Text>
-        <Icon name="chevron-right-01" color="#ffffff" size={18}/>
+        <Icon name={I18nManager.isRTL ? 'chevron-left-01' : 'chevron-right-01'} color="#ffffff" size={18}/>
       </Button>
       <Text style={styles.privacy}>
         {gettext('By placing your order, you agree to wecre8.com’s')}

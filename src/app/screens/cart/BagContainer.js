@@ -3,6 +3,7 @@ import Card from './widgets/card'
 import BagView from './BagView'
 import { useSelector } from 'react-redux'
 import { useCallback, useMemo } from 'react'
+import { I18nManager } from 'react-native'
 import { useFocusEffect } from '@react-navigation/native'
 import { usePrefetchQuery, useGraphInifnyList, useClear } from '@cranium/resource'
 import { hasPermission } from '@cranium/access'
@@ -59,7 +60,9 @@ export default function BagContainer({ navigation }) {
     if(get(checkoutList, 'data.id')) {
       const shipping = get(checkoutList, 'data.shippingPrice.gross.amount') || 0
       const total = get(checkoutList, 'data.totalPrice.gross.amount') || 0
-      const checkoutTotalPrice = [get(checkoutList, 'data.subtotalPrice.currency'), (shipping + total).toLocaleString()].join(' ')
+      const checkoutTotalPrice = I18nManager.isRTL
+        ? [get(checkoutList, 'data.subtotalPrice.currency'), (shipping + total).toLocaleString()].reverse().join(' ')
+        : [get(checkoutList, 'data.subtotalPrice.currency'), (shipping + total).toLocaleString()].join(' ')
       const checkoutCount = get(checkoutList, 'data.lines', []).length
       return {
         count: checkoutCount,
@@ -69,10 +72,10 @@ export default function BagContainer({ navigation }) {
     const totalPrice = (bag || []).reduce((res, { variant, quantity }) => {
       return res + get(variant, 'pricing.price.net.amount', 0) * quantity
     }, 0)
-    const totalPriceCurrency = get(bag, '[0].pricing.price.currency')
+    const totalPriceCurrency = get(bag, '[0]variant.pricing.price.currency')
     return {
       count: (bag || []).length,
-      price: [totalPriceCurrency, totalPrice.toLocaleString()].join(' '),
+      price: I18nManager.isRTL ? [totalPriceCurrency, totalPrice.toLocaleString()].reverse().join(' ') : [totalPriceCurrency, totalPrice.toLocaleString()].join(' '),
     }
   }, [bag, checkoutList.data])
 

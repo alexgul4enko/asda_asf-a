@@ -39,15 +39,27 @@ export default function Footer({
         <Text style={styles.title}>{gettext('Order summary (inc. VAT)')}</Text>
         <View style={styles.totalRow}>
           <Text style={styles.totalLabel}>{gettext('Subtotal')}</Text>
-          <Text style={styles.totalLabel}>{get(total, 'currency')} {(get(subtotal, 'gross.amount') || 0).toLocaleString()}</Text>
+          <View style={styles.priceRow}>
+            <Text style={styles.totalLabel}>{get(total, 'currency')}</Text>
+            <Text style={styles.totalLabel}> </Text>
+            <Text style={styles.totalLabel}>{(get(subtotal, 'gross.amount') || 0).toLocaleString()}</Text>
+          </View>
         </View>
         <View style={styles.totalRow}>
           <Text style={styles.totalLabel}>{gettext('Shipping')}</Text>
-          <Text style={styles.totalLabel}>{get(total, 'currency')} {(get(shippingPrice, 'gross.amount') || 0).toLocaleString()}</Text>
+          <View style={styles.priceRow}>
+            <Text style={styles.totalLabel}>{get(total, 'currency')}</Text>
+            <Text style={styles.totalLabel}> </Text>
+            <Text style={styles.totalLabel}>{(get(shippingPrice, 'gross.amount') || 0).toLocaleString()}</Text>
+          </View>
         </View>
         <View style={styles.totalRow}>
           <Text style={[styles.totalLabel, styles.bold]}>{gettext('Total')}</Text>
-          <Text style={[styles.totalLabel, styles.bold]}>{get(total, 'currency')} {(get(total, 'gross.amount') || 0).toLocaleString()}</Text>
+          <View style={styles.priceRow}>
+            <Text style={[styles.totalLabel, styles.bold]}>{get(total, 'currency')}</Text>
+            <Text style={styles.totalLabel}> </Text>
+            <Text style={[styles.totalLabel, styles.bold]}>{(get(total, 'gross.amount') || 0).toLocaleString()}</Text>
+          </View>
         </View>
       </View>
       <View style={styles.address}>

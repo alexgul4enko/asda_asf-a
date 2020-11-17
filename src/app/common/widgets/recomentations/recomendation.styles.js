@@ -9,5 +9,6 @@ export default StyleSheet.create({
     marginBottom: 16,
     fontSize: 16,
     lineHeight: 24,
+    textAlign: 'left',
   },
 })

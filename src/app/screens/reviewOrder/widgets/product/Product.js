@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types'
-import { Text, View } from 'react-native'
+import { Text, View, I18nManager } from 'react-native'
 import Avatar from 'common/widgets/avatar'
 import { useMemo } from 'react'
 import get from 'lodash/get'
@@ -30,12 +30,12 @@ export default function Product({ thumbnail, productName, variant, quantity, uni
     if(!Array.isArray(get(variant, 'attributes'))) { return null }
     return variant.attributes.map(({ values, attribute }) => {
       return (
-        <Text style={styles.variant} key={get(attribute, 'id')}>
-          <Text>{get(attribute, 'name')}</Text>
-          <Text>:</Text>
-          <Text> </Text>
-          <Text style={styles.value}>{get(values, '[0].name')}</Text>
-        </Text>
+        <View style={styles.variantRow} key={get(attribute, 'id')}>
+          <Text style={styles.variant}>{get(attribute, 'name')}</Text>
+          <Text style={styles.variant}>:</Text>
+          <Text style={styles.variant}> </Text>
+          <Text style={[styles.variant, styles.value]}>{get(values, '[0].name')}</Text>
+        </View>
       )
     })
   }, [variant])
@@ -43,7 +43,7 @@ export default function Product({ thumbnail, productName, variant, quantity, uni
   const totalPrice = useMemo(() => {
     const cur = get(unitPrice, 'currency')
     const amount = ((get(unitPrice, 'gross.amount', '') || 0) * quantity).toLocaleString()
-    return [cur, amount].filter(Boolean).join(' ')
+    return I18nManager.isRTL ? [cur, amount].filter(Boolean).reverse().join(' ') : [cur, amount].filter(Boolean).join(' ')
   }, [unitPrice, quantity])
 
   return (
@@ -64,12 +64,12 @@ export default function Product({ thumbnail, productName, variant, quantity, uni
             {productName}
           </Text>
           {attributes}
-          <Text style={styles.variant}>
-            <Text>{gettext('Quantity')}</Text>
-            <Text>:</Text>
-            <Text> </Text>
-            <Text style={styles.value}>{quantity}</Text>
-          </Text>
+          <View style={styles.variantRow}>
+            <Text style={styles.variant}>{gettext('Quantity')}</Text>
+            <Text style={styles.variant}>:</Text>
+            <Text style={styles.variant}> </Text>
+            <Text style={[styles.variant, styles.value]}>{quantity}</Text>
+          </View>
         </View>
       </View>
       <Text style={styles.totalPrice}>{totalPrice}</Text>

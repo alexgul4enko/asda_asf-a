@@ -58,10 +58,12 @@ const styles = StyleSheet.create({
     lineHeight: 16,
     fontSize: 12,
     marginBottom: 6,
+    textAlign: 'left',
   },
   error: {
     color: theme.error,
     fontSize: 12,
     lineHeight: 14,
+    textAlign: 'left',
   },
 })

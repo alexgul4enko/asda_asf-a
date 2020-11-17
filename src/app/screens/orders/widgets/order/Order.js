@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types'
-import { Text, View } from 'react-native'
+import { Text, View, I18nManager } from 'react-native'
 import Link from 'common/widgets/link'
 import Avatar from 'common/widgets/avatar'
 import { useMemo } from 'react'
@@ -36,7 +36,8 @@ export default function Order({ status, statusDisplay, number, created, total, l
   const totalPrice = useMemo(() => {
     const currency = get(total, 'currency')
     const amount = (get(total, 'gross.amount') || '').toLocaleString()
-    return [currency, amount].filter(Boolean).join(' ')
+    const totalPriceText = [currency, amount].filter(Boolean)
+    return I18nManager.isRTL ? totalPriceText.reverse().join(' ') : totalPriceText.join(' ')
   }, [total])
   const images = useMemo(() => {
     if(!Array.isArray(lines)) { return null }
@@ -54,7 +55,7 @@ export default function Order({ status, statusDisplay, number, created, total, l
     <Link to="Order" style={styles.btn} params={params}>
       <View style={leftLine}/>
       <View style={styles.header}>
-        <Text style={styles.number}>#{number}</Text>
+        <Text style={styles.number}>{I18nManager.isRTL ? `${number}#` : `#${number}`}</Text>
         <Text style={styles.date}>{moment(created).format('DD/MM/YY')}</Text>
       </View>
       <Text style={statusStyle}>{statusDisplay}</Text>

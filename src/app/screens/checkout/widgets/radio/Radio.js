@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types'
 import Animated, { Easing } from 'react-native-reanimated'
 import Button from 'common/widgets/button'
-import { Text } from 'react-native'
+import { Text, I18nManager } from 'react-native'
 import { useMemo, useEffect, useCallback } from 'react'
 import interpolateColors from 'common/utils/interpolateColors'
 import get from 'lodash/get'
@@ -70,7 +70,7 @@ export default function Radio({ isActive, onChange, value, name, price, currency
 
   const title = useMemo(() => {
     const pricetext = get(price, 'amount') ? `+${currency}${get(price, 'amount')}` : null
-    return [name, pricetext].filter(Boolean).join(' | ')
+    return I18nManager.isRTL ? [name, pricetext].filter(Boolean).reverse().join(' | ') : [name, pricetext].filter(Boolean).join(' | ')
   }, [name, price, currency])
 
   return (

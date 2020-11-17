@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types'
-import { SafeAreaView, RefreshControl, Text, KeyboardAvoidingView } from 'react-native'
+import { SafeAreaView, RefreshControl, Text, KeyboardAvoidingView, I18nManager } from 'react-native'
 import { Fragment } from 'react'
 import { FlatList } from 'react-native-gesture-handler'
 import { LoadingWrapper } from 'common/widgets/loading'
@@ -51,7 +51,7 @@ export default function BagView({ isLoading, refetch, refreshing, data, renderIt
               <KeyboardAvoidingView behavior="padding" keyboardVerticalOffset={64}>
                 <Button to="Checkout" primary style={styles.btn} onPress={proceed}>
                   <Text style={styles.link}>{gettext('Proceed to checkout')}</Text>
-                  <Icon name="chevron-right-01" color="#ffffff" size={22}/>
+                  <Icon name={I18nManager.isRTL ? 'chevron-left-01' : 'chevron-right-01'} color="#ffffff" size={22}/>
                 </Button>
               </KeyboardAvoidingView>
               <Toast error={errors}/>

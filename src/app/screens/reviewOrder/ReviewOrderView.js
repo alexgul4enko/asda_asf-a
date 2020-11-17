@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types'
-import { SafeAreaView, FlatList, Text } from 'react-native'
+import { SafeAreaView, FlatList, Text, I18nManager } from 'react-native'
 import Link from 'common/widgets/link'
 import Icon from 'common/widgets/Icon'
 import { LoadingWrapper } from 'common/widgets/loading'
@@ -38,7 +38,7 @@ export default function ReviewOrderView({
         />
         <Link primaty to="main" style={styles.button} primary>
           <Text style={styles.link}>{gettext('Continue shopping')}</Text>
-          <Icon name="chevron-right-01" color="#ffffff" size={18}/>
+          <Icon name={I18nManager.isRTL ? 'chevron-left-01' : 'chevron-right-01'} color="#ffffff" size={18}/>
         </Link>
       </LoadingWrapper>
 

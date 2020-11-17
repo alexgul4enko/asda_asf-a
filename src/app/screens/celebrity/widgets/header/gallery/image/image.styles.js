@@ -35,5 +35,6 @@ export default StyleSheet.create({
     color: '#000000',
     flex: 1,
     alignSelf: 'stretch',
+    textAlign: 'left',
   },
 })

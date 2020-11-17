@@ -43,28 +43,28 @@ export default function Header({
   paymentStatusDisplay,
   paymentMethod,
 }) {
-  const statusStyles = useMemo(() => [styles.status, { color: getStatusColor(status) }], [status])
-  const paymentStyles = useMemo(() => [styles.status, { color: getPaymentColor(paymentStatus) }], [paymentStatus])
+  const statusStyles = useMemo(() => [styles.title, styles.status, { color: getStatusColor(status) }], [status])
+  const paymentStyles = useMemo(() => [styles.title, styles.status, { color: getPaymentColor(paymentStatus) }], [paymentStatus])
   return (
     <View style={styles.header}>
-      <Text style={styles.title}>
-        <Text>{gettext('Your order')}</Text>
-        <Text>:</Text>
-        <Text> </Text>
+      <View style={styles.row}>
+        <Text style={styles.title}>{gettext('Your order')}</Text>
+        <Text style={styles.title}>:</Text>
+        <Text style={styles.title}> </Text>
         <Text style={statusStyles}>{statusDisplay}</Text>
-      </Text>
-      <Text style={styles.title}>
-        <Text>{gettext('Payment')}</Text>
-        <Text>:</Text>
-        <Text> </Text>
+      </View>
+      <View style={styles.row}>
+        <Text style={styles.title}>{gettext('Payment')}</Text>
+        <Text style={styles.title}>:</Text>
+        <Text style={styles.title}> </Text>
         <Text style={paymentStyles}>{paymentStatusDisplay}</Text>
-      </Text>
-      <Text style={styles.title}>
-        <Text>{gettext('PAYMENT METHOD')}</Text>
-        <Text>:</Text>
-        <Text> </Text>
-        <Text style={styles.method}>{paymentMethod}</Text>
-      </Text>
+      </View>
+      <View style={styles.row}>
+        <Text style={styles.title}>{gettext('PAYMENT METHOD')}</Text>
+        <Text style={styles.title}>:</Text>
+        <Text style={styles.title}> </Text>
+        <Text style={[styles.title, styles.method]}>{paymentMethod}</Text>
+      </View>
     </View>
   )
 }

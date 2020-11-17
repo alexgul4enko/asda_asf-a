@@ -103,7 +103,9 @@ export default function Attributes({ isAvailable, variants, selectVariant, count
     <View>
       {content}
       <View style={styles.quantityRow}>
-        <Text style={styles.quantity}>{gettext('Quantity:')}</Text>
+        <Text style={styles.quantity}>{gettext('Quantity')}</Text>
+        <Text style={styles.quantity}>:</Text>
+        <Text style={styles.quantity}>   </Text>
         <CountInput count={count} setCount={setCount}/>
       </View>
     </View>

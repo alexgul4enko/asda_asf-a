@@ -33,6 +33,10 @@ export default StyleSheet.create({
     justifyContent: 'space-between',
     paddingVertical: 8,
   },
+  headerTitleRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
   title: {
     fontSize: 16,
     lineHeight: 24,

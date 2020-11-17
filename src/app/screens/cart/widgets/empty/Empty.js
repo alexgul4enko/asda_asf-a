@@ -1,4 +1,4 @@
-import { ScrollView, View, Text, Image } from 'react-native'
+import { ScrollView, View, Text, Image, I18nManager } from 'react-native'
 import Link from 'common/widgets/link'
 import Icon from 'common/widgets/Icon'
 import Recomentations from 'common/widgets/recomentations'
@@ -20,7 +20,7 @@ export default function Empty() {
         />
         <Link to="Catalog" primary style={styles.button}>
           <Text style={styles.link}>{gettext('Continue shopping')}</Text>
-          <Icon name="chevron-right-01" color="#ffffff" size={16}/>
+          <Icon name={I18nManager.isRTL ? 'chevron-left-01' : 'chevron-right-01'} color="#ffffff" size={16}/>
         </Link>
       </View>
       <View style={styles.recomendations}>

@@ -6,6 +6,7 @@ export default StyleSheet.create({
     padding: 16,
     paddingBottom: 12,
     backgroundColor: '#ffffff',
+    alignItems: 'flex-start',
   },
   title: {
     fontWeight: '600',

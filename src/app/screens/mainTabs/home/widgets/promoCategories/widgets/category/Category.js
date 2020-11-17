@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types'
 import { useMemo } from 'react'
-import { Text } from 'react-native'
+import { Text, I18nManager } from 'react-native'
 import Link from 'common/widgets/link'
 import Avatar from 'common/widgets/avatar'
 import get from 'lodash/get'
@@ -39,7 +39,7 @@ export default function Category({
   type,
   promoLinkText,
 }) {
-  const params = useMemo(() => ({ slug }), [slug])
+  const params = useMemo(() => ({ slug, type: 'category' }), [slug])
   return (
     <Link to="Products" params={params} style={styles.btn}>
       <Avatar
@@ -65,7 +65,11 @@ export default function Category({
             ellipsizeMode="tail"
             style={styles.price}
           >
-            {get(productWithMinPrice, 'minimalVariantPrice.currency')} {get(productWithMinPrice, 'minimalVariantPrice.amount')}
+            {
+              I18nManager.isRTL
+                ? `${get(productWithMinPrice, 'minimalVariantPrice.amount', '')} ${get(productWithMinPrice, 'minimalVariantPrice.currency', '')}`
+                : `${get(productWithMinPrice, 'minimalVariantPrice.currency', '')} ${get(productWithMinPrice, 'minimalVariantPrice.amount', '')}`
+            }
           </Text>
         ) : null
       }

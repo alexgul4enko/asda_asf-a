@@ -16,6 +16,7 @@ export default StyleSheet.create({
     lineHeight: 24,
     color: '#000000',
     marginBottom: 8,
+    textAlign: 'left',
   },
   totalRow: {
     flexDirection: 'row',
@@ -23,6 +24,10 @@ export default StyleSheet.create({
     justifyContent: 'space-between',
     height: 24,
     marginBottom: 4,
+  },
+  priceRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
   },
   totalLabel: {
     fontWeight: '400',
@@ -59,5 +64,6 @@ export default StyleSheet.create({
     alignSelf: 'stretch',
     paddingHorizontal: 16,
     marginTop: 8,
+    textAlign: 'left',
   },
 })

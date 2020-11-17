@@ -33,6 +33,7 @@ export default StyleSheet.create({
     lineHeight: 16,
     marginTop: 8,
     height: 32,
+    textAlign: 'left',
   },
   sale: {
     color: theme.grey,
@@ -47,6 +48,7 @@ export default StyleSheet.create({
     lineHeight: 16,
     flex: 1,
     padding: 0,
+    textAlign: 'left',
   },
   row: {
     flexDirection: 'row',

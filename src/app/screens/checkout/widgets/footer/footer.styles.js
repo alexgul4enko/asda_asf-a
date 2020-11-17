@@ -7,6 +7,7 @@ export default StyleSheet.create({
     padding: 16,
   },
   title: {
+    textAlign: 'left',
     fontWeight: '600',
     fontSize: 16,
     lineHeight: 24,
@@ -38,6 +39,7 @@ export default StyleSheet.create({
     color: '#000000',
     marginTop: 12,
     marginBottom: 24,
+    textAlign: 'left',
   },
   privacyLink: {
     textDecorationLine: 'underline',

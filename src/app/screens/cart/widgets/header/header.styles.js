@@ -19,6 +19,7 @@ export default StyleSheet.create({
     fontSize: 16,
     lineHeight: 24,
     marginBottom: 8,
+    textAlign: 'left',
   },
   totals: {
     flexDirection: 'row',
@@ -28,10 +29,11 @@ export default StyleSheet.create({
     fontSize: 14,
     lineHeight: 16,
     fontWeight: '600',
-    marginRight: 8,
+
   },
   price: {
     fontSize: 14,
     lineHeight: 16,
+    marginLeft: 8,
   },
 })

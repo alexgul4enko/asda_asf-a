@@ -33,6 +33,11 @@ export default StyleSheet.create({
     color: '#000000',
     marginBottom: 8,
   },
+  variantRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'flex-end',
+  },
   variant: {
     fontWeight: '600',
     fontSize: 12,

@@ -18,6 +18,11 @@ export default StyleSheet.create({
     fontWeight: '600',
     fontSize: 12,
     lineHeight: 16,
+    textAlign: 'left',
+  },
+  variantTitleRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
   },
   boxes: {
     flexDirection: 'row',
@@ -53,6 +58,5 @@ export default StyleSheet.create({
     fontWeight: '600',
     fontSize: 12,
     lineHeight: 16,
-    marginRight: 8,
   },
 })

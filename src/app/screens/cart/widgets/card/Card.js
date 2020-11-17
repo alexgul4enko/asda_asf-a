@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types'
 import BagItem from 'common/widgets/bagItem'
-import { View, Text } from 'react-native'
+import { View, Text, I18nManager } from 'react-native'
 import CountInput from 'common/widgets/countInput'
 import get from 'lodash/get'
 import isEmpty from 'lodash/isEmpty'
@@ -36,7 +36,7 @@ export default function Card({ updateCount, deleteItem, ...props } = {}) {
     const cur = get(props, 'variant.pricing.price.currency')
     const amount = get(props, 'variant.pricing.price.net.amount')
     if(!cur || !amount) { return null }
-    return [cur, amount.toLocaleString()].join(' ')
+    return I18nManager.isRTL ? [cur, amount.toLocaleString()].reverse().join(' ') : [cur, amount.toLocaleString()].join(' ')
   }, [get(props, 'variant.pricing')])
 
 

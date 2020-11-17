@@ -19,7 +19,9 @@ export default function parseDescription(desc) {
 
 function getStyle(inlineStyleRanges) {
   if(isEmpty(inlineStyleRanges) || !Array.isArray(inlineStyleRanges)) {
-    return null
+    return {
+      textAlign: 'left',
+    }
   }
   return inlineStyleRanges.reduce((e, i) => ({ ...e, ...getfont(i) }), {})
 }
@@ -30,12 +32,16 @@ function getfont({ style }) {
     case 'BOLD':
       return {
         fontWeight: 'bold',
+        textAlign: 'left',
       }
     case 'ITALIC':
       return {
         fontStyle: 'italic',
+        textAlign: 'left',
       }
     default:
-      return {}
+      return {
+        textAlign: 'left',
+      }
   }
 }

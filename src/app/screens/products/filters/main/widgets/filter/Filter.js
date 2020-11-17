@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types'
-import { Text } from 'react-native'
+import { Text, I18nManager } from 'react-native'
 import Link from 'common/widgets/link'
 import Icon from 'common/widgets/Icon'
 import { useMemo } from 'react'
@@ -54,7 +54,7 @@ export default function Filter({ name, values, slug }) {
         ellipsizeMode="tail"
         style={styles.selection}
       >{selections.selectedText}</Text>
-      <Icon name="chevron-right-01" size={24}/>
+      <Icon name={I18nManager.isRTL ? 'chevron-left-01' : 'chevron-right-01'} size={24}/>
     </Link>
   )
 }

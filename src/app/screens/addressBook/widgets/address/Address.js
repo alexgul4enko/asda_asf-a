@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types'
-import { Text, View } from 'react-native'
+import { Text, View, I18nManager } from 'react-native'
 import Button from 'common/widgets/button'
 import Link from 'common/widgets/link'
 import Icon from 'common/widgets/Icon'
@@ -80,7 +80,7 @@ export default function Address(props) {
         {streetAddress2 ? (<Text style={styles.text}>{streetAddress2}</Text>) : null}
         <Text style={styles.text}>{get(city, 'name')} {postalCode}</Text>
         {get(country, 'country') ? (<Text style={styles.text}>{get(country, 'country')}</Text>) : null}
-        {phone ? (<Text style={styles.text}>{gettext('Phone number:')} {phone}</Text>) : null}
+        {phone ? (<Text style={styles.text}>{I18nManager.isRTL ? [gettext('Phone number'), ' :', phone].reverse() : [gettext('Phone number'), ': ', phone]}</Text>) : null}
       </View>
       {
         readOnly ? null : (

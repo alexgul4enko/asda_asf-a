@@ -17,6 +17,7 @@ export default StyleSheet.create({
     marginHorizontal: 16,
     marginBottom: 12,
     marginTop: 24,
+    textAlign: 'left',
   },
   link: {
     marginHorizontal: 16,

@@ -18,6 +18,7 @@ export default StyleSheet.create({
     marginHorizontal: 16,
     marginBottom: 8,
     marginTop: 24,
+    textAlign: 'left',
   },
   payments: {
     flexDirection: 'row',

@@ -43,7 +43,6 @@ export default function BagItem({ children, quantity, variant, style, deleteItem
   const _style = useMemo(() => ([styles.root, style]), [style])
   return (
     <View style={_style}>
-
       <View style={styles.row}>
         <Link to="Product" params={params} style={styles.link}>
           <Avatar

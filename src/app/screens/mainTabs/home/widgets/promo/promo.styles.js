@@ -15,6 +15,7 @@ export default StyleSheet.create({
     lineHeight: 24,
     fontWeight: '600',
     marginBottom: 12,
+    textAlign: 'left',
   },
   rect: {
     height: 90,

@@ -1,4 +1,4 @@
-import { SafeAreaView, Text, Linking, ScrollView, View } from 'react-native'
+import { SafeAreaView, Text, Linking, ScrollView, View, I18nManager } from 'react-native'
 import { CheckAccess } from '@cranium/access'
 import Link from 'common/widgets/link'
 import Icon from 'common/widgets/Icon'
@@ -48,19 +48,19 @@ export default function ProfileView() {
           <Text style={styles.title}>{gettext('My account')}</Text>
           <Link to="EditProfile" style={styles.link}>
             <Text style={styles.linktext}>{gettext('Profile')}</Text>
-            <Icon name="chevron-right-01" size={20}/>
+            <Icon name={I18nManager.isRTL ? 'chevron-left-01' : 'chevron-right-01'} size={20}/>
           </Link>
           <Link to="AddressBook" style={styles.link}>
             <Text style={styles.linktext}>{gettext('Address Book')}</Text>
-            <Icon name="chevron-right-01" size={20}/>
+            <Icon name={I18nManager.isRTL ? 'chevron-left-01' : 'chevron-right-01'} size={20}/>
           </Link>
           <Link to="ChangePass" style={styles.link}>
             <Text style={styles.linktext}>{gettext('Change Password')}</Text>
-            <Icon name="chevron-right-01" size={20}/>
+            <Icon name={I18nManager.isRTL ? 'chevron-left-01' : 'chevron-right-01'} size={20}/>
           </Link>
           <Link to="Orders" style={styles.link}>
             <Text style={styles.linktext}>{gettext('My Orders')}</Text>
-            <Icon name="chevron-right-01" size={20}/>
+            <Icon name={I18nManager.isRTL ? 'chevron-left-01' : 'chevron-right-01'} size={20}/>
           </Link>
 
         </CheckAccess>
@@ -70,42 +70,42 @@ export default function ProfileView() {
           onPress={returnPolicy}
         >
           <Text style={styles.linktext}>{gettext('Shipping & Return Policy')}</Text>
-          <Icon name="chevron-right-01" size={20}/>
+          <Icon name={I18nManager.isRTL ? 'chevron-left-01' : 'chevron-right-01'} size={20}/>
         </Button>
         <Button
           style={styles.link}
           onPress={aboutUs}
         >
           <Text style={styles.linktext}>{gettext('About us')}</Text>
-          <Icon name="chevron-right-01" size={20}/>
+          <Icon name={I18nManager.isRTL ? 'chevron-left-01' : 'chevron-right-01'} size={20}/>
         </Button>
         <Button
           style={styles.link}
           onPress={stores}
         >
           <Text style={styles.linktext}>{gettext('Store Address')}</Text>
-          <Icon name="chevron-right-01" size={20}/>
+          <Icon name={I18nManager.isRTL ? 'chevron-left-01' : 'chevron-right-01'} size={20}/>
         </Button>
         <Button
           style={styles.link}
           onPress={faq}
         >
           <Text style={styles.linktext}>{gettext('FAQs')}</Text>
-          <Icon name="chevron-right-01" size={20}/>
+          <Icon name={I18nManager.isRTL ? 'chevron-left-01' : 'chevron-right-01'} size={20}/>
         </Button>
         <Button
           style={styles.link}
           onPress={privacyPolicy}
         >
           <Text style={styles.linktext}>{gettext('Privacy Policy')}</Text>
-          <Icon name="chevron-right-01" size={20}/>
+          <Icon name={I18nManager.isRTL ? 'chevron-left-01' : 'chevron-right-01'} size={20}/>
         </Button>
         <Button
           style={styles.link}
           onPress={terms}
         >
           <Text style={styles.linktext}>{gettext('Terms and conditions')}</Text>
-          <Icon name="chevron-right-01" size={20}/>
+          <Icon name={I18nManager.isRTL ? 'chevron-left-01' : 'chevron-right-01'} size={20}/>
         </Button>
         <Text style={styles.title}>{gettext('Join us')}</Text>
         <Button
@@ -113,14 +113,14 @@ export default function ProfileView() {
           onPress={designer}
         >
           <Text style={styles.linktext}>{gettext('Become designer')}</Text>
-          <Icon name="chevron-right-01" size={20}/>
+          <Icon name={I18nManager.isRTL ? 'chevron-left-01' : 'chevron-right-01'} size={20}/>
         </Button>
         <Button
           style={styles.link}
           onPress={celebrity}
         >
           <Text style={styles.linktext}>{gettext('Become celebrity')}</Text>
-          <Icon name="chevron-right-01" size={20}/>
+          <Icon name={I18nManager.isRTL ? 'chevron-left-01' : 'chevron-right-01'} size={20}/>
         </Button>
         <Text style={styles.title}>{gettext('Contact us')}</Text>
         <View style={styles.contacts}>

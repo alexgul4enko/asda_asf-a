@@ -45,6 +45,7 @@ export default StyleSheet.create({
     fontSize: 14,
     lineHeight: 16,
     marginBottom: 8,
+    textAlign: 'left',
   },
   deleteButton: {
     paddingTop: 0,

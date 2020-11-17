@@ -24,11 +24,16 @@ export default StyleSheet.create({
     alignSelf: 'stretch',
     paddingHorizontal: 16,
   },
+  skuRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
   name: {
     fontWeight: '600',
     fontSize: 16,
     lineHeight: 20,
     paddingTop: 16,
+    textAlign: 'left',
   },
   sku: {
     color: theme.grey,
@@ -41,6 +46,7 @@ export default StyleSheet.create({
     fontWeight: 'bold',
     fontSize: 14,
     lineHeight: 16,
+    textAlign: 'left',
   },
   row: {
     flexDirection: 'row',
@@ -70,10 +76,12 @@ export default StyleSheet.create({
     padding: 12,
     marginVertical: 16,
   },
+  deliveryIcon: {
+    marginRight: 12,
+  },
   deliveryText: {
     fontSize: 12,
     lineHeight: 18,
-    marginLeft: 12,
   },
   Riyadh: {
     fontWeight: '600',

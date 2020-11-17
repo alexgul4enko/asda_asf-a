@@ -1,4 +1,5 @@
 import PropTypes from 'prop-types'
+import { I18nManager } from 'react-native'
 import Animated, { Easing } from 'react-native-reanimated'
 import { useCallback, useMemo, useEffect, useState } from 'react'
 import camelCase from 'lodash/camelCase'
@@ -48,7 +49,7 @@ export default function FooterContainer({ like, id, namespace, isAvailable, vari
     const cur = get(variant, 'pricing.price.currency')
     const amount = get(variant, 'pricing.price.net.amount')
     if(!cur || !amount) { return null }
-    return [cur, (amount * count).toLocaleString()].join(' ')
+    return I18nManager.isRTL ? [cur, (amount * count).toLocaleString()].reverse().join(' ') : [cur, (amount * count).toLocaleString()].join(' ')
   }, [count, variant])
 
   const item = useMemo(() => {

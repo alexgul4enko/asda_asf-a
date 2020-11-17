@@ -70,7 +70,10 @@ export default function Variant({ name, values, id, handreTypeSelection, selecti
 
   return (
     <View style={styles.variant}>
-      <Text style={styles.variantTitle}>{name}:</Text>
+      <View style={styles.variantTitleRow}>
+        <Text style={styles.variantTitle}>{name}</Text>
+        <Text style={styles.variantTitle}>:</Text>
+      </View>
       <View style={styles.boxes}>
         {boxes}
       </View>

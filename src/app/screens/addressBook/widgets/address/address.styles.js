@@ -27,6 +27,7 @@ export default StyleSheet.create({
     padding: 16,
     flex: 1,
     alignSelf: 'stretch',
+    alignItems: 'flex-start',
   },
   label: {
     fontWeight: '600',

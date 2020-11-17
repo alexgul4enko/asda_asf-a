@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types'
-import { ScrollView, SafeAreaView, Text, View, RefreshControl } from 'react-native'
+import { ScrollView, SafeAreaView, Text, View, RefreshControl, I18nManager } from 'react-native'
 import { useTranslations } from '@cranium/i18n'
 import { LoadingWrapper } from 'common/widgets/loading'
 import Icon from 'common/widgets/Icon'
@@ -95,13 +95,17 @@ export default function ProductView({
   const { gettext } = useTranslations()
   const price = useMemo(() => {
     if(!isEmpty(get(variant, 'pricing'))) {
-      return `${get(variant, 'pricing.price.currency')} ${get(variant, 'pricing.price.net.amount').toLocaleString()}`
+      return I18nManager.isRTL
+        ? `${get(variant, 'pricing.price.net.amount').toLocaleString()} ${get(variant, 'pricing.price.currency')}`
+        : `${get(variant, 'pricing.price.currency')} ${get(variant, 'pricing.price.net.amount').toLocaleString()}`
     }
     return getPrice(get(pricing, 'priceRange'))
   }, [pricing, variant])
   const salePrice = useMemo(() => {
-    if(!isEmpty(get(variant, 'pricing'))) {
-      return get(variant, 'pricing.onSale') && `${get(variant, 'pricing.price.currency')} ${get(variant, 'pricing.priceUndiscounted.gross.amount').toLocaleString()}`
+    if(!isEmpty(get(variant, 'pricing')) && get(variant, 'pricing.onSale')) {
+      return I18nManager.isRTL
+        ? `${get(variant, 'pricing.priceUndiscounted.gross.amount').toLocaleString()} ${get(variant, 'pricing.price.currency')}`
+        : `${get(variant, 'pricing.price.currency')} ${get(variant, 'pricing.priceUndiscounted.gross.amount').toLocaleString()}`
     }
     return get(pricing, 'onSale') && getPrice(get(pricing, 'priceRangeUndiscounted'))
   }, [pricing, variant])
@@ -127,7 +131,12 @@ export default function ProductView({
 
           <View style={styles.content}>
             <Text style={styles.name}>{name}</Text>
-            <Text style={styles.sku}>{gettext('SKU:')} {get(variant, 'sku')}</Text>
+            <View style={styles.skuRow}>
+              <Text style={styles.sku}>{gettext('SKU')}</Text>
+              <Text style={styles.sku}>:</Text>
+              <Text style={styles.sku}> </Text>
+              <Text style={styles.sku}>{get(variant, 'sku')}</Text>
+            </View>
             <Text style={styles.price}>{ price }</Text>
             {get(pricing, 'onSale') ? (
               <View style={styles.row}>
@@ -144,10 +153,15 @@ export default function ProductView({
               setCount={setCount}
             />
             <View style={styles.delivery}>
-              <Icon name="delivery-01" color={theme.primary}/>
+              <Icon name="delivery-01" color={theme.primary} style={styles.deliveryIcon}/>
               <Text style={styles.deliveryText}>
-                {gettext('Exspress delivery to')} {' '}
-                <Text style={styles.Riyadh}>{gettext('Riyadh')}</Text>
+                {gettext('Exspress delivery to')}
+              </Text>
+              <Text style={styles.deliveryText}>
+                {' '}
+              </Text>
+              <Text style={[styles.deliveryText, styles.Riyadh]}>
+                {gettext('Riyadh')}
               </Text>
             </View>
             {

@@ -11,5 +11,6 @@ export default StyleSheet.create({
   },
   text: {
     flex: 1,
+    textAlign: 'left',
   },
 })

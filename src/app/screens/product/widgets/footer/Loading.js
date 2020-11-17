@@ -82,7 +82,10 @@ export default function Loading({ close, children }) {
       <TouchableWithoutFeedback onPress={() => true}>
         <Animated.View style={bagStyles}>
           <View style={styles.header}>
-            <Text style={styles.title}>{gettext('Added to Bag:')}</Text>
+            <View style={styles.headerTitleRow}>
+              <Text style={styles.title}>{gettext('Added to Bag')}</Text>
+              <Text style={styles.title}>:</Text>
+            </View>
             <Button onPress={close}><Icon name="close-01"/></Button>
           </View>
           {children}

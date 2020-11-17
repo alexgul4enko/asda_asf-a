@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types'
-import { Text } from 'react-native'
+import { Text, I18nManager } from 'react-native'
 import Link from 'common/widgets/link'
 import Icon from 'common/widgets/Icon'
 import { useMemo } from 'react'
@@ -64,7 +64,7 @@ export default function Address({
   return (
     <Link style={styles.link} to="AddressBook" params={params}>
       <Text style={styles.text}>{address}</Text>
-      <Icon name="chevron-right-01"/>
+      <Icon name={I18nManager.isRTL ? 'chevron-left-01' : 'chevron-right-01'}/>
     </Link>
   )
 }

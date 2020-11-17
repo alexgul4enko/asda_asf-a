@@ -1,4 +1,4 @@
-import { StyleSheet } from 'react-native'
+import { StyleSheet, I18nManager } from 'react-native'
 import theme from 'theme'
 
 export default StyleSheet.create({
@@ -13,6 +13,7 @@ export default StyleSheet.create({
     lineHeight: 24,
     marginTop: 24,
     marginBottom: 16,
+    textAlign: 'left',
   },
   mediaButton: {
     paddingVertical: 12,
@@ -33,7 +34,7 @@ export default StyleSheet.create({
     borderWidth: 0,
     marginBottom: 8,
     transform: [{
-      translateX: -12,
+      translateX: I18nManager.isRTL ? 12 : -12,
     }],
   },
 })

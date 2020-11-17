@@ -10,10 +10,12 @@ export default StyleSheet.create({
     fontWeight: '600',
     fontSize: 18,
     lineHeight: 24,
+    textAlign: 'left',
   },
   subTitle: {
     fontWeight: '600',
     fontSize: 14,
     lineHeight: 24,
+    textAlign: 'left',
   },
 })

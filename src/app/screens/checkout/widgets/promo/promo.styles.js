@@ -12,6 +12,7 @@ export default StyleSheet.create({
     fontSize: 12,
     lineHeight: 18,
     color: '#000000',
+    textAlign: 'left',
   },
   row: {
     flexDirection: 'row',

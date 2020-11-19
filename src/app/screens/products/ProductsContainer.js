@@ -9,15 +9,16 @@ import PRODUCTS from './products.graphql'
 
 ProductsContainer.propTypes = NavigationPropTypes
 
-export default function ProductsContainer(props) {
+export default function ProductsContainer({ isVip, ...props }) {
   const filter = useMemo(() => {
     const type = get(props, 'route.params.type') === 'category' ? 'categories' : 'collections'
     const slug = get(props, 'route.params.slug')
     const id = idFromSlug(slug, get(props, 'route.params.type') === 'category' ? 'Category' : 'Collection')
     return {
       [type]: [id].filter(Boolean),
+      isVip,
     }
-  }, [props.route.params])
+  }, [props.route.params, isVip])
   const products = usePrefetchQuery(PRODUCTS, { parseValue: 'data.products' })({ first: 16, filter })
   const { loadNext, refresh, isRefreshing } = useGraphInifnyList(products)
   const onSearch = useSearch(products.request)

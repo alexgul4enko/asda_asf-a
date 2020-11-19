@@ -1,0 +1,5 @@
+query isVIPUser {
+  me {
+    isVip
+  }
+}

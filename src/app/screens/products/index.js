@@ -1,7 +1,7 @@
-import ProductsContainer from './ProductsContainer'
+import Products from './MeWrapper'
 import productsOptions from './navigationOptions'
 
-export default ProductsContainer
+export default Products
 
 export {
   productsOptions,

@@ -13,6 +13,7 @@ import PRODUCTS from './products.graphql'
 ProductsContainer.propTypes = NavigationPropTypes
 
 export default function ProductsContainer({ route, navigation }) {
+  const isVip = useSelector(state => get(state, 'isVipUser.data.me.isVip') === true ? undefined : false)
   const filter = useMemo(() => {
     const type = get(route, 'params.type') === 'category' ? 'inCategory' : 'inCollection'
     const slug = get(route, 'params.slug')
@@ -31,9 +32,10 @@ export default function ProductsContainer({ route, navigation }) {
     const id = idFromSlug(slug, get(route, 'params.type') === 'category' ? 'Category' : 'Collection')
     const filter = {
       [type]: [id].filter(Boolean),
+      isVip,
     }
     products.request({ filter })
-  }, [get(route, 'params'), products.request])
+  }, [get(route, 'params'), products.request, isVip])
 
   useLayoutEffect(() => {
     navigation.setOptions({

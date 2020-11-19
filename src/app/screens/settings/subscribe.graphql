@@ -1,0 +1,8 @@
+mutation SUBSCRIBE($email: String!) {
+  subscribe(email: $email) {
+    accountErrors {
+      message
+      field
+    }
+  }
+}

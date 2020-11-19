@@ -7,6 +7,7 @@
 	<key>com.apple.developer.associated-domains</key>
 	<array>
 		<string>webcredentials:wecre8.inprogress.rocks</string>
+		<string>webcredentials:wecre8.comingsoon.rocks</string>
 	</array>
 </dict>
 </plist>

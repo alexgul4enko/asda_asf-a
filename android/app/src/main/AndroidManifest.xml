@@ -30,6 +30,7 @@
           <category android:name="android.intent.category.DEFAULT"/>
           <category android:name="android.intent.category.BROWSABLE"/>
           <data android:scheme="@string/SHEME_NAME" android:host="*" />
+          <data android:scheme="https" android:host="wecre8.comingsoon.rocks" android:pathPrefix="/*"/>
         </intent-filter>
       </activity>
       <activity android:name="com.facebook.react.devsupport.DevSettingsActivity" />

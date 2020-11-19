@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types'
-import { View, Text, Linking } from 'react-native'
-import { useCallback } from 'react'
+import { View, Text } from 'react-native'
+import useOpenPromoUrl from 'screens/mainTabs/home/utils/useOpenPromoUrl'
 import Button from 'common/widgets/button'
 import CacheImage from 'common/widgets/CacheImage'
 import isEmpty from 'lodash/isEmpty'
@@ -24,10 +24,7 @@ Header.defaultProps = {
 }
 
 export default function Header({ promotion }) {
-  const handlePress = useCallback(() => {
-    if(!get(promotion, 'url')) { return }
-    return Linking.openURL(promotion.url)
-  }, [promotion])
+  const handlePress = useOpenPromoUrl(promotion)
   if(isEmpty(promotion)) {
     return null
   }

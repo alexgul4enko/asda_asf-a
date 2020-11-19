@@ -20,6 +20,7 @@ export default StyleSheet.create({
     fontSize: 14,
     lineHeight: 18,
     marginTop: 6,
+    height: 36,
   },
   price: {
     textAlign: 'center',

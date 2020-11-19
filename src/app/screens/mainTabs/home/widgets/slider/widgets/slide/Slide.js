@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types'
-import { Linking, View, Text } from 'react-native'
-import { useCallback, useMemo } from 'react'
+import { View, Text } from 'react-native'
+import useOpenPromoUrl from 'screens/mainTabs/home/utils/useOpenPromoUrl'
+import { useMemo } from 'react'
 import Button from 'common/widgets/button'
 import CacheImage from 'common/widgets/CacheImage'
 import get from 'lodash/get'
@@ -25,10 +26,7 @@ Slide.defaultProps = {
 
 
 export default function Slide({ promotion }) {
-  const handlePress = useCallback(() => {
-    if(!get(promotion, 'url')) { return }
-    return Linking.openURL(promotion.url)
-  }, [promotion])
+  const handlePress = useOpenPromoUrl(promotion)
   const source = useMemo(() => {
     return { uri: get(promotion, 'bannerImage.url') }
   }, [promotion])

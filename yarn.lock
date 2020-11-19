@@ -1066,6 +1066,11 @@
   resolved "https://registry.yarnpkg.com/@merryjs/photo-viewer/-/photo-viewer-3.2.1.tgz#9bea1d2b80ec3fc3c3ccf09b23b52dead6a17b4c"
   integrity sha512-0zmb3StwwzapEE50OhnQ+uo8htOxSAIQfGvGJe1FnlaJ8t+HWKZgm/AZVTRCsxbywVdeamw6KTChTfOsxI1xdg==
 
+"@notifee/react-native@^0.15.1":
+  version "0.15.1"
+  resolved "https://registry.yarnpkg.com/@notifee/react-native/-/react-native-0.15.1.tgz#33ade678759fbd011bcb9689d3132d3a8cd5d04a"
+  integrity sha512-CfQ3libXhaq8D75eaiftAAOYjMexAAxNIIOMZ5GCx/xPNqYtsr3qjZ+sb+3t3zTMZyRqtRhqMSXysLpOpNRfpg==
+
 "@react-native-community/async-storage@^1.12.0":
   version "1.12.0"
   resolved "https://registry.yarnpkg.com/@react-native-community/async-storage/-/async-storage-1.12.0.tgz#d2fc65bc08aa1c3e9514bbe9fe7095eab8e8aca3"

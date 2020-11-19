@@ -44,7 +44,6 @@ export default function ProfileView() {
         <CheckAccess level={access.F_UNAUTHORISED}>
           <MeetUs/>
         </CheckAccess>
-
         <CheckAccess level={access.F_PROTECTED}>
           <Text style={styles.title}>{gettext('My account')}</Text>
           <Link to="EditProfile" style={styles.link}>
@@ -63,8 +62,14 @@ export default function ProfileView() {
             <Text style={styles.linktext}>{gettext('My Orders')}</Text>
             <Icon name={I18nManager.isRTL ? 'chevron-left-01' : 'chevron-right-01'} size={20}/>
           </Link>
-
         </CheckAccess>
+        <Text style={styles.title}>{gettext('Settings')}</Text>
+        <Link to="Settings" style={styles.link}>
+          <Text style={styles.linktext}>
+            {gettext('Subscriptions')}
+          </Text>
+          <Icon name={I18nManager.isRTL ? 'chevron-left-01' : 'chevron-right-01'} size={20}/>
+        </Link>
         <Text style={styles.title}>{gettext('Change language')}</Text>
         <LanguageSelector/>
         <Text style={styles.title}>{gettext('Support')}</Text>

@@ -15,6 +15,7 @@ import DISLIKE from './dislike.graphql'
 import LIKE from './like.graphql'
 import Product from './product.graphql'
 import theme from 'theme'
+import analytics from '@react-native-firebase/analytics'
 
 
 LikeButton.propTypes = {
@@ -56,6 +57,11 @@ export default function LikeButton({ like, id, size, options }) {
   const handlePress = useCallback(() => {
     const query = like ? DISLIKE : LIKE
     setLoading(true)
+    analytics().logAddToWishlist({
+      items: [{ item_id: id }],
+    })
+      .then(console.log)
+      .catch(console.warn)
     request({ id }, { query })
       .then(() => request({ id }, { query: Product, ...options, forceUpdates: true, queries: [] }))
       .finally(() => setLoading(false))

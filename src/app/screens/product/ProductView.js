@@ -6,13 +6,14 @@ import Icon from 'common/widgets/Icon'
 import Collapse from 'common/widgets/collapse'
 import Toast from 'common/widgets/toast'
 import Recomendations from 'common/widgets/recomentations'
+import ListEmptyComponent from 'common/widgets/listEmptyComponent'
 import RecentProducts from './widgets/recentProducts'
 import Gallery from './widgets/gallery'
 import ShareButton from './widgets/shareButton'
 import Attributes from './widgets/attributes'
 import Footer from './widgets/footer'
 import VariantsWidget from './widgets/variants'
-import { useMemo } from 'react'
+import { useMemo, Fragment } from 'react'
 import getPrice from 'common/widgets/product/utils/getPrice'
 import parseDescription from './utils/parseDescription'
 import get from 'lodash/get'
@@ -129,44 +130,52 @@ export default function ProductView({
             <RefreshControl refreshing={refreshing} onRefresh={refetch} />
           }
         >
-          <Gallery data={images}/>
+          {images ? <Gallery data={images}/> : null}
           {isVip ? <Text style={styles.vip}>{gettext('vip')}</Text> : null}
-
           <View style={styles.content}>
-            <Text style={styles.name}>{get(translation, 'name') || name}</Text>
-            <View style={styles.skuRow}>
-              <Text style={styles.sku}>{gettext('SKU')}</Text>
-              <Text style={styles.sku}>:</Text>
-              <Text style={styles.sku}> </Text>
-              <Text style={styles.sku}>{get(variant, 'sku')}</Text>
-            </View>
-            <Text style={styles.price}>{ price }</Text>
-            {get(pricing, 'onSale') ? (
-              <View style={styles.row}>
-                <Text style={styles.sale}>{salePrice}</Text>
-                <Text style={styles.discount}>{discount}</Text>
-              </View>) : null
+            {
+              id ? (
+                <Fragment>
+                  <Text style={styles.name}>{get(translation, 'name') || name}</Text>
+                  <View style={styles.skuRow}>
+                    <Text style={styles.sku}>{gettext('SKU')}</Text>
+                    <Text style={styles.sku}>:</Text>
+                    <Text style={styles.sku}> </Text>
+                    <Text style={styles.sku}>{get(variant, 'sku')}</Text>
+                  </View>
+                  <Text style={styles.price}>{ price }</Text>
+                  {get(pricing, 'onSale') ? (
+                    <View style={styles.row}>
+                      <Text style={styles.sale}>{salePrice}</Text>
+                      <Text style={styles.discount}>{discount}</Text>
+                    </View>) : null
+                  }
+                  <ShareButton id={id} name={name}/>
+                  <Attributes
+                    isAvailable={isAvailable}
+                    variants={variants}
+                    selectVariant={selectVariant}
+                    count={count}
+                    setCount={setCount}
+                  />
+                  <View style={styles.delivery}>
+                    <Icon name="delivery-01" color={theme.primary} style={styles.deliveryIcon}/>
+                    <Text style={styles.deliveryText}>
+                      {gettext('Exspress delivery to')}
+                    </Text>
+                    <Text style={styles.deliveryText}>
+                      {' '}
+                    </Text>
+                    <Text style={[styles.deliveryText, styles.Riyadh]}>
+                      {gettext('Riyadh')}
+                    </Text>
+                  </View>
+                </Fragment>
+              ) : (
+                <ListEmptyComponent title={gettext('No productFound')}/>
+              )
             }
-            <ShareButton id={id} name={name}/>
-            <Attributes
-              isAvailable={isAvailable}
-              variants={variants}
-              selectVariant={selectVariant}
-              count={count}
-              setCount={setCount}
-            />
-            <View style={styles.delivery}>
-              <Icon name="delivery-01" color={theme.primary} style={styles.deliveryIcon}/>
-              <Text style={styles.deliveryText}>
-                {gettext('Exspress delivery to')}
-              </Text>
-              <Text style={styles.deliveryText}>
-                {' '}
-              </Text>
-              <Text style={[styles.deliveryText, styles.Riyadh]}>
-                {gettext('Riyadh')}
-              </Text>
-            </View>
+
             {
               isEmpty(description) ? null : (
                 <Collapse title={gettext('Product Details')}>
@@ -186,18 +195,20 @@ export default function ProductView({
             <RecentProducts id={id} namespace={`${namespace}Recent`}/>
           </View>
         </ScrollView>
-        <Footer
-          id={id}
-          slug={slug}
-          like={inWishlist}
-          namespace={namespace}
-          isAvailable={!isEmpty(variant) && !!count}
-          variant={variant}
-          count={count}
-          thumbnail={thumbnail}
-          name={get(translation, 'name') || name}
-        />
-        <Toast error={submitError}/>
+        {id ? (
+          <Footer
+            id={id}
+            slug={slug}
+            like={inWishlist}
+            namespace={namespace}
+            isAvailable={!isEmpty(variant) && !!count}
+            variant={variant}
+            count={count}
+            thumbnail={thumbnail}
+            name={get(translation, 'name') || name}
+          />) : null
+        }
+        {id ? (<Toast error={submitError}/>) : null}
       </LoadingWrapper>
     </SafeAreaView>
   )

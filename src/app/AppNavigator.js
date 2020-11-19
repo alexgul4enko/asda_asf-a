@@ -14,6 +14,7 @@ import Designer, { designerOptions } from './screens/designer'
 import Celebrity, { celebrityOptions } from './screens/celebrity'
 import Categories, { categoriesOptions } from './screens/categories'
 import Products, { productsOptions } from './screens/products'
+import analytics from '@react-native-firebase/analytics'
 import {
   Filters,
   filtersOptions,
@@ -93,6 +94,7 @@ const screenOptions = {
 export default function AppNavigator() {
   const navigationRef = useRef()
   useEffect(() => {
+    analytics().logAppOpen()
     messaging().onNotificationOpenedApp(message => handleNotificationClick(message, navigationRef))
     notifee.onForegroundEvent(({ type, detail }) => {
       if(type === EventType.PRESS) {

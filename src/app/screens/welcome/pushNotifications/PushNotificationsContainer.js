@@ -10,7 +10,10 @@ export default function PushNotificationsContainer() {
   const setAppSettings = useSetData('app')
   const setupNotification = useCallback(() => {
     registerPushNotifications(gettext)
-      .finally(() => setAppSettings('done'))
+
+      .finally(() => {
+        setAppSettings('done')
+      })
   }, [gettext, setAppSettings])
   const skip = useCallback(() => setAppSettings('done'), [setAppSettings])
   return (

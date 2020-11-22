@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux'
 import { useEffect, useRef } from 'react'
 import messaging from '@react-native-firebase/messaging'
 import notifee, { EventType } from '@notifee/react-native'
-import { StatusBar } from 'react-native'
+import { StatusBar, Platform } from 'react-native'
 import { createSharedElementStackNavigator } from 'react-navigation-shared-element'
 import { NavigationContainer } from '@react-navigation/native'
 import BackIcon from 'common/navigation/BackIcon'
@@ -113,7 +113,7 @@ export default function AppNavigator() {
           <Welcome/>
         </CheckAccess>
         <CheckAccess level={access.F_FIRST_INSTALL_PASSED}>
-          <MainStack.Navigator screenOptions={screenOptions}>
+          <MainStack.Navigator screenOptions={screenOptions} keyboardHandlingEnabled={Platform.OS === 'android' ? false : undefined}>
             <MainStack.Screen name="main" component={Home} options={homeOptions} />
             <MainStack.Screen name="Designer" component={Designer} options={designerOptions} />
             <MainStack.Screen name="Celebrity" component={Celebrity} options={celebrityOptions} />

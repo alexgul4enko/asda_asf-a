@@ -22,7 +22,7 @@ Avatar.defaultProps = {
   defaultImage: undefined,
 }
 
-export default function Avatar({ url, size, style, resizeMode, defaultImage, noImage = 'avatar' }) {
+export default function Avatar({ url, size, style, resizeMode, defaultImage, noImage }) {
   const source = useMemo(() => {
     return url ? { uri: url } : { uri: noImage }
   }, [url])

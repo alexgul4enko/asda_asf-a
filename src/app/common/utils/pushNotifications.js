@@ -1,6 +1,8 @@
 import messaging from '@react-native-firebase/messaging'
 import { Platform, Alert, Linking, AppState } from 'react-native'
 import iid from '@react-native-firebase/iid'
+import AsyncStorage from '@react-native-community/async-storage'
+import notifee from '@notifee/react-native'
 // import { getUniqueId } from 'react-native-device-info'
 
 
@@ -51,7 +53,6 @@ function requestUserPermission(gettext) {
         return authStatus
       }
       if(authStatus === messaging.AuthorizationStatus.DENIED) {
-        // user denided push notifications previously
         if(Platform.OS === 'ios') {
           return goToSettings()
             .then(() => openSettingsApp(gettext))
@@ -71,12 +72,18 @@ function requestUserPermission(gettext) {
 export default function registerPushNotifications(gettext) {
   return requestUserPermission()
     .then((data) => {
-      console.log(data)
       messaging().registerDeviceForRemoteMessages()
+      messaging().subscribeToTopic('promo')
+        .then(_ => AsyncStorage.setItem('promo_subscription', 'true'))
+      if(Platform.OS === 'android') {
+        notifee.createChannel({
+          name: 'wecre8',
+          id: 'wecre8',
+        })
+      }
       return iid().getToken()
     })
     .then(token => {
-      console.log(token)
       // Send token to firebase analitics
       // fetch('https://wecre8.inprogress.rocks/api/v1/devices', {
       //   method: 'POST',

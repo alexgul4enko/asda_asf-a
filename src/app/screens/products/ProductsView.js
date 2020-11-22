@@ -1,6 +1,6 @@
 import ListPropTypes from 'common/prop-types/List'
 import PropTypes from 'prop-types'
-import { SafeAreaView, FlatList } from 'react-native'
+import { SafeAreaView, FlatList, View } from 'react-native'
 import Header from './widgets/header'
 import { LoadingWrapper } from 'common/widgets/loading'
 import ListEmptyComponent from 'common/widgets/listEmptyComponent'
@@ -34,7 +34,13 @@ export default function ProductsView({
     <SafeAreaView style={styles.root}>
       <LoadingWrapper isLoading={isLoading}>
         <FlatList
-          ListHeaderComponent={isEmpty(route.params) ? (<Search onSearch={onSearch} placeholder={gettext('Search')} style={styles.search} />) : (<Header filter={filter}/>)}
+          ListHeaderComponent={isEmpty(route.params) ? (
+            <View style={styles.searchWrapper}>
+              <Search onSearch={onSearch} placeholder={gettext('Search')} style={styles.search} />
+            </View>
+          ) : (
+            <Header filter={filter}/>
+          )}
           onEndReached={loadNext}
           onRefresh={refetch}
           refreshing={refreshing}

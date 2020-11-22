@@ -40,7 +40,6 @@ export default StyleSheet.create({
   variantRow: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: 'pink',
     alignSelf: 'flex-end',
   },
   variant: {

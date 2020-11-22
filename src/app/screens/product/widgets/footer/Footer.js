@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types'
-import { View, KeyboardAvoidingView, Modal, TouchableWithoutFeedback, Text } from 'react-native'
+import { View, KeyboardAvoidingView, Modal, TouchableWithoutFeedback, Text, Platform } from 'react-native'
 import Button from 'common/widgets/button'
 import Link from 'common/widgets/link'
 import Animated from 'react-native-reanimated'
@@ -39,7 +39,7 @@ export default function Footer({
   price,
 }) {
   return (
-    <KeyboardAvoidingView behavior="padding" keyboardVerticalOffset={64}>
+    <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : undefined} keyboardVerticalOffset={64}>
       <View style={styles.footer}>
         <LikeButton
           like={like}

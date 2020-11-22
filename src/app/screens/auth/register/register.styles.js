@@ -10,6 +10,8 @@ export default StyleSheet.create({
   },
   scroll: {
     paddingTop: 32,
+    flex: 1,
+    justifyContent: 'space-between',
   },
   main: {
     flex: 1,

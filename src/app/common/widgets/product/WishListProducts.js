@@ -1,7 +1,6 @@
 import PropTypes from 'prop-types'
 import { useMemo } from 'react'
 import Link from 'common/widgets/link'
-import { SharedElement } from 'react-navigation-shared-element'
 import Avatar from 'common/widgets/avatar'
 import { Text, View } from 'react-native'
 import DeleteButton from './DeleteButton'
@@ -40,14 +39,12 @@ export default function WishListProducts({ id, name, thumbnail, isVip, pricing, 
   const salePrice = useMemo(() => get(pricing, 'onSale') && getPrice(get(pricing, 'priceRangeUndiscounted')), [pricing])
   return (
     <Link to="Product" params={{ slug }} style={styles.link}>
-      <SharedElement id={`product.${id}.image`}>
-        <Avatar
-          url={get(thumbnail, 'url')}
-          noImage="noimage"
-          style={styles.img}
-          resizeMode="cover"
-        />
-      </SharedElement>
+      <Avatar
+        url={get(thumbnail, 'url')}
+        noImage="noimage"
+        style={styles.img}
+        resizeMode="cover"
+      />
       <Text
         numberOfLines={2}
         allowFontScaling={false}

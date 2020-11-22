@@ -28,6 +28,7 @@ export default function HomeNavigation() {
       tabBarOptions={{
         activeTintColor: theme.primary,
         inactiveTintColor: theme.grey,
+        keyboardHidesTabBar: true,
         labelStyle: {
           fontWeight: '600',
           fontSize: 10,
@@ -84,4 +85,5 @@ export const homeOptions = {
   headerTitle: () => <Logo/>,
   headerLeft: () => <Gender/>,
   headerRight: () => <UserPick/>,
+  headerTitleAlign: 'center',
 }

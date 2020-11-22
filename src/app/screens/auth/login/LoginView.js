@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types'
-import { SafeAreaView, Text, ScrollView } from 'react-native'
+import { SafeAreaView, Text, ScrollView, View } from 'react-native'
 import { TextField } from 'common/forms'
 import Button, { SubmittingButton } from 'common/widgets/button'
 import isFormValid from 'common/utils/isFormValid'
@@ -40,41 +40,44 @@ export default function LoginView({ handleSubmit, submitting, submitError, ...fo
         keyboardDismissMode="on-drag"
         style={styles.main}
       >
-        <TextField
-          name="email"
-          label={gettext('Email address')}
-          keyboardType="email-address"
-        />
-        <TextField
-          name="password"
-          type="password"
-          label={gettext('Password')}
-          secureTextEntry
-        />
-        <Text style={styles.privacy}>
-          {gettext('By signing in or creating an account, you agree out')}
-          <Text> </Text>
-          <Text style={styles.privacyLink} onPress={terms}>{gettext('Terms & Conditions')}</Text>
-          <Text> </Text>
-          <Text>{gettext('and')}</Text>
-          <Text> </Text>
-          <Text style={styles.privacyLink} onPress={privacy}>{gettext('Privacy Statement')}</Text>
-        </Text>
-        <SubmittingButton
-          primary
-          valid={valid}
-          submitting={submitting}
-          title={gettext('Sign In')}
-          onPress={handleSubmit}
-        />
-        <Button
-          style={styles.link}
-          onPress={forgotPass}
-        >
-          <Text style={styles.forgot}>{gettext('Forgot password?')}</Text>
-        </Button>
+        <View>
+          <TextField
+            name="email"
+            label={gettext('Email address')}
+            keyboardType="email-address"
+          />
+          <TextField
+            name="password"
+            type="password"
+            label={gettext('Password')}
+            secureTextEntry
+          />
+          <Text style={styles.privacy}>
+            {gettext('By signing in or creating an account, you agree out')}
+            <Text> </Text>
+            <Text style={styles.privacyLink} onPress={terms}>{gettext('Terms & Conditions')}</Text>
+            <Text> </Text>
+            <Text>{gettext('and')}</Text>
+            <Text> </Text>
+            <Text style={styles.privacyLink} onPress={privacy}>{gettext('Privacy Statement')}</Text>
+          </Text>
+          <SubmittingButton
+            primary
+            valid={valid}
+            submitting={submitting}
+            title={gettext('Sign In')}
+            onPress={handleSubmit}
+          />
+          <Button
+            style={styles.link}
+            onPress={forgotPass}
+          >
+            <Text style={styles.forgot}>{gettext('Forgot password?')}</Text>
+          </Button>
+        </View>
+        <Link to="Register" title={gettext('Create new account')} outline style={styles.footer} textStyle={styles.footertext}/>
       </ScrollView>
-      <Link to="Register" title={gettext('Create new account')} outline style={styles.footer} textStyle={styles.footertext}/>
+
       <Toast error={submitError}/>
     </SafeAreaView>
   )

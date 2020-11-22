@@ -1,6 +1,6 @@
 import StylePropType from 'react-style-proptype'
 import { useMemo } from 'react'
-import { Image } from 'react-native'
+import { Image, Platform } from 'react-native'
 import styles from './logo.styles.js'
 
 Logo.propTypes = {
@@ -16,11 +16,12 @@ const source = {
 }
 
 export default function Logo({ style }) {
-  const _style = useMemo(() => ([styles.logo, style]), [style])
+  const _style = useMemo(() => ([Platform.OS === 'ios' ? styles.logo : styles.logoAndroid, style]), [style])
   return (
     <Image
       source={source}
       style={_style}
+      resizeMode="cover"
     />
   )
 }

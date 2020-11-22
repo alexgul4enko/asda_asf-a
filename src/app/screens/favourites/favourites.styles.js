@@ -8,5 +8,6 @@ export default StyleSheet.create({
   },
   list: {
     paddingHorizontal: 12,
+    paddingTop: 16,
   },
 })

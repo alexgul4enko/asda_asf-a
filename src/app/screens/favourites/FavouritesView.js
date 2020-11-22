@@ -1,5 +1,5 @@
 import ListPropTypes from 'common/prop-types/List'
-import { FlatList, View } from 'react-native'
+import { FlatList, SafeAreaView } from 'react-native'
 import { LoadingWrapper } from 'common/widgets/loading'
 import ListEmptyComponent from 'common/widgets/listEmptyComponent'
 import renderItem from './utils/renderItem'
@@ -19,7 +19,7 @@ FavouritesView.defaultProps = {
 export default function FavouritesView({ data, loadNext, refetch, refreshing, isLoading }) {
   const { gettext } = useTranslations()
   return (
-    <View style={styles.root}>
+    <SafeAreaView style={styles.root}>
       <LoadingWrapper isLoading={isLoading}>
         <FlatList
           data={get(data, 'edges')}
@@ -35,6 +35,6 @@ export default function FavouritesView({ data, loadNext, refetch, refreshing, is
           ListEmptyComponent={<ListEmptyComponent title={gettext('WishList is empty')}/>}
         />
       </LoadingWrapper>
-    </View>
+    </SafeAreaView>
   )
 }

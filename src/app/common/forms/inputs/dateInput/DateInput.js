@@ -31,12 +31,16 @@ export default function DateInput({ value, onChange }) {
     onChange(tempValue)
   }, [setShow, tempValue, onChange])
 
-  const handleChange = useCallback((e) => {
+  const handleChange = useCallback((e, selectedDate) => {
     if(Platform.OS === 'ios') {
-      return setTempValue(moment(new Date(e.nativeEvent.timestamp)).format('YYYY-MM-DD'))
+      return setTempValue(moment(new Date(selectedDate)).format('YYYY-MM-DD'))
     }
-    onChange(moment(new Date(e.nativeEvent.timestamp)).format('YYYY-MM-DD'))
+    if(!selectedDate) {
+      return setShow(false)
+    }
     setShow(false)
+    setTempValue(moment(new Date(selectedDate)).format('YYYY-MM-DD'))
+    onChange(moment(new Date(selectedDate)).format('YYYY-MM-DD'))
   }, [onChange, setTempValue, setShow])
 
   const val = useMemo(() => {
@@ -82,15 +86,15 @@ export default function DateInput({ value, onChange }) {
       <Button onPress={open} style={styles.button}>
         <Text style={styles.text}>{value}</Text>
       </Button>
-      {show && (
+      {show ? (
         <DateTimePicker
           testID="dateTimePicker"
-          value={new Date(1598051730000)}
+          value={val}
           mode="date"
           display="default"
           onChange={handleChange}
         />
-      )}
+      ) : null}
     </Fragment>
   )
 }

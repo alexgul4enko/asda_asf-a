@@ -20,7 +20,7 @@ export default StyleSheet.create({
     borderWidth: StyleSheet.hairlineWidth,
     borderColor: theme.primary,
     paddingVertical: 10,
-
+    height: 38,
   },
   title: {
     fontWeight: '600',

@@ -27,7 +27,6 @@ export default StyleSheet.create({
     flex: 1,
   },
   all: {
-    backgroundColor: 'pink',
   },
   rootLink: {
     fontWeight: '600',

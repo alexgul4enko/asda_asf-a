@@ -15,4 +15,8 @@ export default StyleSheet.create({
     paddingBottom: 24,
     backgroundColor: '#ffffff',
   },
+  searchWrapper: {
+    backgroundColor: '#ffffff',
+    paddingVertical: 12,
+  },
 })

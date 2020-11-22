@@ -69,4 +69,8 @@ export default StyleSheet.create({
     top: 0,
     right: 0,
   },
+  deleteButton: {
+    padding: 8,
+    marginRight: 8,
+  },
 })

@@ -3,6 +3,7 @@ import { SafeAreaView, Text, ScrollView, View } from 'react-native'
 import { TextField } from 'common/forms'
 import Button, { SubmittingButton } from 'common/widgets/button'
 import isFormValid from 'common/utils/isFormValid'
+import SocialButtons from '../socialLogin'
 import Link from 'common/widgets/link'
 import Toast from 'common/widgets/toast'
 import openUrl from 'common/utils/openUrl'
@@ -32,6 +33,7 @@ LoginView.defaultProps = {
 
 export default function LoginView({ handleSubmit, submitting, submitError, ...form } = {}) {
   const valid = isFormValid(form)
+
   return (
     <SafeAreaView style={styles.root}>
       <ScrollView
@@ -52,6 +54,14 @@ export default function LoginView({ handleSubmit, submitting, submitError, ...fo
             label={gettext('Password')}
             secureTextEntry
           />
+          <SubmittingButton
+            primary
+            valid={valid}
+            submitting={submitting}
+            title={gettext('Sign In')}
+            onPress={handleSubmit}
+          />
+          <SocialButtons title={gettext('or login with')}/>
           <Text style={styles.privacy}>
             {gettext('By signing in or creating an account, you agree out')}
             <Text> </Text>
@@ -61,13 +71,6 @@ export default function LoginView({ handleSubmit, submitting, submitError, ...fo
             <Text> </Text>
             <Text style={styles.privacyLink} onPress={privacy}>{gettext('Privacy Statement')}</Text>
           </Text>
-          <SubmittingButton
-            primary
-            valid={valid}
-            submitting={submitting}
-            title={gettext('Sign In')}
-            onPress={handleSubmit}
-          />
           <Button
             style={styles.link}
             onPress={forgotPass}

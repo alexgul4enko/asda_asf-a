@@ -4,6 +4,7 @@ import { Text, I18nManager } from 'react-native'
 import Link from 'common/widgets/link'
 import Avatar from 'common/widgets/avatar'
 import get from 'lodash/get'
+import makeSlug from 'common/utils/makeSlug'
 import styles from './category.styles'
 
 Category.propTypes = {
@@ -42,7 +43,7 @@ export default function Category({
   promoLinkText,
   translation,
 }) {
-  const params = useMemo(() => ({ slug, type: 'category' }), [slug])
+  const params = useMemo(() => ({ slug: makeSlug(get(translation, 'name') || name, id), type: 'category' }), [get(translation, 'name'), name, id])
   return (
     <Link to="Products" params={params} style={styles.btn}>
       <Avatar

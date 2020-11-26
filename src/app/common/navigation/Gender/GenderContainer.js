@@ -1,5 +1,6 @@
 import { useCallback, useMemo } from 'react'
 import Animated, { Easing } from 'react-native-reanimated'
+import analytics from '@react-native-firebase/analytics'
 import { useSetData } from '@cranium/resource'
 import { useSelector } from 'react-redux'
 import Gender from './Gender'
@@ -66,10 +67,12 @@ export default function GenderContainer() {
     }).start()
   }, [animatedValue])
   const setMen = useCallback(() => {
+    analytics().setUserProperty('Gender', 'M')
     setGender('M')
     animate(1)
   }, [setGender, animate])
   const setWomen = useCallback(() => {
+    analytics().setUserProperty('Gender', 'F')
     setGender('F')
     animate(0)
   }, [setGender, animate])

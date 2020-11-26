@@ -5,6 +5,7 @@ import { useSelector } from 'react-redux'
 import { useCallback, useMemo } from 'react'
 import { I18nManager } from 'react-native'
 import { useFocusEffect } from '@react-navigation/native'
+import analytics from '@react-native-firebase/analytics'
 import { usePrefetchQuery, useGraphInifnyList, useClear } from '@cranium/resource'
 import { hasPermission } from '@cranium/access'
 import { access } from 'common/session'
@@ -87,9 +88,11 @@ export default function BagContainer({ navigation }) {
     if(!isLoggedIn) {
       return navigation.navigate('Login')
     }
+
     if(get(checkoutList, 'data.id')) {
       return navigation.navigate('Checkout')
     }
+    analytics().logBeginCheckout()
     const input = createChecoutData(bag, me.data)
     return checkoutList.request({ input }, {
       query: CREATE,

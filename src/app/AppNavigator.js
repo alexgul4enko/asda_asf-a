@@ -1,6 +1,6 @@
 import Config from 'react-native-config'
 import { useSelector } from 'react-redux'
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useCallback } from 'react'
 import messaging from '@react-native-firebase/messaging'
 import notifee, { EventType } from '@notifee/react-native'
 import { StatusBar, Platform } from 'react-native'
@@ -93,6 +93,7 @@ const screenOptions = {
 
 export default function AppNavigator() {
   const navigationRef = useRef()
+  const routeNameRef = useRef()
   useEffect(() => {
     analytics().logAppOpen()
     messaging().onNotificationOpenedApp(message => handleNotificationClick(message, navigationRef))
@@ -104,11 +105,27 @@ export default function AppNavigator() {
     messaging().onMessage(handleNotification)
     messaging().registerDeviceForRemoteMessages()
   }, [])
+  const onReady = useCallback(() => {
+    routeNameRef.current = navigationRef.current.getCurrentRoute().name
+  }, [routeNameRef, navigationRef])
+  const handleStateChange = useCallback(() => {
+    const previousRouteName = routeNameRef.current
+    const currentRouteName = navigationRef.current.getCurrentRoute().name
+    if(previousRouteName !== currentRouteName) {
+      analytics().logScreenView({ screen_name: currentRouteName })
+    }
+    routeNameRef.current = currentRouteName
+  }, [routeNameRef, navigationRef])
   const isInitialized = useSelector(state => get(state, 'isInitialized'))
   return (
     <LoadingWrapper isLoading={!isInitialized}>
       <StatusBar barStyle="dark-content"/>
-      <NavigationContainer linking={linking} ref={navigationRef}>
+      <NavigationContainer
+        linking={linking}
+        ref={navigationRef}
+        onReady={onReady}
+        onStateChange={handleStateChange}
+      >
         <CheckAccess level={access.F_FIRST_INSTALL}>
           <Welcome/>
         </CheckAccess>

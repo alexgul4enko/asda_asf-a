@@ -3,6 +3,7 @@ import CheckoutView from './CheckoutView'
 import { usePrefetchQuery, useGraphInifnyList, useSetData } from '@cranium/resource'
 import { useState, useCallback, useEffect, useMemo } from 'react'
 import { Linking } from 'react-native'
+import analytics from '@react-native-firebase/analytics'
 import get from 'lodash/get'
 import omit from 'lodash/omit'
 import CHECKOUTDATA from './checkout-data.graphql'
@@ -26,6 +27,9 @@ export default function CheckoutContainer({ navigation }) {
 
   const { refresh, isRefreshing } = useGraphInifnyList(checkout)
   const setupShipping = useCallback((val) => {
+    analytics().logAddShippingInfo({
+      shipping_tier: val,
+    })
     checkout.request({
       checkoutId: get(checkout, 'data.checkout.id'),
       shippingMethodId: val,
@@ -34,6 +38,11 @@ export default function CheckoutContainer({ navigation }) {
   }, [checkout.request, get(checkout, 'data.checkout.id')])
 
   const setupPayment = useCallback((val) => {
+    analytics().logAddPaymentInfo({
+      payment_type: val,
+      value: get(checkout, 'data.checkout.totalPrice.gross.amount'),
+      currency: get(checkout, 'data.checkout.subtotalPrice.currency'),
+    })
     checkout.request({
       checkoutId: get(checkout, 'data.checkout.id'),
       input: {
@@ -54,6 +63,9 @@ export default function CheckoutContainer({ navigation }) {
   ])
 
   const applyPromoCode = useCallback((promoCode) => {
+    analytics().logAddPaymentInfo({
+      coupon: promoCode,
+    })
     checkout.request({
       checkoutId: get(checkout, 'data.checkout.id'),
       promoCode,
@@ -105,6 +117,7 @@ export default function CheckoutContainer({ navigation }) {
       checkoutId: get(checkout, 'data.checkout.id'),
       shippingAddress: addr,
     }
+
 
     const billing = {
       selectedBillingAddressId: address.id,

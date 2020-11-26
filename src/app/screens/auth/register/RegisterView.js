@@ -4,6 +4,7 @@ import { TextField } from 'common/forms'
 import { SubmittingButton } from 'common/widgets/button'
 import Toast from 'common/widgets/toast'
 import Link from 'common/widgets/link'
+import SocialButtons from '../socialLogin'
 import { validateConfirmPassword } from 'common/forms/validation'
 import openUrl from 'common/utils/openUrl'
 import isFormValid from 'common/utils/isFormValid'
@@ -58,6 +59,14 @@ function RegisterView({ handleSubmit, submitting, submitError, ...form } = {}) {
             secureTextEntry
             validate={validateConfirmPassword}
           />
+          <SubmittingButton
+            primary
+            valid={valid}
+            submitting={submitting}
+            title={gettext('Get started')}
+            onPress={handleSubmit}
+          />
+          <SocialButtons title={gettext('or signup with')}/>
           <Text style={styles.privacy}>
             {gettext('By signing in or creating an account, you agree out')}
             <Text> </Text>
@@ -67,13 +76,6 @@ function RegisterView({ handleSubmit, submitting, submitError, ...form } = {}) {
             <Text> </Text>
             <Text style={styles.privacyLink} onPress={privacy}>{gettext('Privacy Statement')}</Text>
           </Text>
-          <SubmittingButton
-            primary
-            valid={valid}
-            submitting={submitting}
-            title={gettext('Get started')}
-            onPress={handleSubmit}
-          />
         </View>
         <Link to="Login" title={gettext('Already have an account?')} outline style={styles.footer} textStyle={styles.footertext}/>
       </ScrollView>

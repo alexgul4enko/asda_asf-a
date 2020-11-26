@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types'
 import { I18nManager } from 'react-native'
 import Animated, { Easing } from 'react-native-reanimated'
+import analytics from '@react-native-firebase/analytics'
 import { useCallback, useMemo, useEffect, useState } from 'react'
 import camelCase from 'lodash/camelCase'
 import isEmpty from 'lodash/isEmpty'
@@ -88,6 +89,14 @@ export default function FooterContainer({ like, id, namespace, isAvailable, vari
 
   const add = useCallback(() => {
     setActive(true)
+    analytics().logAddToCart({
+      items: [
+        {
+          item_id: item.id,
+          item_variant: item.variant.sku,
+        },
+      ],
+    })
     addTobag(item, setActive)
   }, [setActive, addTobag, item])
 

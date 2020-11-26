@@ -11,13 +11,13 @@ GenderContainer.propTypes = {
 export default function GenderContainer({ navigation }) {
   const setGender = useSetData('gender')
   const men = useCallback(() => {
-    setGender('M')
     analytics().setUserProperty('Gender', 'M')
+    setGender('M')
     navigation.navigate('notifications')
   }, [setGender, navigation.navigate])
   const women = useCallback(() => {
+    analytics().setUserProperty('gender', 'F')
     setGender('F')
-    analytics().setUserProperty('Gender', 'F')
     navigation.navigate('notifications')
   }, [setGender, navigation.navigate])
   return (

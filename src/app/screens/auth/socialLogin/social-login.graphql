@@ -1,0 +1,5 @@
+mutation LOGIN_OAUTH($accessToken: String!, $backend: AuthorizationKeyType!) {
+  oauthTokenCreate(accessToken: $accessToken, backend: $backend) {
+    token
+  }
+}

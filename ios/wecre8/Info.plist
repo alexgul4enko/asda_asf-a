@@ -30,9 +30,15 @@
 			<key>CFBundleURLSchemes</key>
 			<array>
 				<string>wecre8</string>
+        <string>fb183197136420832</string>
+        <string>com.googleusercontent.apps.189599021840-h0kp6j0eh788ele3qrqm0kj7vltegi3d</string>
 			</array>
 		</dict>
 	</array>
+  <key>FacebookAppID</key>
+  <string>183197136420832</string>
+  <key>FacebookDisplayName</key>
+  <string>wecre8</string>
 	<key>CFBundleVersion</key>
 	<string>1</string>
 	<key>LSRequiresIPhoneOS</key>

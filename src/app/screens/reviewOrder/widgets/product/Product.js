@@ -48,6 +48,7 @@ export default function Product({ thumbnail, productName, variant, quantity, uni
     return I18nManager.isRTL ? [cur, amount].filter(Boolean).reverse().join(' ') : [cur, amount].filter(Boolean).join(' ')
   }, [unitPrice, quantity])
 
+
   return (
     <View style={styles.product}>
       <View style={styles.data}>
@@ -57,14 +58,18 @@ export default function Product({ thumbnail, productName, variant, quantity, uni
           noImage="noimage"
         />
         <View style={styles.main}>
-          <Text
-            numberOfLines={2}
-            allowFontScaling={false}
-            ellipsizeMode="tail"
-            style={styles.name}
-          >
-            {translatedProductName || productName}
-          </Text>
+          <View style={styles.headerRow}>
+            <Text
+              numberOfLines={2}
+              allowFontScaling={false}
+              ellipsizeMode="tail"
+              style={styles.name}
+            >
+              {translatedProductName || productName}
+            </Text>
+            <Text style={styles.totalPrice}>{totalPrice}</Text>
+          </View>
+
           {attributes}
           <View style={styles.variantRow}>
             <Text style={styles.variant}>{gettext('Quantity')}</Text>
@@ -74,7 +79,7 @@ export default function Product({ thumbnail, productName, variant, quantity, uni
           </View>
         </View>
       </View>
-      <Text style={styles.totalPrice}>{totalPrice}</Text>
+
     </View>
   )
 }

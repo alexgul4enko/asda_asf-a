@@ -10,15 +10,17 @@ import styles from './recomendation.styles'
 RecomendationsView.propTypes = {
   data: PropTypes.object,
   isLoading: PropTypes.bool.isRequired,
+  style: PropTypes.any,
 }
 
 RecomendationsView.defaultProps = {
   data: undefined,
+  style: undefined,
 }
 
-export default function RecomendationsView({ isLoading, data }) {
+export default function RecomendationsView({ isLoading, data, style }) {
   return (
-    <View style={styles.root}>
+    <View style={[styles.root, style]}>
       <Text style={styles.title}>{gettext('You Might Also Like')}</Text>
       <LoadingWrapper isLoading={isLoading}>
         <FlatList

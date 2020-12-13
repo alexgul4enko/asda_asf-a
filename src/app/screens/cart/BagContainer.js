@@ -58,9 +58,6 @@ export default function BagContainer({ navigation }) {
   }, [checkoutList.initialLoading, get(checkoutList, 'data.lines'), bag])
 
   const totals = useMemo(() => {
-    if(checkoutList.initialLoading) {
-      return
-    }
     if(get(checkoutList, 'data.id')) {
       const shipping = get(checkoutList, 'data.shippingPrice.gross.amount') || 0
 

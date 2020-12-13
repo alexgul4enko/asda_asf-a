@@ -57,6 +57,7 @@ export default StyleSheet.create({
     fontSize: 14,
     lineHeight: 16,
     color: theme.grey,
+    textDecorationLine: 'line-through',
   },
   discount: {
     backgroundColor: '#FEF5F6',
@@ -86,5 +87,7 @@ export default StyleSheet.create({
   Riyadh: {
     fontWeight: '600',
   },
-
+  collapse: {
+    fontWeight: 'bold',
+  },
 })

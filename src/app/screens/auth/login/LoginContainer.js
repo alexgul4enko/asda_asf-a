@@ -1,5 +1,4 @@
 import NavigationPropTypes from 'common/prop-types/Navigation'
-import analytics from '@react-native-firebase/analytics'
 import { Form } from 'react-final-form'
 import { useCallback } from 'react'
 import LoginView from './LoginView'
@@ -16,7 +15,6 @@ export default function LoginContainer({ navigation }) {
     return request(variables)
       .then(data => {
         if(data && data.token) {
-          analytics().logLogin()
           return navigation.goBack()
         }
         return data

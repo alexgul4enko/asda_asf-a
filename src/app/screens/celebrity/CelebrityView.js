@@ -1,5 +1,5 @@
 import ListPropTypes from 'common/prop-types/List'
-import { View, RefreshControl } from 'react-native'
+import { SafeAreaView, RefreshControl } from 'react-native'
 import ListEmptyComponent from 'common/widgets/listEmptyComponent'
 import { FlatList } from 'react-native-gesture-handler'
 import { LoadingWrapper } from 'common/widgets/loading'
@@ -21,10 +21,10 @@ export default function CelebrityView({
   refreshing,
 }) {
   return (
-    <View style={styles.root}>
+    <SafeAreaView style={styles.root}>
       <LoadingWrapper isLoading={isLoading}>
         <FlatList
-          ListHeaderComponent={isEmpty(celebrity) ? null : <Header {...celebrity}/>}
+          ListHeaderComponent={isEmpty(celebrity) ? null : <Header {...celebrity} hasProducts={!isEmpty(get(products, 'edges'))}/>}
           keyExtractor={keyExtractor}
           renderItem={renderItem}
           data={get(products, 'edges')}
@@ -35,9 +35,9 @@ export default function CelebrityView({
           contentContainerStyle={styles.listContent}
           keyboardShouldPersistTaps="handled"
           keyboardDismissMode="on-drag"
-          ListEmptyComponent={<ListEmptyComponent title={gettext('No celebrity found')}/>}
+          ListEmptyComponent={isEmpty(celebrity) ? <ListEmptyComponent title={gettext('No celebrity found')}/> : null}
         />
       </LoadingWrapper>
-    </View>
+    </SafeAreaView>
   )
 }

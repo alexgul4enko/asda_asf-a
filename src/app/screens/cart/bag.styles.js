@@ -23,4 +23,7 @@ export default StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
+  footer: {
+    paddingHorizontal: 16,
+  },
 })

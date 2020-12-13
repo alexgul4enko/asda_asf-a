@@ -1,10 +1,8 @@
 import PropTypes from 'prop-types'
-import { SafeAreaView, ScrollView, View } from 'react-native'
+import { SafeAreaView, ScrollView, View, KeyboardAvoidingView, Platform } from 'react-native'
 import { TextField, RadioField, DateField } from 'common/forms'
-import { AbsoluteLoader } from 'common/widgets/loading'
 import { SubmittingButton } from 'common/widgets/button'
 import Toast from 'common/widgets/toast'
-import Avatar from './widgets/avatar'
 import isFormValid from 'common/utils/isFormValid'
 import styles from './profile.styles'
 
@@ -38,56 +36,54 @@ export default function ProfileView({ id, handleSubmit, submitting, submitError,
   const valid = isFormValid(form)
   return (
     <SafeAreaView style={styles.root}>
-      <ScrollView
-        contentContainerStyle={styles.scroll}
-        keyboardShouldPersistTaps="handled"
-        keyboardDismissMode="on-drag"
-        style={styles.main}
-      >
-        <Avatar
-          url={avatar}
-          id={id}
-        />
-        <TextField
-          name="firstName"
-          label={gettext('First name')}
-        />
-        <TextField
-          name="lastName"
-          label={gettext('Last name')}
-        />
-        <RadioField
-          name="gender"
-          options={options}
-          valueKey="value"
-          label={gettext('Gender')}
-        />
-        <DateField
-          name="birthday"
-          label={gettext('Date of birth')}
-        />
-        <TextField
-          name="email"
-          label={gettext('Email address')}
-          disabled
-        />
-        <TextField
-          name="phone"
-          label={gettext('Mobile number')}
-          dataDetectorTypes="phoneNumber"
-          keyboardType="phone-pad"
-        />
-      </ScrollView>
-      <View style={styles.footer}>
-        <SubmittingButton
-          primary
-          valid={valid}
-          submitting={submitting}
-          title={gettext('Update profile')}
-          onPress={handleSubmit}
-        />
-      </View>
-      <AbsoluteLoader isLoading={submitting}/>
+      <KeyboardAvoidingView style={styles.root} behavior={Platform.OS === 'ios' ? 'padding' : undefined} keyboardVerticalOffset={64}>
+        <ScrollView
+          contentContainerStyle={styles.scroll}
+          keyboardShouldPersistTaps="handled"
+          keyboardDismissMode="on-drag"
+          style={styles.main}
+        >
+          <TextField
+            name="firstName"
+            label={gettext('First name')}
+          />
+          <TextField
+            name="lastName"
+            label={gettext('Last name')}
+          />
+          <RadioField
+            name="gender"
+            options={options}
+            valueKey="value"
+            label={gettext('Gender')}
+          />
+          <DateField
+            name="birthday"
+            label={gettext('Date of birth')}
+          />
+          <TextField
+            name="email"
+            label={gettext('Email address')}
+            disabled
+          />
+          <TextField
+            name="phone"
+            label={gettext('Mobile number')}
+            dataDetectorTypes="phoneNumber"
+            keyboardType="phone-pad"
+          />
+        </ScrollView>
+
+        <View style={styles.footer}>
+          <SubmittingButton
+            primary
+            valid={valid}
+            submitting={submitting}
+            title={gettext('Update profile')}
+            onPress={handleSubmit}
+          />
+        </View>
+      </KeyboardAvoidingView>
       <Toast error={submitError}/>
     </SafeAreaView>
   )

@@ -60,7 +60,6 @@ export default function LikeButton({ like, id, size, options }) {
     analytics().logAddToWishlist({
       items: [{ item_id: id }],
     })
-      .catch(console.warn)
     request({ id }, { query })
       .then(() => request({ id }, { query: Product, ...options, forceUpdates: true, queries: [] }))
       .finally(() => setLoading(false))

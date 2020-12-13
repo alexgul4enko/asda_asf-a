@@ -38,7 +38,6 @@ export default function UserCard({ avatar, firstName, lastName, id, to, translat
           url={get(avatar, 'url')}
           resizeMode="cover"
           style={styles.avatar}
-          responsive
         />
       </SharedElement>
       <Text

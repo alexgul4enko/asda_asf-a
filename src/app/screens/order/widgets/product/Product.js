@@ -1,8 +1,10 @@
 import PropTypes from 'prop-types'
+import Link from 'common/widgets/link'
 import { Text, View, I18nManager } from 'react-native'
 import Avatar from 'common/widgets/avatar'
 import { useMemo } from 'react'
 import get from 'lodash/get'
+import makeSlug from 'common/utils/makeSlug'
 import styles from './product.styles'
 
 Product.propTypes = {
@@ -57,14 +59,19 @@ export default function Product({ thumbnail, quantityFulfilled, productName, var
     const amount = ((get(unitPrice, 'gross.amount', '') || 0) * quantity).toLocaleString()
     return I18nManager.isRTL ? [cur, amount].filter(Boolean).reverse().join(' ') : [cur, amount].filter(Boolean).join(' ')
   }, [unitPrice, quantity])
+
+  const params = useMemo(() => ({ slug: makeSlug(translatedProductName || productName, get(variant, 'product.id')) }), [get(variant, 'product.id'), productName, translatedProductName])
+
   return (
     <View style={styles.product}>
       <View style={styles.data}>
-        <Avatar
-          style={styles.image}
-          url={get(thumbnail, 'url')}
-          noImage="noimage"
-        />
+        <Link to="Product" params={params} style={styles.link} >
+          <Avatar
+            style={styles.image}
+            url={get(thumbnail, 'url')}
+            noImage="noimage"
+          />
+        </Link>
         <View style={styles.main}>
           <Text style={titleStyle}>{typeof quantityFulfilled === 'number' ? gettext('Unfullfiled') : gettext('Fullfiled')}</Text>
           <Text

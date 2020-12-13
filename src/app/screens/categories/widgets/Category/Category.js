@@ -49,6 +49,7 @@ export default function Category({ name, backgroundImage, promoImage, children, 
       return {
         to: 'Categories',
         params: { parent: id, title: get(translation, 'name') || name, slug: _slug },
+        linkAction: 'push',
       }
     }
     return {

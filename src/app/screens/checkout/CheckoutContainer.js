@@ -160,7 +160,7 @@ export default function CheckoutContainer({ navigation }) {
 
   const setAddRessEqual = useCallback((value) => {
     setAdressSame(value)
-    if(value) {
+    if(value && shippingAddress) {
       setupBillingAddress(shippingAddress)
     }
   }, [setAdressSame, shippingAddress, setupBillingAddress])

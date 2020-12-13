@@ -11,6 +11,7 @@ Avatar.propTypes = {
   style: Image.propTypes.style,
   resizeMode: PropTypes.oneOf(['contain', 'cover', 'center', 'stretch']),
   defaultImage: PropTypes.string,
+  responsive: PropTypes.bool,
 }
 
 Avatar.defaultProps = {
@@ -20,9 +21,10 @@ Avatar.defaultProps = {
   style: undefined,
   resizeMode: undefined,
   defaultImage: undefined,
+  responsive: undefined,
 }
 
-export default function Avatar({ url, size, style, resizeMode, defaultImage, noImage }) {
+export default function Avatar({ url, size, style, resizeMode, defaultImage, noImage, responsive }) {
   const source = useMemo(() => {
     return url ? { uri: url } : { uri: noImage }
   }, [url])
@@ -44,6 +46,7 @@ export default function Avatar({ url, size, style, resizeMode, defaultImage, noI
           source={source}
           resizeMode={resizeMode}
           defaultImage={errorImage}
+          responsive={responsive}
         />
       ) : (
         <Image

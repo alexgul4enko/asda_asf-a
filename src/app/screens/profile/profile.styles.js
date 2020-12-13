@@ -18,7 +18,7 @@ export default StyleSheet.create({
   footer: {
     paddingHorizontal: 16,
     paddingBottom: 16,
-    marginTop: 12,
+    marginTop: 4,
     shadowColor: '#000000',
     shadowOffset: {
       width: 4,

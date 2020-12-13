@@ -71,7 +71,7 @@ export default function Radio({ isActive, onChange, value, name, price, currency
   }, [onChange, value])
 
   const title = useMemo(() => {
-    const pricetext = get(price, 'amount') ? `+${currency}${get(price, 'amount')}` : null
+    const pricetext = currency ? `+ ${currency} ${get(price, 'amount') || 0}` : null
     return I18nManager.isRTL ? [name, pricetext].filter(Boolean).reverse().join(' | ') : [name, pricetext].filter(Boolean).join(' | ')
   }, [name, price, currency])
 

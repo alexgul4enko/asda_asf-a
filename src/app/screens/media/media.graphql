@@ -1,0 +1,59 @@
+query GET_USER_DIGITAL_CONTENT($id: ID!, $languageCode: LanguageCodeEnum!) {
+  userDigitalContent(id: $id) {
+    id
+    name
+    translation(languageCode: $languageCode) {
+      name
+    }
+    url
+    image {
+      url
+    }
+    products {
+      id
+      slug
+      name
+      translation(languageCode: $languageCode) {
+        name
+      }
+      updatedAt
+      inWishlist
+      thumbnail(size: 510) {
+        url
+      }
+      minimalVariantPrice {
+        amount
+      }
+      pricing {
+        onSale
+        priceRange {
+          start {
+            currency
+            gross {
+              amount
+            }
+          }
+          stop {
+            currency
+            gross {
+              amount
+            }
+          }
+        }
+        priceRangeUndiscounted {
+          stop {
+            currency
+            gross {
+              amount
+            }
+          }
+        }
+      }
+    }
+    user {
+      id
+      firstName
+      lastName
+    }
+  }
+}

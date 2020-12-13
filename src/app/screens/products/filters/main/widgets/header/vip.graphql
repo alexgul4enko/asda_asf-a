@@ -1,0 +1,6 @@
+query isVipUser {
+  me {
+    id
+    isVip
+  }
+}

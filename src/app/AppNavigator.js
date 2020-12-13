@@ -47,6 +47,7 @@ import Orders, { ordersOptions } from './screens/orders'
 import Order, { orderOptions } from './screens/order'
 import ReviewOrder, { reviewOptions } from './screens/reviewOrder'
 import Settings, { settingsOptions } from './screens/settings'
+import Media, { mediaOptions } from './screens/media'
 import { handleNotification, handleNotificationClick } from './common/notifications'
 import { CheckAccess } from '@cranium/access'
 import { access } from 'common/session'
@@ -158,6 +159,7 @@ export default function AppNavigator() {
             <MainStack.Screen name="Order" component={Order} options={orderOptions}/>
             <MainStack.Screen name="ReviewOrder" component={ReviewOrder} options={reviewOptions}/>
             <MainStack.Screen name="Settings" component={Settings} options={settingsOptions}/>
+            <MainStack.Screen name="Media" component={Media} options={mediaOptions}/>
           </MainStack.Navigator>
         </CheckAccess>
       </NavigationContainer>

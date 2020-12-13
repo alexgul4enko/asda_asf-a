@@ -36,7 +36,6 @@ export default StyleSheet.create({
   variantRow: {
     flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'flex-end',
   },
   variant: {
     fontWeight: '600',
@@ -55,5 +54,14 @@ export default StyleSheet.create({
     lineHeight: 24,
     color: '#000000',
     marginLeft: 96 + 8,
+  },
+  headerRow: {
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    flexDirection: 'row',
+    marginBottom: 8,
+  },
+  link: {
+    padding: 0,
   },
 })

@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types'
 import { View } from 'react-native'
 import Item from './Item'
+import VIP from './VIP'
 import { useRoute } from '@react-navigation/native'
 import get from 'lodash/get'
 
@@ -28,6 +29,7 @@ export default function Header({ priceText, hasSubCategories, categoryFilters })
           />
         ) : null
       }
+      <VIP/>
       <Item
         to="Price"
         title={gettext('Price')}

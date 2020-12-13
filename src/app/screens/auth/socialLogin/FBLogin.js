@@ -2,7 +2,6 @@ import { LoginManager, AccessToken } from 'react-native-fbsdk'
 import { Image } from 'react-native'
 import { useQuery } from '@cranium/resource'
 import { useCallback } from 'react'
-import analytics from '@react-native-firebase/analytics'
 import { useNavigation } from '@react-navigation/native'
 import Button from 'common/widgets/button'
 import SOCIAL from './social-login.graphql'
@@ -22,7 +21,6 @@ export default function FBLogin() {
           .then((data) => request({ accessToken: data.accessToken.toString(), backend: 'FACEBOOK' }))
           .then(data => {
             if(data && data.token) {
-              analytics().logLogin()
               return navigation.goBack()
             }
             return data

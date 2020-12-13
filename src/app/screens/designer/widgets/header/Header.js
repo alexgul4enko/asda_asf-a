@@ -20,6 +20,7 @@ Header.propTypes = {
   avatar: PropTypes.shape({
     url: PropTypes.string,
   }),
+  hasProducts: PropTypes.bool,
 }
 
 Header.defaultProps = {
@@ -28,9 +29,11 @@ Header.defaultProps = {
   lastName: undefined,
   socialMedias: undefined,
   avatar: undefined,
+  hasProducts: undefined,
 }
 
-export default function Header({ designer, firstName, lastName, socialMedias, avatar }) {
+export default function Header({ designer, firstName, lastName, socialMedias, avatar, hasProducts }) {
+  const brand = get(designer, 'translation.brand') || get(designer, 'brand')
   const socialButtons = useMemo(() => {
     if(!Array.isArray(socialMedias)) { return null }
     return socialMedias.map(med => (<
@@ -62,10 +65,11 @@ export default function Header({ designer, firstName, lastName, socialMedias, av
         </View>
       </View>
       <View style={styles.info}>
+        {brand ? <Text style={styles.brand}>{brand}</Text> : null}
         <CollapseText style={styles.desc}>
           {get(designer, 'translation.description', get(designer, 'description')) }
         </CollapseText>
-        <Text style={styles.title}>{gettext('My top product list')}</Text>
+        {hasProducts ? <Text style={styles.title}>{gettext('My top product list')}</Text> : null}
       </View>
     </View>
   )

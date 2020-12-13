@@ -27,6 +27,7 @@ Product.propTypes = {
   linkAction: PropTypes.string,
   hideLikeButton: PropTypes.bool,
   translation: PropTypes.object,
+  options: PropTypes.object,
 }
 
 Product.defaultProps = {
@@ -39,9 +40,10 @@ Product.defaultProps = {
   linkAction: undefined,
   hideLikeButton: undefined,
   translation: undefined,
+  options: undefined,
 }
 
-export default function Product({ id, name, slug, thumbnail, isVip, pricing, inWishlist, inList, hideLikeButton, linkAction, translation }) {
+export default function Product({ options, id, name, slug, thumbnail, isVip, pricing, inWishlist, inList, hideLikeButton, linkAction, translation }) {
   const price = useMemo(() => getPrice(get(pricing, 'priceRange')), [pricing])
   const salePrice = useMemo(() => get(pricing, 'onSale') && getPrice(get(pricing, 'priceRangeUndiscounted')), [pricing])
   const params = useMemo(() => ({ slug: makeSlug(get(translation, 'name') || name, id) }), [id, name, translation])
@@ -67,7 +69,7 @@ export default function Product({ id, name, slug, thumbnail, isVip, pricing, inW
       <Text style={styles.sale}>{salePrice}</Text>
       <View style={styles.row}>
         <Text style={styles.price}>{price}</Text>
-        {hideLikeButton ? null : <LikeButton like={inWishlist} id={id} inList={inList} size={20}/>}
+        {hideLikeButton ? null : <LikeButton like={inWishlist} id={id} inList={inList} size={20} options={options}/>}
       </View>
     </Link>
   )

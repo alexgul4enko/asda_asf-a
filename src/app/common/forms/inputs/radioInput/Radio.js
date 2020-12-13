@@ -11,7 +11,7 @@ Radio.propTypes = {
   isActive: PropTypes.bool.isRequired,
   onChange: PropTypes.func.isRequired,
   value: PropTypes.any,
-  title: PropTypes.node,
+  title: PropTypes.any,
 }
 
 Radio.defaultProps = {

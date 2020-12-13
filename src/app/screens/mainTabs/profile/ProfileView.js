@@ -115,19 +115,19 @@ export default function ProfileView() {
           <Text style={styles.linktext}>{gettext('Terms and conditions')}</Text>
           <Icon name={I18nManager.isRTL ? 'chevron-left-01' : 'chevron-right-01'} size={20}/>
         </Button>
-        <Text style={styles.title}>{gettext('Join us')}</Text>
+        <Text style={styles.title}>{gettext('Join to WECRE8')}</Text>
         <Button
           style={styles.link}
           onPress={designer}
         >
-          <Text style={styles.linktext}>{gettext('Become designer')}</Text>
+          <Text style={styles.linktext}>{gettext('As a Designer')}</Text>
           <Icon name={I18nManager.isRTL ? 'chevron-left-01' : 'chevron-right-01'} size={20}/>
         </Button>
         <Button
           style={styles.link}
           onPress={celebrity}
         >
-          <Text style={styles.linktext}>{gettext('Become celebrity')}</Text>
+          <Text style={styles.linktext}>{gettext('As a Celebrity')}</Text>
           <Icon name={I18nManager.isRTL ? 'chevron-left-01' : 'chevron-right-01'} size={20}/>
         </Button>
         <Text style={styles.title}>{gettext('Contact us')}</Text>

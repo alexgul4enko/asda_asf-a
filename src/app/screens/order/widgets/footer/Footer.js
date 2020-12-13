@@ -13,6 +13,8 @@ Footer.propTypes = {
   shippingAddress: PropTypes.object,
   canPayNow: PropTypes.bool,
   lastPayment: PropTypes.object,
+  cashOnDeliveryFee: PropTypes.object,
+  discount: PropTypes.object,
 }
 
 Footer.defaultProps = {
@@ -22,6 +24,8 @@ Footer.defaultProps = {
   shippingAddress: undefined,
   canPayNow: undefined,
   lastPayment: undefined,
+  cashOnDeliveryFee: undefined,
+  discount: undefined,
 }
 
 export default function Footer({
@@ -31,6 +35,8 @@ export default function Footer({
   shippingAddress,
   canPayNow,
   lastPayment,
+  cashOnDeliveryFee,
+  discount,
 }) {
   const pay = useCallback(() => Linking.openURL(get(lastPayment, 'redirectPostUrl')), [])
   return (
@@ -53,6 +59,28 @@ export default function Footer({
             <Text style={styles.totalLabel}>{(get(shippingPrice, 'gross.amount') || 0).toLocaleString()}</Text>
           </View>
         </View>
+        {get(cashOnDeliveryFee, 'gross.amount') ? (
+          <View style={styles.totalRow}>
+            <Text style={styles.totalLabel}>{gettext('Cash on delivery fee')}</Text>
+            <View style={styles.priceRow}>
+              <Text style={styles.totalLabel}>{get(cashOnDeliveryFee, 'currency')}</Text>
+              <Text style={styles.totalLabel}> </Text>
+              <Text style={styles.totalLabel}>{(get(cashOnDeliveryFee, 'gross.amount') || 0).toLocaleString()}</Text>
+            </View>
+          </View>
+        ) : null
+        }
+        {get(discount, 'amount') ? (
+          <View style={styles.totalRow}>
+            <Text style={styles.totalLabel}>{gettext('Discount')}</Text>
+            <View style={styles.priceRow}>
+              <Text style={styles.totalLabel}>{get(discount, 'currency')}</Text>
+              <Text style={styles.totalLabel}> </Text>
+              <Text style={styles.totalLabel}>{(get(discount, 'amount') || 0).toLocaleString()}</Text>
+            </View>
+          </View>
+        ) : null
+        }
         <View style={styles.totalRow}>
           <Text style={[styles.totalLabel, styles.bold]}>{gettext('Total')}</Text>
           <View style={styles.priceRow}>

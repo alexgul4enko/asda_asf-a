@@ -8,7 +8,7 @@ export default function Header() {
   const { gettext } = useTranslations()
   return (
     <Link to="Products" style={styles.seeAll}>
-      <Text style={styles.link}>{gettext('See all producs')}</Text>
+      <Text style={styles.link}>{gettext('See all products')}</Text>
       <Icon name={I18nManager.isRTL ? 'chevron-left-01' : 'chevron-right-01'} size={16}/>
     </Link>
   )

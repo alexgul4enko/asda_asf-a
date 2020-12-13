@@ -1,14 +1,13 @@
 import PropTypes from 'prop-types'
 import Avatar from 'common/widgets/avatar'
+import Link from 'common/widgets/link'
 import Icon from 'common/widgets/Icon'
-import { TouchableWithoutFeedback, View, Text, Linking } from 'react-native'
-import { useCallback } from 'react'
+import { View, Text } from 'react-native'
 import get from 'lodash/get'
 import styles from './image.styles'
 
 Image.propTypes = {
   imageUrl: PropTypes.string.isRequired,
-  setVisible: PropTypes.func.isRequired,
   name: PropTypes.string,
   type: PropTypes.string,
   url: PropTypes.string,
@@ -23,15 +22,10 @@ Image.defaultProps = {
 }
 
 
-export default function Image({ translation, setVisible, imageUrl, name, type, url }) {
-  const handlePress = useCallback(() => {
-    if(type === 'VIDEO') {
-      return Linking.openURL(url)
-    }
-    setVisible({ type, uri: imageUrl, title: get(translation, 'name') || name })
-  }, [type, imageUrl, setVisible, name, url, translation])
+export default function Image(props) {
+  const { translation, imageUrl, name, type } = props
   return (
-    <TouchableWithoutFeedback onPress={handlePress}>
+    <Link params={props} to="Media">
       <View style={styles.card}>
         <View style={styles.imageWrapper}>
           <Avatar
@@ -57,6 +51,6 @@ export default function Image({ translation, setVisible, imageUrl, name, type, u
           {get(translation, 'name') || name}
         </Text>
       </View>
-    </TouchableWithoutFeedback>
+    </Link>
   )
 }

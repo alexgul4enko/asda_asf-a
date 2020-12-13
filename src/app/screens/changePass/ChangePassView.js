@@ -5,6 +5,7 @@ import { SubmittingButton } from 'common/widgets/button'
 import Toast from 'common/widgets/toast'
 import isFormValid from 'common/utils/isFormValid'
 import styles from './change-pass.styles'
+import { validateConfirm } from './utils/validate'
 
 ChangePassView.propTypes = {
   handleSubmit: PropTypes.func.isRequired,
@@ -43,6 +44,7 @@ export default function ChangePassView({ handleSubmit, submitting, submitError, 
           type="password"
           label={gettext('Confirm new password')}
           secureTextEntry
+          validate={validateConfirm}
         />
       </ScrollView>
       <View style={styles.submit}>

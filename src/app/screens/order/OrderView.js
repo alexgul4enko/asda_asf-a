@@ -27,6 +27,8 @@ OrderView.propTypes = {
   lastPayment: PropTypes.string,
   refreshing: PropTypes.bool.isRequired,
   refetch: PropTypes.func.isRequired,
+  cashOnDeliveryFee: PropTypes.object,
+  discount: PropTypes.object,
 }
 
 OrderView.defaultProps = {
@@ -43,6 +45,8 @@ OrderView.defaultProps = {
   shippingAddress: undefined,
   canPayNow: undefined,
   lastPayment: undefined,
+  cashOnDeliveryFee: undefined,
+  discount: undefined,
 }
 
 export default function OrderView({
@@ -62,6 +66,8 @@ export default function OrderView({
   lastPayment,
   refreshing,
   refetch,
+  cashOnDeliveryFee,
+  discount,
 }) {
   const data = useMemo(() => {
     if(!Array.isArray(lines)) { return }
@@ -103,6 +109,8 @@ export default function OrderView({
               shippingAddress={shippingAddress}
               canPayNow={canPayNow}
               lastPayment={lastPayment}
+              cashOnDeliveryFee={cashOnDeliveryFee}
+              discount={discount}
             />
           )}
           sections={data}

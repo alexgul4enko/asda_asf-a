@@ -30,7 +30,7 @@ export default function CategoryContainer({ navigation }) {
   }, [onSearch, get(category, 'filters.id')])
 
 
-  const [selectedItems, setSelected] = useState(get(products, 'filters.filter.categories'))
+  const [selectedItems, setSelected] = useState(get(products, 'filters.filter.categories') || [])
 
   const selectItem = useCallback((id) => {
     const selections = selectedItems.includes(id)

@@ -8,22 +8,26 @@ BoolInput.propTypes = {
   value: PropTypes.bool,
   onChange: PropTypes.func.isRequired,
   text: PropTypes.node,
+  style: PropTypes.any,
+  textStyle: PropTypes.any,
 }
 
 BoolInput.defaultProps = {
   value: false,
   text: undefined,
+  style: undefined,
+  textStyle: undefined,
 }
 
-export default function BoolInput({ text, value, onChange }) {
+export default function BoolInput({ text, value, onChange, style, textStyle }) {
   const onValueChange = useCallback((value) => onChange(value), [onChange])
   return (
-    <View style={styles.main}>
+    <View style={[styles.main, style]}>
       <Text
         numberOfLines={1}
         allowFontScaling={false}
         ellipsizeMode="tail"
-        style={styles.text}
+        style={[styles.text, textStyle]}
       >
         {text}
       </Text>

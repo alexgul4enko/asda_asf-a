@@ -1,7 +1,6 @@
 import NavigationPropTypes from 'common/prop-types/Navigation'
 import { Form } from 'react-final-form'
 import { useCallback } from 'react'
-import analytics from '@react-native-firebase/analytics'
 import RegisterView from './RegisterView'
 import { useQuery } from '@cranium/resource'
 import REGISTER from './register.graphql'
@@ -19,7 +18,6 @@ export default function RegisterContainer({ navigation }) {
     return request({ input: { ...pick(variables, ['email', 'password']), redirectUrl: Config.SITE_URL + '/auth/confirm' } })
       .then((res) => {
         if(res && res.id) {
-          analytics().logSignUp()
           return navigation.navigate('RegistrationSuccess')
         }
         return res

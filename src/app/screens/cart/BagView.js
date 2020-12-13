@@ -2,6 +2,7 @@ import PropTypes from 'prop-types'
 import { SafeAreaView, RefreshControl, Text, KeyboardAvoidingView, I18nManager } from 'react-native'
 import { Fragment } from 'react'
 import { FlatList } from 'react-native-gesture-handler'
+import Recomentations from 'common/widgets/recomentations'
 import { LoadingWrapper } from 'common/widgets/loading'
 import Button from 'common/widgets/button'
 import Toast from 'common/widgets/toast'
@@ -47,6 +48,7 @@ export default function BagView({ isLoading, refetch, refreshing, data, renderIt
                 keyboardShouldPersistTaps="handled"
                 keyboardDismissMode="on-drag"
                 stickyHeaderIndices={[0]}
+                ListFooterComponent={<Recomentations style={styles.footer}/>}
               />
               <KeyboardAvoidingView behavior="padding" keyboardVerticalOffset={64}>
                 <Button to="Checkout" primary style={styles.btn} onPress={proceed}>

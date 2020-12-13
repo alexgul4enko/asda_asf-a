@@ -22,6 +22,7 @@ Footer.propTypes = {
   totalPrice: PropTypes.object,
   voucherCode: PropTypes.string,
   discount: PropTypes.object,
+  cacheOnDeliveryFee: PropTypes.object,
   removeDiscount: PropTypes.func,
 }
 
@@ -33,6 +34,7 @@ Footer.defaultProps = {
   voucherCode: undefined,
   discount: undefined,
   removeDiscount: undefined,
+  cacheOnDeliveryFee: undefined,
 }
 
 export default function Footer({
@@ -43,6 +45,7 @@ export default function Footer({
   voucherCode,
   discount,
   removeDiscount,
+  cacheOnDeliveryFee,
 }) {
   const subPrice = useMemo(() => {
     const amount = get(subtotalPrice, 'gross.amount')
@@ -55,7 +58,7 @@ export default function Footer({
   const shipPrice = useMemo(() => {
     const amount = get(shippingPrice, 'gross.amount')
     const currency = get(subtotalPrice, 'currency')
-    if(!currency) {
+    if(!currency || !amount) {
       return null
     }
     return I18nManager.isRTL ? [currency, (amount || 0).toLocaleString()].reverse().join(' ') : [currency, (amount || 0).toLocaleString()].join(' ')
@@ -68,6 +71,17 @@ export default function Footer({
     }
     return I18nManager.isRTL ? [currency, (amount || 0).toLocaleString()].reverse().join(' ') : [currency, (amount || 0).toLocaleString()].join(' ')
   }, [subtotalPrice, totalPrice])
+
+  const cacheOnDelivery = useMemo(() => {
+    const amount = get(cacheOnDeliveryFee, 'amount')
+    const currency = get(subtotalPrice, 'currency')
+    if(!currency || !amount) {
+      return null
+    }
+    return I18nManager.isRTL ? [currency, (amount || 0).toLocaleString()].reverse().join(' ') : [currency, (amount || 0).toLocaleString()].join(' ')
+  }, [subtotalPrice, cacheOnDeliveryFee])
+
+
   const discountName = useMemo(() => {
     if(!get(discount, 'amount') || !voucherCode) { return null }
     return I18nManager.isRTL ? (
@@ -88,10 +102,20 @@ export default function Footer({
         <Text style={styles.priceAttr}>{gettext('Subtotal')}</Text>
         <Text style={styles.priceAttr}>{subPrice}</Text>
       </View>
-      <View style={styles.row}>
-        <Text style={styles.priceAttr}>{gettext('Shipping')}</Text>
-        <Text style={styles.priceAttr}>{shipPrice}</Text>
-      </View>
+      {cacheOnDelivery ? (
+        <View style={styles.row}>
+          <Text style={styles.priceAttr}>{gettext('Cash on delivery fee')}</Text>
+          <Text style={styles.priceAttr}>{cacheOnDelivery}</Text>
+        </View>
+      ) : null
+      }
+      {shipPrice ? (
+        <View style={styles.row}>
+          <Text style={styles.priceAttr}>{gettext('Shipping')}</Text>
+          <Text style={styles.priceAttr}>{shipPrice}</Text>
+        </View>
+      ) : null
+      }
       {
         discountName ? (
           <View style={styles.row}>

@@ -9,6 +9,13 @@ export default StyleSheet.create({
     marginLeft: 96,
     height: 36,
   },
+  brand: {
+    fontWeight: '600',
+    fontSize: 18,
+    lineHeight: 24,
+    marginTop: 16,
+    textAlign: 'center',
+  },
   title: {
     fontWeight: '600',
     fontSize: 16,
@@ -53,7 +60,7 @@ export default StyleSheet.create({
     fontSize: 14,
     lineHeight: 21,
     textAlign: 'center',
-    marginTop: 16,
+    marginTop: 12,
     color: theme.greyText,
   },
   avatar: {

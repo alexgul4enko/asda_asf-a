@@ -11,6 +11,7 @@ import AsyncStorage from '@react-native-community/async-storage'
 import SUBSCRIBE from './subscribe.graphql'
 import parseValue from './utils/parseValue'
 import validate from './utils/validate'
+import toast from 'common/utils/toast'
 
 
 export default function SettingsContainer() {
@@ -42,6 +43,7 @@ export default function SettingsContainer() {
   const { request } = useQuery(SUBSCRIBE, { namespace: 'subscribe', parseValue })
   const handleSubmit = useCallback((variables) => {
     return request(variables)
+      .then(() => toast({ title: gettext('Subscribed'), position: 'top' }))
   }, [request])
 
   return (

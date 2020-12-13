@@ -22,6 +22,7 @@ Header.propTypes = {
     description: PropTypes.string,
   }),
   id: PropTypes.string,
+  hasProducts: PropTypes.bool,
 }
 
 Header.defaultProps = {
@@ -30,10 +31,11 @@ Header.defaultProps = {
   lastName: undefined,
   socialMedias: undefined,
   id: undefined,
+  hasProducts: undefined,
 }
 
 
-export default function Header({ celebrity, firstName, lastName, socialMedias, id }) {
+export default function Header({ celebrity, firstName, lastName, socialMedias, id, hasProducts }) {
   const gallery = usePrefetchQuery(GALLERY, { parseValue: 'data.userDigitalContents' })({ first: 40, filter: { userId: id } })
 
   const data = useMemo(() => {
@@ -74,7 +76,7 @@ export default function Header({ celebrity, firstName, lastName, socialMedias, i
           {get(celebrity, 'translation.description', get(celebrity, 'description'))}
         </CollapseText>
         <Gallery data={data}/>
-        <Text style={styles.title}>{gettext('My top product list')}</Text>
+        {hasProducts ? <Text style={styles.title}>{gettext('My top product list')}</Text> : null}
       </View>
 
     </View>

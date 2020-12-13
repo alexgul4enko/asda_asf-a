@@ -77,4 +77,7 @@ export default StyleSheet.create({
   bold: {
     fontWeight: '700',
   },
+  link: {
+    padding: 0,
+  },
 })

@@ -6,12 +6,12 @@ export default StyleSheet.create({
     flex: 1,
     alignSelf: 'stretch',
     backgroundColor: '#ffffff',
-    paddingHorizontal: 16,
   },
   scroll: {
     paddingTop: 32,
     flex: 1,
     justifyContent: 'space-between',
+    paddingHorizontal: 16,
   },
   main: {
     flex: 1,

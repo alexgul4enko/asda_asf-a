@@ -178,14 +178,14 @@ export default function ProductView({
 
             {
               isEmpty(description) ? null : (
-                <Collapse title={gettext('Product Details')}>
+                <Collapse title={gettext('Product Details')} titleStyle={styles.collapse}>
                   {description}
                 </Collapse>
               )
             }
             {
               !isEmpty(attributes) ? (
-                <Collapse title={gettext('Product Specifications')}>
+                <Collapse title={gettext('Product Specifications')} titleStyle={styles.collapse}>
                   <VariantsWidget data={attributes} />
                 </Collapse>
               ) : null

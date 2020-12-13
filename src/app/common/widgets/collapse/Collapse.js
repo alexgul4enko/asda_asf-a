@@ -12,16 +12,18 @@ Collapse.propTypes = {
   title: PropTypes.node,
   children: PropTypes.node,
   style: PropTypes.any,
+  titleStyle: PropTypes.any,
 }
 
 Collapse.defaultProps = {
   title: undefined,
   children: undefined,
   style: undefined,
+  titleStyle: undefined,
 }
 
 
-export default function Collapse({ title, children, style }) {
+export default function Collapse({ title, children, style, titleStyle }) {
   const collapseValue = useMemo(() => new Animated.Value(0), [])
   const rotateValue = useMemo(() => new Animated.Value(270), [])
   const [expanded, expand] = useState(true)
@@ -53,7 +55,7 @@ export default function Collapse({ title, children, style }) {
   return (
     <View style={style}>
       <Button onPress={handlePress} style={styles.header}>
-        <Text style={title}>{title}</Text>
+        <Text style={[title, titleStyle]}>{title}</Text>
         <Animated.View style={iconStyle}>
           <Icon name={I18nManager.isRTL ? 'chevron-left-01' : 'chevron-right-01'} size={20}/>
         </Animated.View>

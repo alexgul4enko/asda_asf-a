@@ -6,7 +6,7 @@ import Address from './widgets/address'
 import Collapse from './widgets/collapse'
 import Toast from 'common/widgets/toast'
 import Footer from './widgets/footer'
-import { AbsoluteLoader, LoadingWrapper } from 'common/widgets/loading'
+import { LoadingWrapper } from 'common/widgets/loading'
 import get from 'lodash/get'
 import isEmpty from 'lodash/isEmpty'
 import styles from './checkout.styles'
@@ -124,11 +124,11 @@ export default function CheckoutView({
             totalPrice={get(checkout, 'totalPrice')}
             voucherCode={get(checkout, 'voucherCode')}
             discount={get(checkout, 'discount')}
+            cacheOnDeliveryFee={get(checkout, 'cacheOnDeliveryFee')}
             removeDiscount={removeDiscount}
           />
         </ScrollView>
         <Toast error={isEmpty(errors) ? null : errors} timeout={10000}/>
-        <AbsoluteLoader isLoading={loading}/>
       </LoadingWrapper>
     </SafeAreaView>
   )

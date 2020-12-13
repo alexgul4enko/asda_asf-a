@@ -2,7 +2,6 @@ import { GoogleSignin } from '@react-native-community/google-signin'
 import { Image } from 'react-native'
 import { useQuery } from '@cranium/resource'
 import { useCallback } from 'react'
-import analytics from '@react-native-firebase/analytics'
 import { useNavigation } from '@react-navigation/native'
 import Button from 'common/widgets/button'
 import SOCIAL from './social-login.graphql'
@@ -22,14 +21,11 @@ export default function GoogleLogin() {
       .then(() => GoogleSignin.signIn())
       .then(({ idToken }) => request({ accessToken: idToken, backend: 'GOOGLE_OAUTH2' }))
       .then(data => {
-        console.log({ data })
         if(data && data.token) {
-          analytics().logLogin()
           return navigation.goBack()
         }
         return data
       })
-      .catch(err => console.log({ err }))
   }, [request, navigation.goBack])
 
   return (

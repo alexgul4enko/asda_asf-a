@@ -4,9 +4,12 @@ import { useCallback } from 'react'
 import ProfileView from './ProfileView'
 import validate from './utils/validate'
 import parseValue from './utils/parseValue'
+import { useTranslations } from '@cranium/i18n'
 import get from 'lodash/get'
 import omit from 'lodash/omit'
+import toast from 'common/utils/toast'
 import PROFILE from './profile.graphql'
+
 
 ProfileContainer.propTypes = {
   navigation: PropTypes.shape({
@@ -21,15 +24,16 @@ ProfileContainer.defaultProps = {
 }
 
 export default function ProfileContainer({ navigation, request, initialValues }) {
+  const { gettext } = useTranslations()
   const handleSubmit = useCallback((variables) => {
-    return request({ input: omit(variables, ['avatar', 'id', 'email', 'role']) }, { query: PROFILE, parseValue, reducer: 'none' })
+    return request({ input: { phone: '', ...omit(variables, ['avatar', 'id', 'email', 'role']) } }, { query: PROFILE, parseValue, reducer: 'none' })
       .then(data => {
         if(data && data.user) {
-          return navigation.goBack()
+          return toast({ title: gettext('Profile chages saved'), position: 'top' })
         }
         return data
       })
-  }, [request, navigation.goBack])
+  }, [request, gettext])
   return (
     <Form
       onSubmit={handleSubmit}

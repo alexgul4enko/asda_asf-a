@@ -68,7 +68,14 @@ export default function Product({ options, id, name, slug, thumbnail, isVip, pri
       </Text>
       <Text style={styles.sale}>{salePrice}</Text>
       <View style={styles.row}>
-        <Text style={styles.price}>{price}</Text>
+        <Text
+          numberOfLines={1}
+          allowFontScaling
+          adjustsFontSizeToFit
+          style={styles.price}
+        >
+          {price}
+        </Text>
         {hideLikeButton ? null : <LikeButton like={inWishlist} id={id} inList={inList} size={20} options={options}/>}
       </View>
     </Link>

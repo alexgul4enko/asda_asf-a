@@ -8,12 +8,17 @@ import get from 'lodash/get'
 import omit from 'lodash/omit'
 import idFromSlug from 'common/utils/idFromSlug'
 import ATTRIBUTES from './attributes.graphql'
+import ISVIP from './vip.graphql'
 import PRODUCTS from './products.graphql'
+import CATEGORY from './category.graphql'
 import ALLPRODUCTS from '../../products.graphql'
 
 ProductsContainer.propTypes = NavigationPropTypes
 
 export default function ProductsContainer({ route, navigation }) {
+  const id = useMemo(() => {
+    return idFromSlug(get(route, 'params.slug'), 'Category')
+  }, [get(route, 'params.slug')])
   const isVip = useSelector(state => get(state, 'isVipUser.data.me.isVip') === true ? undefined : false)
   const filter = useMemo(() => {
     const type = get(route, 'params.type') === 'category' ? 'inCategory' : 'inCollection'
@@ -23,6 +28,8 @@ export default function ProductsContainer({ route, navigation }) {
       [type]: id,
     }
   }, [route.params])
+  const { data: userData, initialLoading: vipLoading } = usePrefetchQuery(ISVIP, { parseValue: 'data.me' })()
+  const category = usePrefetchQuery(CATEGORY, { parseValue: 'data.category.children' })({ id, first: 16 })
   const attributes = usePrefetchQuery(ATTRIBUTES, { parseValue: 'data.attributes' })({ filter })
 
   const filters = useSelector(state => omit(get(state, 'products.filters'), ['first', 'cursor', 'sortBy']))
@@ -50,7 +57,9 @@ export default function ProductsContainer({ route, navigation }) {
   return (
     <FiltersView
       data={attributes.data}
-      isLoading={attributes.initialLoading}
+      isLoading={attributes.initialLoading || vipLoading || category.initialLoading }
+      category={category}
+      userData={userData}
     />
   )
 }

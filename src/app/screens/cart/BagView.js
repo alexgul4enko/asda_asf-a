@@ -48,7 +48,7 @@ export default function BagView({ isLoading, refetch, refreshing, data, renderIt
                 keyboardShouldPersistTaps="handled"
                 keyboardDismissMode="on-drag"
                 stickyHeaderIndices={[0]}
-                ListFooterComponent={<Recomentations style={styles.footer}/>}
+                ListFooterComponent={<Recomentations style={styles.footer} title={gettext("Items you don't want to miss")}/>}
               />
               <KeyboardAvoidingView behavior="padding" keyboardVerticalOffset={64}>
                 <Button to="Checkout" primary style={styles.btn} onPress={proceed}>

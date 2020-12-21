@@ -10,13 +10,15 @@ import theme from 'theme'
 
 Gallery.propTypes = {
   data: PropTypes.array,
+  children: PropTypes.node,
 }
 
 Gallery.defaultProps = {
   data: [],
+  children: undefined,
 }
 
-export default function Gallery({ data }) {
+export default function Gallery({ data, children }) {
   const [page, setPage] = useState(0)
   const [visible, setVisible] = useState(false)
   const handleScroll = useCallback((e) => {
@@ -53,6 +55,7 @@ export default function Gallery({ data }) {
         showsHorizontalScrollIndicator={false}
         onScroll={handleScroll}
       />
+      {children}
       <View style={styles.pages}>
         <Text style={styles.page}>{`${page + 1}/${data.length}`}</Text>
       </View>

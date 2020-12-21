@@ -10,14 +10,16 @@ import styles from './toast.styles'
 Toast.propTypes = {
   error: PropTypes.any,
   timeout: PropTypes.number,
+  selfClearable: PropTypes.bool,
 }
 
 Toast.defaultProps = {
   error: undefined,
   timeout: undefined,
+  selfClearable: undefined,
 }
 
-export default function Toast({ error, timeout }) {
+export default function Toast({ error, timeout, selfClearable }) {
   const [err, setErr] = useState()
   const [timer, setTimer] = useState()
   const animatedValue = useMemo(() => new Animated.Value(0), [])
@@ -56,7 +58,7 @@ export default function Toast({ error, timeout }) {
     clearTimeout(timer)
     if(!isEmpty(error)) {
       setErr(error)
-      Animated.timing(animatedValue, {
+      return Animated.timing(animatedValue, {
         duration: 200,
         toValue: 1,
         easing: Easing.inOut(Easing.ease),
@@ -64,6 +66,15 @@ export default function Toast({ error, timeout }) {
         if(timeout) {
           setTimer(setTimeout(close, timeout))
         }
+      })
+    }
+    if(selfClearable) {
+      Animated.timing(animatedValue, {
+        duration: 200,
+        toValue: 0,
+        easing: Easing.inOut(Easing.ease),
+      }).start(() => {
+        setErr(undefined)
       })
     }
   }, [error])

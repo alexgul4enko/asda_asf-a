@@ -9,13 +9,15 @@ Header.propTypes = {
   priceText: PropTypes.string,
   hasSubCategories: PropTypes.bool.isRequired,
   categoryFilters: PropTypes.array.isRequired,
+  userData: PropTypes.object,
 }
 
 Header.defaultProps = {
   priceText: undefined,
+  userData: undefined,
 }
 
-export default function Header({ priceText, hasSubCategories, categoryFilters }) {
+export default function Header({ priceText, hasSubCategories, categoryFilters, userData }) {
   const route = useRoute()
   return (
     <View>
@@ -29,7 +31,7 @@ export default function Header({ priceText, hasSubCategories, categoryFilters })
           />
         ) : null
       }
-      <VIP/>
+      <VIP userData={userData}/>
       <Item
         to="Price"
         title={gettext('Price')}

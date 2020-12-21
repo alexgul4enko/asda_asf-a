@@ -130,8 +130,30 @@ export default function ProductView({
             <RefreshControl refreshing={refreshing} onRefresh={refetch} />
           }
         >
-          {images ? <Gallery data={images}/> : null}
-          {isVip ? <Text style={styles.vip}>{gettext('vip')}</Text> : null}
+          {images ? (
+            <Gallery data={images}>
+              {
+                isVip ? (
+                  <View
+                    renderToHardwareTextureAndroid
+                    needsOffscreenAlphaCompositing
+                    style={styles.vipWrapper}
+                  >
+                    <Text style={styles.vip}>{gettext('vip')}</Text>
+                  </View>
+                ) : null
+              }
+            </Gallery>
+          ) : null}
+          {isVip && !isEmpty(images) ? (
+            <View
+              renderToHardwareTextureAndroid
+              needsOffscreenAlphaCompositing
+              style={styles.vipWrapper}
+            >
+              <Text style={styles.vip}>{gettext('vip')}</Text>
+            </View>)
+            : null}
           <View style={styles.content}>
             {
               id ? (

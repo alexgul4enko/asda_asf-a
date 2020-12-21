@@ -17,6 +17,7 @@ UserCard.propTypes = {
   id: PropTypes.string.isRequired,
   to: PropTypes.string.isRequired,
   translation: PropTypes.object,
+  designer: PropTypes.object,
 }
 
 UserCard.defaultProps = {
@@ -24,13 +25,18 @@ UserCard.defaultProps = {
   firstName: undefined,
   lastName: undefined,
   translation: undefined,
+  designer: undefined,
 }
 
-export default function UserCard({ avatar, firstName, lastName, id, to, translation }) {
+
+export default function UserCard({ avatar, firstName, lastName, id, to, translation, designer }) {
   const name = useMemo(() => {
     return [get(translation, 'firstName') || firstName, get(translation, 'lastName') || lastName].filter(Boolean).join(' ')
   }, [firstName, lastName, translation])
-  const params = useMemo(() => ({ slug: makeSlug(name, id), avatar: get(avatar, 'url'), id }), [id, name, avatar])
+  const params = useMemo(() => {
+    const brand = designer ? get(designer, 'translation.brand') || get(designer, 'brand') : ''
+    return { slug: makeSlug(brand || name, id), avatar: get(avatar, 'url'), id }
+  }, [id, name, avatar, designer])
   return (
     <Link to={to} params={params} style={styles.btn}>
       <SharedElement id={`item.${id}.photo`}>

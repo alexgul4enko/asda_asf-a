@@ -36,29 +36,36 @@ export default function ProfileView({ id, handleSubmit, submitting, submitError,
   const valid = isFormValid(form)
   return (
     <SafeAreaView style={styles.root}>
-      <KeyboardAvoidingView style={styles.root} behavior={Platform.OS === 'ios' ? 'padding' : undefined} keyboardVerticalOffset={64}>
+      <KeyboardAvoidingView
+        style={styles.root}
+        behavior={Platform.OS === 'ios' ? 'padding' : undefined} keyboardVerticalOffset={64}
+        contentContainerStyle={[styles.root, { marginBottom: 10 }]}
+      >
         <ScrollView
           contentContainerStyle={styles.scroll}
           keyboardShouldPersistTaps="handled"
-          keyboardDismissMode="on-drag"
           style={styles.main}
         >
           <TextField
             name="firstName"
+            required
             label={gettext('First name')}
           />
           <TextField
             name="lastName"
+            required
             label={gettext('Last name')}
           />
           <RadioField
             name="gender"
+            required
             options={options}
             valueKey="value"
             label={gettext('Gender')}
           />
           <DateField
             name="birthday"
+            required
             label={gettext('Date of birth')}
           />
           <TextField
@@ -84,7 +91,7 @@ export default function ProfileView({ id, handleSubmit, submitting, submitError,
           />
         </View>
       </KeyboardAvoidingView>
-      <Toast error={submitError}/>
+      <Toast error={submitError} selfClearable/>
     </SafeAreaView>
   )
 }

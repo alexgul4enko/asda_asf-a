@@ -80,11 +80,13 @@ export default function FooterContainer({ like, id, namespace, isAvailable, vari
 
 
   useEffect(() => {
-    Animated.timing(animatedValue, {
-      duration: 200,
-      toValue: isAvailable ? 1 : 0,
-      easing: Easing.inOut(Easing.ease),
-    }).start()
+    setTimeout(() => {
+      Animated.timing(animatedValue, {
+        duration: 200,
+        toValue: isAvailable ? 1 : 0,
+        easing: Easing.inOut(Easing.ease),
+      }).start()
+    }, 100)
   }, [isAvailable])
 
   const add = useCallback(() => {

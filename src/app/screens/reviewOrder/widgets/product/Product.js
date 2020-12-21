@@ -51,35 +51,32 @@ export default function Product({ thumbnail, productName, variant, quantity, uni
 
   return (
     <View style={styles.product}>
-      <View style={styles.data}>
-        <Avatar
-          style={styles.image}
-          url={get(thumbnail, 'url')}
-          noImage="noimage"
-        />
-        <View style={styles.main}>
-          <View style={styles.headerRow}>
-            <Text
-              numberOfLines={2}
-              allowFontScaling={false}
-              ellipsizeMode="tail"
-              style={styles.name}
-            >
-              {translatedProductName || productName}
-            </Text>
-            <Text style={styles.totalPrice}>{totalPrice}</Text>
-          </View>
-
-          {attributes}
-          <View style={styles.variantRow}>
-            <Text style={styles.variant}>{gettext('Quantity')}</Text>
-            <Text style={styles.variant}>:</Text>
-            <Text style={styles.variant}> </Text>
-            <Text style={[styles.variant, styles.value]}>{quantity}</Text>
-          </View>
+      <Avatar
+        style={styles.image}
+        url={get(thumbnail, 'url')}
+        noImage="noimage"
+        resizeMode="cover"
+      />
+      <View style={styles.main}>
+        <View style={styles.headerRow}>
+          <Text
+            numberOfLines={2}
+            allowFontScaling={false}
+            ellipsizeMode="tail"
+            style={styles.name}
+          >
+            {translatedProductName || productName} asdasdasd
+          </Text>
+          <Text style={styles.totalPrice}>{totalPrice}</Text>
+        </View>
+        {attributes}
+        <View style={styles.variantRow}>
+          <Text style={styles.variant}>{gettext('Quantity')}</Text>
+          <Text style={styles.variant}>:</Text>
+          <Text style={styles.variant}> </Text>
+          <Text style={[styles.variant, styles.value]}>{quantity}</Text>
         </View>
       </View>
-
     </View>
   )
 }

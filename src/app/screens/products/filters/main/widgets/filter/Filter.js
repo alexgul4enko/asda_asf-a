@@ -52,7 +52,7 @@ export default function Filter({ name, values, slug, translation }) {
       </Text>
       <Text
         numberOfLines={1}
-        allowFontScaling={false}
+        allowFontScaling
         ellipsizeMode="tail"
         style={styles.selection}
       >

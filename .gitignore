@@ -60,3 +60,6 @@ src/bones
 /ios/Pods/
 
 ios/tmp.xcconfig
+
+android/app/release/
+android/java_pid18390.hprof

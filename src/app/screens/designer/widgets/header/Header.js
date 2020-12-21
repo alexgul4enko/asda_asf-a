@@ -33,7 +33,6 @@ Header.defaultProps = {
 }
 
 export default function Header({ designer, firstName, lastName, socialMedias, avatar, hasProducts }) {
-  const brand = get(designer, 'translation.brand') || get(designer, 'brand')
   const socialButtons = useMemo(() => {
     if(!Array.isArray(socialMedias)) { return null }
     return socialMedias.map(med => (<
@@ -65,7 +64,6 @@ export default function Header({ designer, firstName, lastName, socialMedias, av
         </View>
       </View>
       <View style={styles.info}>
-        {brand ? <Text style={styles.brand}>{brand}</Text> : null}
         <CollapseText style={styles.desc}>
           {get(designer, 'translation.description', get(designer, 'description')) }
         </CollapseText>

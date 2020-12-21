@@ -13,7 +13,6 @@ export default StyleSheet.create({
     width: theme.width / 2 - 24,
     borderWidth: 0,
     borderRadius: 0,
-    backgroundColor: 'pink',
   },
   title: {
     fontSize: 14,

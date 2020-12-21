@@ -1,20 +1,29 @@
+import PropTypes from 'prop-types'
 import Header from './Header'
 import { useSelector } from 'react-redux'
 import { useMemo } from 'react'
-import { usePrefetchQuery } from '@cranium/resource'
 import { useRoute } from '@react-navigation/native'
-import CATEGORY from './category.graphql'
 import get from 'lodash/get'
 import idFromSlug from 'common/utils/idFromSlug'
 import isEmpty from 'lodash/isEmpty'
 
-export default function HeaderContainer() {
+
+HeaderContainer.propTypes = {
+  category: PropTypes.object,
+  userData: PropTypes.object,
+}
+
+HeaderContainer.defaultProps = {
+  category: undefined,
+  userData: undefined,
+}
+
+export default function HeaderContainer({ category, userData }) {
   const route = useRoute()
   const id = useMemo(() => {
     return idFromSlug(get(route, 'params.slug'), 'Category')
   }, [get(route, 'params.slug')])
 
-  const category = usePrefetchQuery(CATEGORY, { parseValue: 'data.category.children' })({ id, first: 16 })
   const price = useSelector(state => get(state, 'productsCount.filters.filter.price', {}))
   const categories = useSelector(state => get(state, 'productsCount.filters.filter.categories', []))
   const priceText = useMemo(() => {
@@ -37,6 +46,7 @@ export default function HeaderContainer() {
       priceText={priceText}
       hasSubCategories={!!get(category, 'data.totalCount')}
       categoryFilters={categoryFilters}
+      userData={userData}
     />
   )
 }

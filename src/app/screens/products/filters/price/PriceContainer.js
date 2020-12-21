@@ -2,7 +2,7 @@ import NavigationPropTypes from 'common/prop-types/Navigation'
 import PriceView from './PriceView'
 import Clear from '../clear'
 import { useCallback, useState, useLayoutEffect } from 'react'
-import { useQuery } from '@cranium/resource'
+import { useQuery, useSetFilters } from '@cranium/resource'
 import omit from 'lodash/omit'
 import isEmpty from 'lodash/isEmpty'
 import get from 'lodash/get'
@@ -15,22 +15,42 @@ export default function PriceContainer({ navigation }) {
   const [minPrice, setMinPrice] = useState(get(products, 'filters.filter.price.gte'))
   const [maxPrice, setMaxPrice] = useState(get(products, 'filters.filter.price.lte'))
   const [error, setError] = useState()
-
-
+  const setFilters = useSetFilters('productsCount')
   const fromPrice = useCallback((value) => {
     if(value && value.startsWith('.')) {
       return setMinPrice('')
     }
     const price = value ? parseInt(value, 10) : ''
     setMinPrice(price)
-  }, [setMinPrice])
+    setFilters({
+      filter: {
+        ...get(products, 'filters.filter'),
+        price: {
+          gte: price,
+          lte: maxPrice,
+        },
+      },
+
+
+    })
+  }, [setMinPrice, setFilters, products.filters, maxPrice])
   const toPrice = useCallback((value) => {
     if(value && value.startsWith('.')) {
       return setMaxPrice('')
     }
     const price = value ? parseInt(value, 10) : ''
     setMaxPrice(price)
-  }, [setMaxPrice])
+    setFilters({
+      filter: {
+        ...get(products, 'filters.filter'),
+        price: {
+          lte: price,
+          gte: minPrice,
+        },
+      },
+
+    })
+  }, [setMaxPrice, setFilters, products.filters, minPrice])
   const handleBlur = useCallback(() => {
     if(minPrice && maxPrice && maxPrice < minPrice) {
       return setError(gettext('Please enter valid min max values'))

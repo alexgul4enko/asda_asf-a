@@ -11,10 +11,8 @@ export default StyleSheet.create({
     paddingHorizontal: 16,
     paddingBottom: 12,
     paddingTop: 8,
-  },
-  data: {
-    alignSelf: 'stretch',
     flexDirection: 'row',
+    flexWrap: 'nowrap',
   },
   image: {
     width: 96,
@@ -25,13 +23,12 @@ export default StyleSheet.create({
   main: {
     flex: 1,
     alignSelf: 'stretch',
-    marginLeft: 8,
+    paddingLeft: 8,
   },
   name: {
     fontSize: 14,
     lineHeight: 16,
     color: '#000000',
-    marginBottom: 8,
   },
   variantRow: {
     flexDirection: 'row',
@@ -53,13 +50,15 @@ export default StyleSheet.create({
     fontSize: 14,
     lineHeight: 24,
     color: '#000000',
-    marginLeft: 96 + 8,
   },
   headerRow: {
     alignItems: 'center',
     justifyContent: 'space-between',
     flexDirection: 'row',
     marginBottom: 8,
+    flex: 1,
+    alignSelf: 'stretch',
+    flexWrap: 'nowrap',
   },
   link: {
     padding: 0,

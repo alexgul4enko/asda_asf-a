@@ -24,7 +24,7 @@ export default function Empty() {
         </Link>
       </View>
       <View style={styles.recomendations}>
-        <Recomentations/>
+        <Recomentations title={gettext("Items you don't want to miss")}/>
       </View>
     </ScrollView>
   )

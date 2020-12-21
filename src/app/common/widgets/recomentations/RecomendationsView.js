@@ -11,17 +11,19 @@ RecomendationsView.propTypes = {
   data: PropTypes.object,
   isLoading: PropTypes.bool.isRequired,
   style: PropTypes.any,
+  title: PropTypes.any,
 }
 
 RecomendationsView.defaultProps = {
   data: undefined,
   style: undefined,
+  title: undefined,
 }
 
-export default function RecomendationsView({ isLoading, data, style }) {
+export default function RecomendationsView({ isLoading, data, style, title }) {
   return (
     <View style={[styles.root, style]}>
-      <Text style={styles.title}>{gettext('You Might Also Like')}</Text>
+      <Text style={styles.title}>{title || gettext('You Might Also Like')}</Text>
       <LoadingWrapper isLoading={isLoading}>
         <FlatList
           keyExtractor={keyExtractor}

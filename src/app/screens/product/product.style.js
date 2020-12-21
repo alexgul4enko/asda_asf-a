@@ -7,18 +7,21 @@ export default StyleSheet.create({
     alignSelf: 'stretch',
     backgroundColor: '#ffffff',
   },
-  vip: {
+  vipWrapper: {
     backgroundColor: '#7048E8',
-    color: '#ffffff',
-    textTransform: 'uppercase',
-    fontWeight: '700',
-    fontSize: 12,
-    lineHeight: 12,
     paddingVertical: 3,
     paddingHorizontal: 6,
     position: 'absolute',
     top: 6,
     right: 6,
+    zIndex: 100,
+  },
+  vip: {
+    color: '#ffffff',
+    textTransform: 'uppercase',
+    fontWeight: '700',
+    fontSize: 12,
+    lineHeight: 12,
   },
   content: {
     alignSelf: 'stretch',

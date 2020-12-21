@@ -42,8 +42,8 @@ export default function Product({ thumbnail, quantityFulfilled, productName, var
       return (
         <View style={styles.variantRow} key={get(attribute, 'id')}>
           <Text style={styles.variant}>{get(attribute, 'translation.name') || get(attribute, 'name')}</Text>
-          <Text style={styles.variant}> </Text>
           <Text style={styles.variant}>:</Text>
+          <Text style={styles.variant}> </Text>
           <Text style={[styles.variant, styles.value]}>{get(values, '[0]translation.name') || get(values, '[0].name')}</Text>
         </View>
       )

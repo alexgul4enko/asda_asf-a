@@ -1,14 +1,21 @@
-import { usePrefetchQuery, useQuery } from '@cranium/resource'
-import ISVIP from './vip.graphql'
+import PropTypes from 'prop-types'
+import { useQuery } from '@cranium/resource'
 import get from 'lodash/get'
 import { useCallback } from 'react'
 import BoolInput from 'common/forms/inputs/boolInput'
 import styles from './vip.styles'
 import PRODUCTS from './products.graphql'
 
-export default function VIP() {
-  const { data } = usePrefetchQuery(ISVIP, { parseValue: 'data.me' })()
+VIP.propTypes = {
+  userData: PropTypes.object,
+}
 
+VIP.defaultProps = {
+  userData: undefined,
+}
+
+
+export default function VIP({ userData }) {
   const products = useQuery(PRODUCTS, { parseValue: 'data.products', destroyOnUnmount: false })
 
   const handleChange = useCallback((isVip) => {
@@ -19,7 +26,7 @@ export default function VIP() {
       },
     })
   }, [products.request, get(products, 'filters.filter')])
-  if(!get(data, 'isVip')) { return null }
+  if(!get(userData, 'isVip')) { return null }
   return (
     <BoolInput
       onChange={handleChange}

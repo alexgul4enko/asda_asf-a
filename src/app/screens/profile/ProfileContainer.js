@@ -1,4 +1,5 @@
 import PropTypes from 'prop-types'
+import { TextInput } from 'react-native'
 import { Form } from 'react-final-form'
 import { useCallback } from 'react'
 import ProfileView from './ProfileView'
@@ -26,9 +27,11 @@ ProfileContainer.defaultProps = {
 export default function ProfileContainer({ navigation, request, initialValues }) {
   const { gettext } = useTranslations()
   const handleSubmit = useCallback((variables) => {
+    TextInput.State.currentlyFocusedInput() && TextInput.State.blurTextInput(TextInput.State.currentlyFocusedInput())
     return request({ input: { phone: '', ...omit(variables, ['avatar', 'id', 'email', 'role']) } }, { query: PROFILE, parseValue, reducer: 'none' })
       .then(data => {
         if(data && data.user) {
+          // setErrors(null)
           return toast({ title: gettext('Profile chages saved'), position: 'top' })
         }
         return data

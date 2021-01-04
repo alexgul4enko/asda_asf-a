@@ -6,6 +6,7 @@ import Link from 'common/widgets/link'
 import Icon from 'common/widgets/Icon'
 import { useMemo } from 'react'
 import get from 'lodash/get'
+import makeSlug from 'common/utils/makeSlug'
 import styles from './bag-item.styles'
 import theme from 'theme'
 
@@ -38,8 +39,8 @@ export default function BagItem({ children, quantity, variant, style, deleteItem
     })
   }, [variant.attributes])
   const params = useMemo(() => ({
-    slug: get(variant, 'product.slug'),
-  }), [get(variant, 'product.slug')])
+    slug: makeSlug(get(variant, 'product.translation.name') || get(variant, 'product.name'), get(variant, 'product.id')),
+  }), [get(variant, 'product')])
   const _style = useMemo(() => ([styles.root, style]), [style])
   return (
     <View style={_style}>

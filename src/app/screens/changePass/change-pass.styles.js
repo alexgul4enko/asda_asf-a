@@ -5,16 +5,18 @@ export default StyleSheet.create({
     flex: 1,
     alignSelf: 'stretch',
     backgroundColor: '#ffffff',
-    paddingHorizontal: 16,
+
   },
   main: {
     paddingTop: 32,
     flex: 1,
     alignSelf: 'stretch',
     paddingBottom: 24,
+    paddingHorizontal: 16,
   },
   submit: {
     marginBottom: 24,
     alignSelf: 'stretch',
+    paddingHorizontal: 16,
   },
 })

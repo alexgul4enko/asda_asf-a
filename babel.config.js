@@ -17,7 +17,6 @@ module.exports = {
           root: ['./src/app'],
           alias: {
             assets: './src/assets',
-            '@cranium/resource': './src/bones/packages/resource/lib',
           },
         },
       ],

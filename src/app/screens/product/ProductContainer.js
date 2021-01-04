@@ -18,7 +18,7 @@ export default function ProductContainer({ route }) {
   const [variant, selectVariant] = useState({})
   const [count, setCount] = useState(1)
   const id = useMemo(() => idFromSlug(get(route, 'params.slug'), 'Product'), [get(route, 'params.slug')])
-  const product = usePrefetchQuery(PRODUCT, { parseValue: 'data.product', namespace: get(route, 'params.slug') })({ id })
+  const product = usePrefetchQuery(PRODUCT, { parseValue: 'data.product', namespace: route.key })({ id })
 
   const { refresh, isRefreshing } = useGraphInifnyList(product)
   markAsViewed(id)
@@ -29,7 +29,7 @@ export default function ProductContainer({ route }) {
       isLoading={product.initialLoading}
       refetch={refresh}
       refreshing={isRefreshing}
-      namespace={get(route, 'params.slug')}
+      namespace={route.key}
       selectVariant={selectVariant}
       variant={variant}
       count={count}

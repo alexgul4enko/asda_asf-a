@@ -65,7 +65,7 @@ export default function Product({ thumbnail, productName, variant, quantity, uni
             ellipsizeMode="tail"
             style={styles.name}
           >
-            {translatedProductName || productName} asdasdasd
+            {translatedProductName || productName}
           </Text>
           <Text style={styles.totalPrice}>{totalPrice}</Text>
         </View>

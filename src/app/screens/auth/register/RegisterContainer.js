@@ -8,12 +8,22 @@ import validate from './utils/validate'
 import parseValue from './utils/parseValue'
 import Config from 'react-native-config'
 import pick from 'lodash/pick'
+import { useFocusEffect } from '@react-navigation/native'
+import { hasPermission } from '@cranium/access'
+import { access } from 'common/session'
 
 RegisterContainer.propTypes = NavigationPropTypes
 
 export default function RegisterContainer({ navigation }) {
+  const isLoggedIn = hasPermission(access.F_PROTECTED)
   const { request } = useQuery(REGISTER, { reducer: 'none', parseValue })
-
+  useFocusEffect(
+    useCallback(() => {
+      if(isLoggedIn) {
+        return navigation.goBack()
+      }
+    }, [isLoggedIn])
+  )
   const handleSubmit = useCallback((variables) => {
     return request({ input: { ...pick(variables, ['email', 'password']), redirectUrl: Config.SITE_URL + '/auth/confirm' } })
       .then((res) => {

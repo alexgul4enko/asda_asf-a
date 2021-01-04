@@ -62,6 +62,7 @@ export default function FooterContainer({ like, id, namespace, isAvailable, vari
         product: {
           name,
           thumbnail,
+          id,
         },
       },
     }

@@ -9,6 +9,7 @@ query YOU_MAY_ALSO_LIKE($products: [ID], $languageCode: LanguageCodeEnum!) {
       node {
         id
         slug
+        isVip
         translation(languageCode: $languageCode) {
           name
         }

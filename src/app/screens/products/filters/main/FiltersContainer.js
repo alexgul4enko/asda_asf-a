@@ -19,7 +19,7 @@ export default function ProductsContainer({ route, navigation }) {
   const id = useMemo(() => {
     return idFromSlug(get(route, 'params.slug'), 'Category')
   }, [get(route, 'params.slug')])
-  const isVip = useSelector(state => get(state, 'isVipUser.data.me.isVip') === true ? undefined : false)
+  const isVip = useSelector(state => get(state, 'isVipUser.data.me.isVip') ? undefined : false)
   const filter = useMemo(() => {
     const type = get(route, 'params.type') === 'category' ? 'inCategory' : 'inCollection'
     const slug = get(route, 'params.slug')
@@ -34,7 +34,7 @@ export default function ProductsContainer({ route, navigation }) {
 
   const filters = useSelector(state => omit(get(state, 'products.filters'), ['first', 'cursor', 'sortBy']))
   const products = usePrefetchQuery(PRODUCTS, { parseValue: 'data.products' })(filters)
-  const allproducts = useQuery(ALLPRODUCTS, { parseValue: 'data.products' })
+  const allproducts = useQuery(ALLPRODUCTS, { parseValue: 'data.products', queries: ['filter', 'offset'] })
   const clear = useCallback(() => {
     const type = get(route, 'params.type') === 'category' ? 'categories' : 'collections'
     const slug = get(route, 'params.slug')
@@ -44,8 +44,8 @@ export default function ProductsContainer({ route, navigation }) {
       isVip,
     }
     products.request({ filter })
+    allproducts.request({ filter, first: 16 })
     navigation.pop()
-    allproducts.request({ ...filter, first: 16 })
   }, [get(route, 'params'), products.request, isVip, navigation.pop, allproducts.request])
 
   useLayoutEffect(() => {

@@ -6,10 +6,21 @@ import LOGIN from './login.graphql'
 import validate from './utils/validate'
 import { useQuery } from '@cranium/resource'
 import parseValue from './utils/parseValue'
+import { useFocusEffect } from '@react-navigation/native'
+import { hasPermission } from '@cranium/access'
+import { access } from 'common/session'
 
 LoginContainer.propTypes = NavigationPropTypes
 
 export default function LoginContainer({ navigation }) {
+  const isLoggedIn = hasPermission(access.F_PROTECTED)
+  useFocusEffect(
+    useCallback(() => {
+      if(isLoggedIn) {
+        return navigation.goBack()
+      }
+    }, [isLoggedIn])
+  )
   const { request } = useQuery(LOGIN, { namespace: 'session', parseValue })
   const handleSubmit = useCallback((variables) => {
     return request(variables)
